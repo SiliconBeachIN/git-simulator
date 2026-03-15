@@ -2,8 +2,11 @@
 
 > An interactive, browser-based learning tool that teaches Git and GitHub through hands-on simulators, real command references, and visual diagrams. No sign-up. No install. Just open and learn.
 
+**[🚀 Live Demo → git-playground.netlify.app](https://git-playground.netlify.app/)**
+
 ![React](https://img.shields.io/badge/React-18.3-61dafb?style=flat&logo=react)
-![Vite](https://img.shields.io/badge/Vite-5.4-646cff?style=flat&logo=vite)
+![Vite](https://img.shields.io/badge/Vite-6.4-646cff?style=flat&logo=vite)
+![Netlify](https://img.shields.io/netlify/PLACEHOLDER?style=flat&logo=netlify&label=Netlify)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat)
 ![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa?style=flat)
