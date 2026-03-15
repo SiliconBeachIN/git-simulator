@@ -28,7 +28,7 @@ If you discover a security issue:
 1. **Do not** open a public GitHub Issue
 2. Open a **private** GitHub Issue (use the "Security" label if available) or
    contact the maintainers directly at the GitHub profile for
-   [@SiliconBeachIN](https://github.com/SiliconBeachIN)
+   [Jeethesh (@SiliconBeachIN)](https://github.com/SiliconBeachIN)
 3. Include:
    - A clear description of the vulnerability
    - Steps to reproduce
