@@ -1,0 +1,25 @@
+# CODEOWNERS
+#
+# Each line maps a file path pattern to the GitHub user(s) or team(s)
+# who are automatically requested as reviewers when that path is changed.
+#
+# Format:  <path pattern>   <@user or @org/team>
+# Docs:    https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default — all files not matched below
+*                           @SiliconBeachIN
+
+# Core application source
+src/                        @SiliconBeachIN
+
+# Contributor-facing docs — require maintainer sign-off
+CONTRIBUTING.md             @SiliconBeachIN
+CODE_OF_CONDUCT.md          @SiliconBeachIN
+SECURITY.md                 @SiliconBeachIN
+
+# GitHub config — require maintainer sign-off
+.github/                    @SiliconBeachIN
+
+# Dependencies — require security review
+package.json                @SiliconBeachIN
+package-lock.json           @SiliconBeachIN
