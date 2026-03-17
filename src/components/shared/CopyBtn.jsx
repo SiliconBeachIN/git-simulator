@@ -7,9 +7,10 @@ export default function CopyBtn({ text }) {
     <button
       onClick={(e) => {
         e.stopPropagation();
-        try { navigator.clipboard.writeText(text); } catch (err) { /* noop */ }
-        setDone(true);
-        setTimeout(() => setDone(false), 1400);
+        navigator.clipboard.writeText(text).then(() => {
+          setDone(true);
+          setTimeout(() => setDone(false), 1400);
+        }).catch(() => {});
       }}
       style={{
         background: done ? "rgba(74,222,128,.18)" : "rgba(30,41,59,.7)",

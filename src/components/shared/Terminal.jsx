@@ -552,7 +552,7 @@ const TERM_PATTERNS = [
       const remote = cmd.replace(/^git fetch\s+/i, "").trim();
       return [
         `From ${remote}`,
-        "   a3f2b1c..f4e5d6c  main -> ${remote}/main",
+        `   a3f2b1c..f4e5d6c  main -> ${remote}/main`,
         "",
         `✓ Downloaded latest data from '${remote}' without merging.`,
         "💡 Your local branches are untouched. Merge manually when ready.",

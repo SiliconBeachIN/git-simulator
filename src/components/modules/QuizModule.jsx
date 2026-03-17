@@ -15,7 +15,7 @@ const QUESTIONS = [
   { q: "What is `git reflog`?", opts: ["Remote log of all users", "Complete local history of every HEAD movement, including deleted commits", "Log of all git config changes", "Commit log for a specific file"], ans: 1, exp: "reflog is your ultimate safety net — it records every place HEAD has been, even for commits you deleted. You can recover lost work with git reset --hard HEAD@{N}." },
 ];
 
-function Quiz() {
+function Quiz({ isMobile }) {
   const [idx, setIdx] = useState(0);
   const [sel, setSel] = useState(null);
   const [score, setScore] = useState(0);
@@ -108,7 +108,7 @@ export default function QuizModule({ isMobile }) {
         your mastery level. These questions cover the concepts that trip up even experienced
         developers.
       </InfoBox>
-      <Quiz />
+      <Quiz isMobile={isMobile} />
     </div>
   );
 }
