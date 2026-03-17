@@ -1,6 +1,5 @@
 import T from "../../constants/tokens";
-import { CopyBtn } from "../shared";
-import { InfoBox, ConceptDiagram, SectionTitle, CommandCard } from "../shared";
+import { CopyBtn, InfoBox, ConceptDiagram, SectionTitle, CommandCard } from "../shared";
 
 export default function ActionsModule() {
   const fullYaml = `name: CI/CD Pipeline
