@@ -25,12 +25,12 @@ function PRSimulator() {
         {steps.map((s, i) => (
           <div key={i} onClick={() => setStep(i)} style={{ position: "relative", marginBottom: 2, cursor: "pointer" }}>
             {i < steps.length - 1 && (
-              <div style={{ position: "absolute", left: -20, top: 36, width: 2, height: "calc(100% + 2px)", background: i < step ? "linear-gradient(to bottom,#4ade80,#60a5fa)" : "#1a2540", transition: "background .3s" }} />
+              <div style={{ position: "absolute", left: -20, top: 36, width: 2, height: "calc(100% + 2px)", background: i < step ? `linear-gradient(to bottom,${T.green},${T.blue})` : T.border, transition: "background .3s" }} />
             )}
             <div style={{ position: "absolute", left: -27, top: 14, width: 14, height: 14, borderRadius: "50%", background: i <= step ? T.green : T.border, border: `2px solid ${T.bg}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 7, color: T.bg, fontWeight: 700, transition: "all .2s" }}>
               {i < step ? "✓" : i + 1}
             </div>
-            <div style={{ background: i === step ? "rgba(74,222,128,.05)" : T.card, border: `1px solid ${i === step ? "rgba(74,222,128,.25)" : T.border}`, borderRadius: 9, padding: "11px 14px", marginBottom: 8, transition: "all .2s" }}>
+            <div style={{ background: i === step ? T.greenBgLight : T.card, border: `1px solid ${i === step ? T.greenBorderMedium : T.border}`, borderRadius: 9, padding: "11px 14px", marginBottom: 8, transition: "all .2s" }}>
               <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
                 <span style={{ fontSize: 16 }}>{s.icon}</span>
                 <span style={{ color: i === step ? T.text : T.subtleText, fontWeight: i === step ? 600 : 400, fontSize: 13 }}>{s.label}</span>
@@ -43,8 +43,8 @@ function PRSimulator() {
         ))}
       </div>
       <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
-        <button onClick={() => setStep((s) => Math.max(0, s - 1))} disabled={step === 0} style={{ flex: 1, background: "rgba(30,41,59,.4)", border: `1px solid ${T.border}`, borderRadius: 7, color: step === 0 ? T.muted : T.text, fontSize: 12, padding: 9, cursor: step === 0 ? "default" : "pointer" }}>← Back</button>
-        <button onClick={() => setStep((s) => Math.min(steps.length - 1, s + 1))} disabled={step === steps.length - 1} style={{ flex: 1, background: "rgba(74,222,128,.1)", border: "1px solid rgba(74,222,128,.25)", borderRadius: 7, color: step === steps.length - 1 ? T.muted : T.green, fontSize: 12, padding: 9, cursor: step === steps.length - 1 ? "default" : "pointer" }}>Next Step →</button>
+        <button onClick={() => setStep((s) => Math.max(0, s - 1))} disabled={step === 0} style={{ flex: 1, background: T.cardBgInactive, border: `1px solid ${T.border}`, borderRadius: 7, color: step === 0 ? T.muted : T.text, fontSize: 12, padding: 9, cursor: step === 0 ? "default" : "pointer" }}>← Back</button>
+        <button onClick={() => setStep((s) => Math.min(steps.length - 1, s + 1))} disabled={step === steps.length - 1} style={{ flex: 1, background: T.greenBgMedium, border: `1px solid ${T.greenBorderMedium}`, borderRadius: 7, color: step === steps.length - 1 ? T.muted : T.green, fontSize: 12, padding: 9, cursor: step === steps.length - 1 ? "default" : "pointer" }}>Next Step →</button>
       </div>
     </div>
   );

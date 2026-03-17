@@ -1,14 +1,20 @@
-﻿import { useState, useRef, useCallback } from "react";
+﻿import { useState, useRef, useCallback, useEffect } from "react";
 import T from "./constants/tokens";
 import useMediaQuery from "./hooks/useMediaQuery";
 import { Sidebar, Topbar, Footer } from "./components/layout";
 import { ModuleContent } from "./components/modules";
 
+const MOBILE_QUERY = `(max-width:${T.mobileBreakpoint}px)`;
+
 export default function App() {
-  const isMobile = useMediaQuery("(max-width:768px)");
+  const isMobile = useMediaQuery(MOBILE_QUERY);
   const [active, setActive] = useState("home");
-  const [sideOpen, setSideOpen] = useState(false);
+  const [sideOpen, setSideOpen] = useState(!isMobile);
   const scrollRef = useRef(null);
+
+  useEffect(() => {
+    setSideOpen(!isMobile);
+  }, [isMobile]);
 
   const go = useCallback((id) => {
     setActive(id);
@@ -23,18 +29,18 @@ export default function App() {
         *{box-sizing:border-box;margin:0;padding:0}
         ::-webkit-scrollbar{width:5px;height:5px}
         ::-webkit-scrollbar-track{background:transparent}
-        ::-webkit-scrollbar-thumb{background:#1a2540;border-radius:3px}
+        ::-webkit-scrollbar-thumb{background:${T.scrollThumb};border-radius:3px}
         @keyframes slideIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
         @keyframes toastIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
-        .navrow:hover{background:rgba(74,222,128,.07)!important}
-        .navrow.on{background:rgba(74,222,128,.11)!important;border-color:rgba(74,222,128,.28)!important}
-        .navrow.on .nlabel{color:#4ade80!important}
+        .navrow:hover{background:${T.greenNavHover}!important}
+        .navrow.on{background:${T.greenNavActive}!important;border-color:${T.greenNavBorder}!important}
+        .navrow.on .nlabel{color:${T.green}!important}
       `}</style>
 
       <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0 }}>
-        <div style={{ position: "absolute", top: "-15%", left: "-8%", width: "40%", height: "40%", background: "radial-gradient(circle,rgba(74,222,128,.035) 0%,transparent 70%)" }} />
-        <div style={{ position: "absolute", bottom: "-15%", right: "-8%", width: "40%", height: "40%", background: "radial-gradient(circle,rgba(96,165,250,.035) 0%,transparent 70%)" }} />
+        <div style={{ position: "absolute", top: "-15%", left: "-8%", width: "40%", height: "40%", background: T.glowGreen }} />
+        <div style={{ position: "absolute", bottom: "-15%", right: "-8%", width: "40%", height: "40%", background: T.glowBlue }} />
       </div>
 
       <Sidebar active={active} onNavigate={go} sideOpen={sideOpen} setSideOpen={setSideOpen} isMobile={isMobile} />

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import T from "../../constants/tokens";
-import { InfoBox, ConceptDiagram, SectionTitle, CommandCard } from "../shared";
+import { InfoBox, SectionTitle, CommandCard } from "../shared";
 
 const MOCK_FILES = [
   { name: "src/App.jsx", status: "modified" },
@@ -76,18 +76,18 @@ function StagingSimulator({ isMobile }) {
               <div key={f.name} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
                 <span style={{ color: statusColors[f.status], fontFamily: "monospace", fontSize: 11, fontWeight: 700, width: 14 }}>{statusLabels[f.status]}</span>
                 <span style={{ color: T.subtleText, fontSize: 11, flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name}</span>
-                <button onClick={() => stageFile(f.name)} style={{ background: "rgba(74,222,128,.1)", border: "1px solid rgba(74,222,128,.2)", borderRadius: 4, color: T.green, fontSize: 10, padding: "2px 7px", cursor: "pointer" }}>add →</button>
+                <button onClick={() => stageFile(f.name)} style={{ background: T.greenBgMedium, border: `1px solid ${T.greenBorderLight}`, borderRadius: 4, color: T.green, fontSize: 10, padding: "2px 7px", cursor: "pointer" }}>add →</button>
               </div>
             ))
           )}
           {unstaged.length > 0 && (
-            <button onClick={stageAll} style={{ width: "100%", background: "rgba(74,222,128,.08)", border: "1px solid rgba(74,222,128,.2)", borderRadius: 6, color: T.green, fontSize: 11, padding: "6px", cursor: "pointer", marginTop: 6 }}>
+            <button onClick={stageAll} style={{ width: "100%", background: T.greenBgLight, border: `1px solid ${T.greenBorderLight}`, borderRadius: 6, color: T.green, fontSize: 11, padding: "6px", cursor: "pointer", marginTop: 6 }}>
               git add . (stage all)
             </button>
           )}
         </div>
         {/* Staging Area */}
-        <div style={{ background: T.card, border: `1px solid ${staged.length > 0 ? "rgba(74,222,128,.3)" : T.border}`, borderRadius: 10, padding: 14 }}>
+        <div style={{ background: T.card, border: `1px solid ${staged.length > 0 ? T.greenBorderStrong : T.border}`, borderRadius: 10, padding: 14 }}>
           <div style={{ color: T.green, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", marginBottom: 10 }}>📦 STAGING AREA</div>
           {staged.length === 0 ? (
             <div style={{ color: T.muted, fontSize: 12, textAlign: "center", padding: 16 }}>Use "add →" to stage files</div>
@@ -96,17 +96,17 @@ function StagingSimulator({ isMobile }) {
               <div key={f.name} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
                 <span style={{ color: T.green, fontFamily: "monospace", fontSize: 11, fontWeight: 700, width: 14 }}>✓</span>
                 <span style={{ color: T.subtleText, fontSize: 11, flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name}</span>
-                <button onClick={() => unstage(f.name)} style={{ background: "rgba(248,113,113,.1)", border: "1px solid rgba(248,113,113,.2)", borderRadius: 4, color: T.red, fontSize: 10, padding: "2px 7px", cursor: "pointer" }}>← undo</button>
+                <button onClick={() => unstage(f.name)} style={{ background: T.redBgMedium, border: `1px solid ${T.redBorderLight}`, borderRadius: 4, color: T.red, fontSize: 10, padding: "2px 7px", cursor: "pointer" }}>← undo</button>
               </div>
             ))
           )}
           {staged.length > 0 && (
             <div style={{ marginTop: 10 }}>
               <input value={msg} onChange={(e) => setMsg(e.target.value)} placeholder="feat: describe your change"
-                style={{ width: "100%", background: "rgba(10,14,26,.8)", border: `1px solid ${T.border}`, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 11, outline: "none", fontFamily: "monospace", boxSizing: "border-box" }}
+                style={{ width: "100%", background: T.inputBgFaint, border: `1px solid ${T.border}`, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 11, outline: "none", fontFamily: "monospace", boxSizing: "border-box" }}
                 onKeyDown={(e) => e.key === "Enter" && doCommit()} />
-              <button onClick={doCommit} disabled={!msg.trim()} style={{ width: "100%", marginTop: 6, background: msg.trim() ? "rgba(167,139,250,.15)" : "rgba(30,41,59,.3)", border: `1px solid ${msg.trim() ? "rgba(167,139,250,.4)" : T.border}`, borderRadius: 6, color: msg.trim() ? T.purple : T.muted, fontSize: 11, padding: "7px", cursor: msg.trim() ? "pointer" : "default", transition: "all .2s" }}>
-                git commit -m "…" →
+              <button onClick={doCommit} disabled={!msg.trim()} style={{ width: "100%", marginTop: 6, background: msg.trim() ? T.purpleBgMedium : T.cardBgInactive, border: `1px solid ${msg.trim() ? T.purpleBorderLight : T.border}`, borderRadius: 6, color: msg.trim() ? T.purple : T.muted, fontSize: 11, padding: "7px", cursor: msg.trim() ? "pointer" : "default", transition: "all .2s" }}>
+                {`git commit -m "${msg.trim() || "..."}"`}
               </button>
             </div>
           )}
@@ -118,7 +118,7 @@ function StagingSimulator({ isMobile }) {
             <div style={{ color: T.muted, fontSize: 12, textAlign: "center", padding: 16 }}>Commits appear here</div>
           ) : (
             committed.map((c) => (
-              <div key={c.id} style={{ marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid #1a2540" }}>
+              <div key={c.id} style={{ marginBottom: 10, paddingBottom: 10, borderBottom: `1px solid ${T.border}` }}>
                 <div style={{ display: "flex", gap: 6, alignItems: "center", marginBottom: 3 }}>
                   <span style={{ color: T.purple, fontFamily: "monospace", fontSize: 10 }}>{c.id}</span>
                   <span style={{ color: T.muted, fontSize: 10 }}>{c.time}</span>
@@ -126,7 +126,7 @@ function StagingSimulator({ isMobile }) {
                 <div style={{ color: T.subtleText, fontSize: 11, marginBottom: 4 }}>{c.msg}</div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
                   {c.files.map((f) => (
-                    <span key={f} style={{ background: "rgba(167,139,250,.1)", border: "1px solid rgba(167,139,250,.2)", borderRadius: 3, fontSize: 9, color: T.purple, padding: "1px 5px" }}>
+                    <span key={f} style={{ background: T.purpleBgLight, border: `1px solid ${T.purpleBorderLight}`, borderRadius: 3, fontSize: 9, color: T.purple, padding: "1px 5px" }}>
                       {f.split("/").pop()}
                     </span>
                   ))}
@@ -143,19 +143,11 @@ function StagingSimulator({ isMobile }) {
       </div>
       {committed.length > 0 && files.length === 0 && (
         <div style={{ textAlign: "center", marginTop: 8, marginBottom: 4 }}>
-          <button onClick={reset} style={{ background: "rgba(30,41,59,.5)", border: "1px solid #1a2540", borderRadius: 7, color: T.muted, fontSize: 11, padding: "7px 20px", cursor: "pointer" }}>
+          <button onClick={reset} style={{ background: T.resetBg, border: `1px solid ${T.border}`, borderRadius: 7, color: T.muted, fontSize: 11, padding: "7px 20px", cursor: "pointer" }}>
             ↺ Reset Simulator
           </button>
         </div>
       )}
-      <ConceptDiagram>{`
-  git add                    git commit
-Working Dir ──────────────► Staging Area ──────────────► Repository
-   ↑                                                          │
-   └──────────────────── git checkout ◄─────────────────────┘
-   ↑                                                          │
-   └──────────────────── git restore  ◄──── (unstage) ───────┘
-`}</ConceptDiagram>
     </div>
   );
 }
@@ -175,13 +167,15 @@ export default function StagingModule({ isMobile }) {
         staging, you commit the bug fix first, then the feature separately. Clean,
         professional history.
       </InfoBox>
-      <InfoBox icon="🎬" title="The camera analogy" color={T.teal}>
-        Think of your project as a photo studio.{" "}
-        <strong style={{ color: T.teal }}>Modified files</strong> are your subjects walking
-        around the studio. <strong style={{ color: T.green }}>Staging (git add)</strong> is
-        posing the right subjects for the shot.{" "}
-        <strong style={{ color: T.amber }}>Committing (git commit)</strong> is pressing the
-        shutter — the photo is saved forever, exactly as staged.
+      <InfoBox icon="🛒" title="The grocery store analogy" color={T.teal}>
+        Think of your project like a grocery store. All your files are items on the shelves,
+        and whenever you make changes, it is like picking items you might want to buy. Staging
+        in Git (<code style={{ color: T.green }}>git add</code>) is like putting those items
+        into your shopping cart. You can walk around and pick up many things, but only the
+        items in your cart are actually ready to be purchased. When you run{" "}
+        <code style={{ color: T.amber }}>git commit</code>, it is like going to the checkout
+        and paying. You get a receipt that records exactly what was in your cart. So staging is
+        simply choosing which changes you want to include in your next commit.
       </InfoBox>
       <SectionTitle>🎬 Interactive Simulator</SectionTitle>
       <StagingSimulator isMobile={isMobile} />

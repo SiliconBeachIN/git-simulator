@@ -24,7 +24,7 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
           style={{
             position: "fixed",
             inset: 0,
-            background: "rgba(0,0,0,.6)",
+            background: T.overlayBg,
             zIndex: 19,
           }}
         />
@@ -32,8 +32,8 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
 
       <div
         style={{
-          width: isMobile ? 260 : sideOpen ? 236 : 56,
-          background: "rgba(8,13,26,.99)",
+          width: isMobile ? T.sidebarMobileWidth : sideOpen ? T.sidebarOpenWidth : T.sidebarClosedWidth,
+          background: T.navbarBg,
           borderRight: `1px solid ${T.border}`,
           display: "flex",
           flexDirection: "column",
@@ -67,7 +67,7 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
               width: 32,
               height: 32,
               borderRadius: 8,
-              background: "linear-gradient(135deg,#4ade80,#22d3ee)",
+              background: T.logoGradient,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -133,7 +133,7 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
           <div
             style={{
               padding: "8px 10px",
-              borderBottom: "1px solid rgba(26,37,64,.3)",
+              borderBottom: `1px solid ${T.sidebarSearchBorder}`,
               flexShrink: 0,
             }}
           >
@@ -143,7 +143,7 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
               placeholder="Search…"
               style={{
                 width: "100%",
-                background: "rgba(13,21,38,.8)",
+                background: T.sidebarSearchBg,
                 border: `1px solid ${T.border}`,
                 borderRadius: 6,
                 padding: "5px 9px",
@@ -212,7 +212,7 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
             <div
               style={{
                 fontSize: 9,
-                color: "#1e3a5f",
+                color: T.faint,
                 textAlign: "center",
                 lineHeight: 1.6,
               }}

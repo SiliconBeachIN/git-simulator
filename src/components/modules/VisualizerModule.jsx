@@ -43,11 +43,11 @@ function CommitGraph() {
         The <span style={{ color: T.purple }}>purple node</span> is a merge commit — it has
         two parents.
       </InfoBox>
-      <div style={{ background: "#050b13", border: "1px solid #1a2540", borderRadius: 12, overflowX: "auto", padding: "8px 0" }}>
+      <div style={{ background: T.terminalBg, border: `1px solid ${T.border}`, borderRadius: 12, overflowX: "auto", padding: "8px 0" }}>
         <svg width={svgW} height={svgH + 80} style={{ display: "block", minWidth: svgW }}>
           <defs>
             <filter id="glow2"><feGaussianBlur stdDeviation="3" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
-            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#1a2540" /></marker>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill={T.border} /></marker>
           </defs>
           {[["main", 2, T.green], ["feature/login", 0, T.blue], ["hotfix", 4, T.red]].map(([label, row, color]) => (
             <text key={label} x={padX - 8} y={padY + row * cellH + 4} textAnchor="end" fill={color} fontSize="10" fontFamily="monospace" fontWeight="bold" opacity=".8">{label}</text>
@@ -68,7 +68,7 @@ function CommitGraph() {
             return (
               <g key={c.id} onMouseEnter={() => setHovered(c)} onMouseLeave={() => setHovered(null)} style={{ cursor: "pointer" }}>
                 <circle cx={cx(c)} cy={cy(c)} r={isH ? 15 : 11} fill={c.color} opacity={isH ? 1 : 0.75} filter="url(#glow2)" style={{ transition: "all .15s" }} />
-                <circle cx={cx(c)} cy={cy(c)} r={4.5} fill="#050b13" />
+                <circle cx={cx(c)} cy={cy(c)} r={4.5} fill={T.terminalBg} />
                 <text x={cx(c)} y={cy(c) + 24} textAnchor="middle" fill={T.muted} fontSize="9" fontFamily="monospace">{c.id.slice(0, 6)}</text>
               </g>
             );
@@ -80,7 +80,7 @@ function CommitGraph() {
             const ty = svgH - 10;
             return (
               <g>
-                <rect x={tx} y={ty} width={boxW} height={boxH} rx="8" fill="#0d1526" stroke={hovered.color} strokeWidth="1" opacity=".97" />
+                <rect x={tx} y={ty} width={boxW} height={boxH} rx="8" fill={T.card} stroke={hovered.color} strokeWidth="1" opacity=".97" />
                 <text x={tx + 12} y={ty + 18} fill={hovered.color} fontSize="11" fontFamily="monospace" fontWeight="bold">{hovered.id}</text>
                 <text x={tx + 12} y={ty + 34} fill={T.subtleText} fontSize="10" fontFamily="sans-serif">{hovered.msg.length > 28 ? hovered.msg.slice(0, 28) + "…" : hovered.msg}</text>
                 <text x={tx + 12} y={ty + 52} fill={T.muted} fontSize="9" fontFamily="monospace">branch: {hovered.branch}</text>

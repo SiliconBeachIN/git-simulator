@@ -5,3 +5,4 @@ export { default as ConceptDiagram } from "./ConceptDiagram";
 export { default as SectionTitle } from "./SectionTitle";
 export { default as CommandCard } from "./CommandCard";
 export { default as Terminal } from "./Terminal";
+export { default as ReadmeGuide } from "./ReadmeGuide";

@@ -3,12 +3,12 @@ import T from "../../constants/tokens";
 import { InfoBox, SectionTitle } from "../shared";
 
 const ISSUE_LABELS = [
-  { name: "bug", color: "#f87171" },
-  { name: "enhancement", color: "#60a5fa" },
-  { name: "good first issue", color: "#4ade80" },
-  { name: "help wanted", color: "#fbbf24" },
-  { name: "documentation", color: "#a78bfa" },
-  { name: "wontfix", color: "#64748b" },
+  { name: "bug", color: T.red },
+  { name: "enhancement", color: T.blue },
+  { name: "good first issue", color: T.green },
+  { name: "help wanted", color: T.amber },
+  { name: "documentation", color: T.purple },
+  { name: "wontfix", color: T.muted },
 ];
 
 function IssuesSimulator({ isMobile }) {
@@ -41,7 +41,7 @@ function IssuesSimulator({ isMobile }) {
         <div style={{ background: T.card, border: "1px solid " + T.border, borderRadius: 10, overflow: "hidden" }}>
           <div style={{ padding: "10px 14px", borderBottom: "1px solid " + T.border, display: "flex", gap: 8 }}>
             {["open", "closed", "all"].map((f) => (
-              <button key={f} onClick={() => setFilter(f)} style={{ background: filter === f ? "rgba(74,222,128,.12)" : "transparent", border: "1px solid " + (filter === f ? "rgba(74,222,128,.3)" : T.border), borderRadius: 5, color: filter === f ? T.green : T.muted, fontSize: 10, padding: "3px 10px", cursor: "pointer" }}>
+              <button key={f} onClick={() => setFilter(f)} style={{ background: filter === f ? T.greenBgMedium : "transparent", border: "1px solid " + (filter === f ? T.greenBorderStrong : T.border), borderRadius: 5, color: filter === f ? T.green : T.muted, fontSize: 10, padding: "3px 10px", cursor: "pointer" }}>
                 {f} ({issues.filter((i) => f === "all" || i.state === f).length})
               </button>
             ))}
@@ -50,7 +50,7 @@ function IssuesSimulator({ isMobile }) {
             {shown.map((i) => {
               const lc = (ISSUE_LABELS.find((l) => l.name === i.label) || { color: T.blue }).color;
               return (
-                <div key={i.id} onClick={() => setSelId(i.id)} style={{ padding: "10px 14px", borderBottom: "1px solid " + T.border, cursor: "pointer", background: sel && sel.id === i.id ? "rgba(74,222,128,.04)" : "transparent" }}>
+                <div key={i.id} onClick={() => setSelId(i.id)} style={{ padding: "10px 14px", borderBottom: "1px solid " + T.border, cursor: "pointer", background: sel && sel.id === i.id ? T.greenBgSubtle : "transparent" }}>
                   <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
                     <span style={{ fontSize: 13, marginTop: 1 }}>{i.state === "open" ? "🟢" : "⚫"}</span>
                     <div style={{ flex: 1, minWidth: 0 }}>
@@ -71,25 +71,25 @@ function IssuesSimulator({ isMobile }) {
             <div style={{ background: T.card, border: "1px solid " + T.border, borderRadius: 10, padding: 14 }}>
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
                 <span style={{ color: T.muted, fontSize: 11 }}>Issue #{sel.id}</span>
-                <button onClick={() => closeIssue(sel.id)} style={{ background: "rgba(74,222,128,.1)", border: "1px solid rgba(74,222,128,.25)", borderRadius: 5, color: T.green, fontSize: 10, padding: "3px 10px", cursor: "pointer" }}>
+                <button onClick={() => closeIssue(sel.id)} style={{ background: T.greenBgMedium, border: `1px solid ${T.greenBorderMedium}`, borderRadius: 5, color: T.green, fontSize: 10, padding: "3px 10px", cursor: "pointer" }}>
                   {sel.state === "open" ? "Close" : "Reopen"}
                 </button>
               </div>
               <div style={{ color: T.text, fontSize: 13, fontWeight: 600, marginBottom: 6 }}>{sel.title}</div>
               <div style={{ color: T.subtleText, fontSize: 12, lineHeight: 1.7, marginBottom: 8 }}>{sel.body}</div>
-              <div style={{ color: T.green, fontSize: 11, background: "rgba(74,222,128,.05)", border: "1px solid rgba(74,222,128,.15)", borderRadius: 6, padding: "8px 10px" }}>
+              <div style={{ color: T.green, fontSize: 11, background: T.greenBgLight, border: `1px solid ${T.heroBannerBorder}`, borderRadius: 6, padding: "8px 10px" }}>
                 In a PR, write: Fixes #{sel.id} to auto-close on merge
               </div>
             </div>
           ) : (
             <div style={{ background: T.card, border: "1px solid " + T.border, borderRadius: 10, padding: 14 }}>
               <div style={{ color: T.muted, fontSize: 11, fontWeight: 700, marginBottom: 10 }}>NEW ISSUE</div>
-              <input value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))} placeholder="Issue title" style={{ width: "100%", background: "rgba(6,11,24,.6)", border: "1px solid " + T.border, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 12, outline: "none", marginBottom: 8, boxSizing: "border-box" }} />
-              <select value={form.label} onChange={(e) => setForm((f) => ({ ...f, label: e.target.value }))} style={{ width: "100%", background: "rgba(6,11,24,.8)", border: "1px solid " + T.border, borderRadius: 6, padding: "6px 10px", color: T.text, fontSize: 11, outline: "none", marginBottom: 8, boxSizing: "border-box" }}>
+              <input value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))} placeholder="Issue title" style={{ width: "100%", background: T.inputBgDark, border: "1px solid " + T.border, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 12, outline: "none", marginBottom: 8, boxSizing: "border-box" }} />
+              <select value={form.label} onChange={(e) => setForm((f) => ({ ...f, label: e.target.value }))} style={{ width: "100%", background: T.inputBgFaint, border: "1px solid " + T.border, borderRadius: 6, padding: "6px 10px", color: T.text, fontSize: 11, outline: "none", marginBottom: 8, boxSizing: "border-box" }}>
                 {ISSUE_LABELS.map((l) => <option key={l.name} value={l.name}>{l.name}</option>)}
               </select>
-              <textarea value={form.body} onChange={(e) => setForm((f) => ({ ...f, body: e.target.value }))} placeholder="Describe the issue" rows={3} style={{ width: "100%", background: "rgba(6,11,24,.6)", border: "1px solid " + T.border, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 12, outline: "none", resize: "none", boxSizing: "border-box", marginBottom: 8 }} />
-              <button onClick={create} style={{ width: "100%", background: "rgba(74,222,128,.1)", border: "1px solid rgba(74,222,128,.25)", borderRadius: 7, color: T.green, fontSize: 12, padding: 9, cursor: "pointer" }}>Submit Issue</button>
+              <textarea value={form.body} onChange={(e) => setForm((f) => ({ ...f, body: e.target.value }))} placeholder="Describe the issue" rows={3} style={{ width: "100%", background: T.inputBgDark, border: "1px solid " + T.border, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 12, outline: "none", resize: "none", boxSizing: "border-box", marginBottom: 8 }} />
+              <button onClick={create} style={{ width: "100%", background: T.greenBgMedium, border: `1px solid ${T.greenBorderMedium}`, borderRadius: 7, color: T.green, fontSize: 12, padding: 9, cursor: "pointer" }}>Submit Issue</button>
             </div>
           )}
         </div>

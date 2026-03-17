@@ -8,8 +8,9 @@ export default function CommandCard({ cmd, desc, detail, example, warning, index
     <div
       onClick={() => setOpen((o) => !o)}
       style={{
-        background: open ? "rgba(74,222,128,.04)" : T.card,
-        border: `1px solid ${open ? "rgba(74,222,128,.25)" : T.border}`,
+        background: open ? T.greenBgSubtle : T.card,
+        border: `1px solid ${open ? T.greenBorder : T.border}`,
+
         borderRadius: 10,
         padding: "13px 16px",
         cursor: "pointer",
@@ -39,7 +40,12 @@ export default function CommandCard({ cmd, desc, detail, example, warning, index
         >
           {cmd}
         </code>
-        <CopyBtn text={cmd} />
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 6 }}>
+          <CopyBtn text={cmd} />
+          <div style={{ color: open ? T.green : T.subtleText, fontSize: 10, fontFamily: "monospace" }}>
+            {open ? "Collapse ▲" : "Expand ▼"}
+          </div>
+        </div>
       </div>
       <div style={{ color: T.muted, fontSize: 12, marginTop: 5 }}>{desc}</div>
       {open && (
@@ -57,8 +63,9 @@ export default function CommandCard({ cmd, desc, detail, example, warning, index
               style={{
                 color: T.red,
                 fontSize: 12,
-                background: "rgba(248,113,113,.08)",
-                border: "1px solid rgba(248,113,113,.2)",
+                background: T.redBgLight,
+                border: `1px solid ${T.redBorderLight}`,
+
                 borderRadius: 6,
                 padding: "6px 10px",
                 marginTop: 8,

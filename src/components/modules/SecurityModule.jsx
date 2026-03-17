@@ -12,6 +12,18 @@ export default function SecurityModule() {
         <code style={{ color: T.green }}>.gitignore</code> +{" "}
         <code style={{ color: T.green }}>pre-commit hooks</code>.
       </InfoBox>
+      <InfoBox icon="🧹" title="How .gitignore works" color={T.green}>
+        Imagine your project is a backpack for a school trip. You want to carry your homework,
+        snacks, and a water bottle, but not your dirty laundry or old receipts. The{" "}
+        <code style={{ color: T.green }}>.gitignore</code> file is like a packing list that
+        tells Git, "ignore these things-I don't want them in my backpack."
+        <br /><br />
+        If you put a file in <code style={{ color: T.green }}>.gitignore</code> before your
+        first commit, Git will never track it. But if you've already packed it once (already
+        committed), adding it to <code style={{ color: T.green }}>.gitignore</code> won't
+        magically remove it-you'll need to "unpack" it with{" "}
+        <code style={{ color: T.green }}>git rm --cached filename</code> and commit again.
+      </InfoBox>
       <SectionTitle>.gitignore Essentials</SectionTitle>
       <ConceptDiagram>{`# Environment & Secrets (NEVER COMMIT THESE!)
 .env

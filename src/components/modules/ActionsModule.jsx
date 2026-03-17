@@ -59,48 +59,35 @@ jobs:
         <strong style={{ color: T.amber }}>CI/CD</strong> (Continuous Integration / Continuous
         Deployment).
       </InfoBox>
-      <ConceptDiagram>{`  Event Trigger (push to main)
-         │
-         ▼
-  GitHub Actions Runner (ubuntu-latest VM spins up)
-         │
-         ├─► Job: test   → install → run tests → report
-         ├─► Job: lint   → eslint → format check
-         └─► Job: deploy → build → push to server
-                              │
-                         (only if test passes)
-                              │
-                              ▼
-                         🚀 Your app is live!`}</ConceptDiagram>
+    
       <SectionTitle>Complete CI/CD Workflow</SectionTitle>
-      <div style={{ background: "#050b13", border: "1px solid #1a2540", borderRadius: 10, padding: 16, marginBottom: 14 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-          <span style={{ color: T.amber, fontSize: 11, fontWeight: 700, letterSpacing: ".08em" }}>📄 .github/workflows/ci.yml</span>
-          <CopyBtn text={fullYaml} />
+      <div style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 10, padding: 14, marginBottom: 14 }}>
+        <div style={{ color: T.text, fontSize: 12, lineHeight: 1.8, marginBottom: 10 }}>
+          Imagine GitHub Actions like a tiny robot helper. You tell it what to do in a file,
+          and it does the same thing every time.
         </div>
-        <pre style={{ margin: 0, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: T.subtleText, lineHeight: 1.7, overflowX: "auto", whiteSpace: "pre-wrap" }}>
-          {`name: CI/CD Pipeline
-
-on:                                 `}<span style={{ color: T.blue }}>← triggers</span>{`
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest          `}<span style={{ color: T.blue }}>← clean VM spins up</span>{`
-    steps:
-      - uses: actions/checkout@v4   `}<span style={{ color: T.blue }}>← clone your code</span>{`
-      - run: npm ci                 `}<span style={{ color: T.blue }}>← install deps</span>{`
-      - run: npm test               `}<span style={{ color: T.blue }}>← run your tests</span>{`
-
-  deploy:
-    needs: test                     `}<span style={{ color: T.blue }}>← only runs if test passes</span>{`
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - run: npx vercel --prod --token=\${{ secrets.VERCEL_TOKEN }}`}
-        </pre>
+        <div style={{ color: T.subtleText, fontSize: 12, lineHeight: 1.8, marginBottom: 12 }}>
+          1. Open your project on GitHub.
+          <br />
+          2. Create folder: <code style={{ color: T.green }}>.github/workflows</code>
+          <br />
+          3. Create file: <code style={{ color: T.green }}>ci.yml</code>
+          <br />
+          4. Paste the code below.
+          <br />
+          5. Commit and push to <code style={{ color: T.green }}>main</code>.
+          <br />
+          6. Go to the <strong style={{ color: T.amber }}>Actions</strong> tab and watch your robot run.
+        </div>
+        <div style={{ background: T.terminalBg, border: `1px solid ${T.border}`, borderRadius: 8, padding: 12 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+            <span style={{ color: T.amber, fontSize: 11, fontWeight: 700 }}>ci.yml</span>
+            <CopyBtn text={fullYaml} />
+          </div>
+          <pre style={{ margin: 0, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: T.subtleText, lineHeight: 1.7, overflowX: "auto", whiteSpace: "pre-wrap" }}>
+            {fullYaml}
+          </pre>
+        </div>
       </div>
       <SectionTitle>Useful Action Commands</SectionTitle>
       {[

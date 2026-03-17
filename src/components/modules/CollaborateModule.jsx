@@ -1,5 +1,5 @@
 import T from "../../constants/tokens";
-import { InfoBox, ConceptDiagram, SectionTitle, CommandCard } from "../shared";
+import { InfoBox, SectionTitle, CommandCard } from "../shared";
 
 export default function CollaborateModule() {
   return (
@@ -10,14 +10,6 @@ export default function CollaborateModule() {
         React, Linux, Python, and VS Code were built this way.{" "}
         <strong style={{ color: T.teal }}>You can contribute too.</strong>
       </InfoBox>
-      <ConceptDiagram>{`  ORIGINAL (torvalds/linux)          YOUR FORK (you/linux)
-  ┌──────────────────────┐          ┌──────────────────────┐
-  │  main branch         │◄── PR ───│  main branch         │
-  │  (protected)         │          │  feature/my-fix      │◄─── you work here
-  └──────────────────────┘          └──────────────────────┘
-            ↑                                  ↑
-            └─── upstream remote               └─── origin remote
-          (git remote add upstream ...)         (default clone)`}</ConceptDiagram>
       <SectionTitle>Complete Fork Workflow</SectionTitle>
       {[
         { cmd: "# Click 'Fork' on GitHub.com", desc: "STEP 1 — Create your own copy on GitHub", detail: "Fork creates a full copy of the repo under YOUR account. You have full write access to your fork.", example: "📋 Photocopying a book so you can write in the margins" },
@@ -30,7 +22,7 @@ export default function CollaborateModule() {
       ].map((c, i) => (
         <div key={i} style={{ position: "relative", paddingLeft: 26 }}>
           {i < 6 && (
-            <div style={{ position: "absolute", left: 5, top: 38, width: 2, height: "calc(100% + 2px)", background: "linear-gradient(to bottom,#2dd4bf,rgba(45,212,191,.1))" }} />
+            <div style={{ position: "absolute", left: 5, top: 38, width: 2, height: "calc(100% + 2px)", background: T.timelineGradientTeal }} />
           )}
           <div style={{ position: "absolute", left: 0, top: 16, width: 12, height: 12, borderRadius: "50%", background: T.teal, border: `2px solid ${T.bg}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 7, color: T.bg, fontWeight: 700 }}>
             {i + 1}

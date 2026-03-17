@@ -22,15 +22,15 @@ function DotGithubExplorer({ isMobile }) {
         behaviour. This is not app code — it is instructions for GitHub itself. PR templates,
         Actions, issue forms, and security policies all live here.
       </InfoBox>
-      <div style={{ background: "#050b13", border: "1px solid #1a2540", borderRadius: 10, overflow: "hidden", marginBottom: 14 }}>
-        <div style={{ background: T.surface, padding: "8px 14px", borderBottom: "1px solid #1a2540" }}>
+      <div style={{ background: T.terminalBg, border: `1px solid ${T.border}`, borderRadius: 10, overflow: "hidden", marginBottom: 14 }}>
+        <div style={{ background: T.surface, padding: "8px 14px", borderBottom: `1px solid ${T.border}` }}>
           <code style={{ color: T.muted, fontSize: 11 }}>📂 .github/</code>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "220px 1fr", minHeight: 280 }}>
-          <div style={{ borderRight: isMobile ? "none" : "1px solid #1a2540", borderBottom: isMobile ? "1px solid #1a2540" : "none", padding: 10, overflowY: "auto" }}>
+          <div style={{ borderRight: isMobile ? "none" : `1px solid ${T.border}`, borderBottom: isMobile ? `1px solid ${T.border}` : "none", padding: 10, overflowY: "auto" }}>
             {Object.entries(DG_FILES).map(([name, f]) => (
-              <div key={name} onClick={() => setSel(name)} style={{ background: sel === name ? f.c + "12" : "rgba(13,21,38,.4)", border: "1px solid " + (sel === name ? f.c + "40" : "transparent"), borderRadius: 6, padding: "8px 10px", cursor: "pointer", marginBottom: 5 }}>
-                <div style={{ color: sel === name ? f.c : "#64748b", fontSize: 10, fontFamily: "monospace", marginBottom: 3 }}>{name}</div>
+              <div key={name} onClick={() => setSel(name)} style={{ background: sel === name ? f.c + "12" : T.cardBgInactive, border: "1px solid " + (sel === name ? f.c + "40" : "transparent"), borderRadius: 6, padding: "8px 10px", cursor: "pointer", marginBottom: 5 }}>
+                <div style={{ color: sel === name ? f.c : T.linkColor, fontSize: 10, fontFamily: "monospace", marginBottom: 3 }}>{name}</div>
                 <div style={{ color: T.muted, fontSize: 9 }}>{f.desc}</div>
               </div>
             ))}
