@@ -1,0 +1,28 @@
+const MODULES = [
+  { id: "home",        icon: "⚡", label: "Mission Control" },
+  { id: "init",        icon: "🌱", label: "git init" },
+  { id: "staging",     icon: "📦", label: "Stage & Commit" },
+  { id: "branch",      icon: "🌿", label: "Branching" },
+  { id: "merge",       icon: "🔀", label: "Merge & Rebase" },
+  { id: "remote",      icon: "☁",  label: "Remote & Push" },
+  { id: "pullrequest", icon: "🤝", label: "Pull Requests" },
+  { id: "gitflow",     icon: "🔄", label: "Git Flow" },
+  { id: "advanced",    icon: "⚗",  label: "Advanced Magic" },
+  { id: "collaborate", icon: "🌐", label: "Open Source" },
+  { id: "visualizer",  icon: "📊", label: "Commit Graph" },
+  { id: "actions",     icon: "🤖", label: "GitHub Actions" },
+  { id: "security",    icon: "🔐", label: "Security" },
+  { id: "issues",      icon: "🐛", label: "Issues" },
+  { id: "projects",    icon: "📋", label: "GitHub Projects" },
+  { id: "pages",       icon: "🌍", label: "GitHub Pages" },
+  { id: "releases",    icon: "📦", label: "Releases" },
+  { id: "protection",  icon: "🔒", label: "Branch Protection" },
+  { id: "codeowners",  icon: "👑", label: "CODEOWNERS" },
+  { id: "githubapi",   icon: "🔌", label: "GitHub API" },
+  { id: "dotgithub",   icon: "📂", label: ".github Folder" },
+  { id: "dependabot",  icon: "🤖", label: "Dependabot" },
+  { id: "codespaces",  icon: "💻", label: "Codespaces" },
+  { id: "quiz",        icon: "🧠", label: "Master Quiz" },
+];
+
+export default MODULES;
