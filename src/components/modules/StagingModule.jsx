@@ -75,7 +75,7 @@ function StagingSimulator({ isMobile }) {
             unstaged.map((f) => (
               <div key={f.name} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
                 <span style={{ color: statusColors[f.status], fontFamily: "monospace", fontSize: 11, fontWeight: 700, width: 14 }}>{statusLabels[f.status]}</span>
-                <span style={{ color: "#94a3b8", fontSize: 11, flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name}</span>
+                <span style={{ color: T.subtleText, fontSize: 11, flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name}</span>
                 <button onClick={() => stageFile(f.name)} style={{ background: "rgba(74,222,128,.1)", border: "1px solid rgba(74,222,128,.2)", borderRadius: 4, color: T.green, fontSize: 10, padding: "2px 7px", cursor: "pointer" }}>add →</button>
               </div>
             ))
@@ -95,7 +95,7 @@ function StagingSimulator({ isMobile }) {
             staged.map((f) => (
               <div key={f.name} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
                 <span style={{ color: T.green, fontFamily: "monospace", fontSize: 11, fontWeight: 700, width: 14 }}>✓</span>
-                <span style={{ color: "#94a3b8", fontSize: 11, flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name}</span>
+                <span style={{ color: T.subtleText, fontSize: 11, flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name}</span>
                 <button onClick={() => unstage(f.name)} style={{ background: "rgba(248,113,113,.1)", border: "1px solid rgba(248,113,113,.2)", borderRadius: 4, color: T.red, fontSize: 10, padding: "2px 7px", cursor: "pointer" }}>← undo</button>
               </div>
             ))
@@ -123,7 +123,7 @@ function StagingSimulator({ isMobile }) {
                   <span style={{ color: T.purple, fontFamily: "monospace", fontSize: 10 }}>{c.id}</span>
                   <span style={{ color: T.muted, fontSize: 10 }}>{c.time}</span>
                 </div>
-                <div style={{ color: "#94a3b8", fontSize: 11, marginBottom: 4 }}>{c.msg}</div>
+                <div style={{ color: T.subtleText, fontSize: 11, marginBottom: 4 }}>{c.msg}</div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
                   {c.files.map((f) => (
                     <span key={f} style={{ background: "rgba(167,139,250,.1)", border: "1px solid rgba(167,139,250,.2)", borderRadius: 3, fontSize: 9, color: T.purple, padding: "1px 5px" }}>

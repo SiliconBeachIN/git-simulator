@@ -147,7 +147,7 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
                 border: `1px solid ${T.border}`,
                 borderRadius: 6,
                 padding: "5px 9px",
-                color: "#94a3b8",
+                color: T.subtleText,
                 fontSize: 11,
                 outline: "none",
               }}
@@ -160,7 +160,10 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
           {filtered.map((m) => (
             <div
               key={m.id}
+              role="button"
+              tabIndex={0}
               onClick={() => handleNav(m.id)}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleNav(m.id); } }}
               className={`navrow${active === m.id ? " on" : ""}`}
               style={{
                 display: "flex",
@@ -172,6 +175,7 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
                 border: "1px solid transparent",
                 marginBottom: 2,
                 transition: "all .14s",
+                outline: "none",
               }}
             >
               <span style={{ fontSize: 15, flexShrink: 0, opacity: 0.8 }}>

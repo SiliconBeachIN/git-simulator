@@ -28,7 +28,7 @@ export default function HomeModule({ isMobile }) {
         </div>
         <div
           style={{
-            color: "#94a3b8",
+            color: T.subtleText,
             fontSize: isMobile ? 13 : 14,
             lineHeight: 1.8,
             marginBottom: 16,
@@ -85,7 +85,7 @@ export default function HomeModule({ isMobile }) {
             }}
           >
             <span style={{ fontSize: 18 }}>{m.icon}</span>
-            <span style={{ color: "#94a3b8", fontSize: 12, fontWeight: 500 }}>
+            <span style={{ color: T.subtleText, fontSize: 12, fontWeight: 500 }}>
               {m.label}
             </span>
           </div>

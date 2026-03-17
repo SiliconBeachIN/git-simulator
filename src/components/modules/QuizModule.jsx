@@ -44,7 +44,7 @@ function Quiz({ isMobile }) {
       <div style={{ textAlign: "center", padding: "30px 20px" }}>
         <div style={{ fontSize: 56, marginBottom: 12 }}>{pct === 100 ? "🏆" : pct >= 70 ? "⭐" : "📚"}</div>
         <div style={{ color: T.green, fontSize: 28, fontWeight: 700, fontFamily: "monospace" }}>{score}/{QUESTIONS.length}</div>
-        <div style={{ color: "#94a3b8", fontSize: 14, marginTop: 6, marginBottom: 24 }}>{pct === 100 ? "Perfect! You're a Git Master 🎉" : pct >= 70 ? "Great work! Review the missed ones." : "Keep exploring the modules and retry!"}</div>
+        <div style={{ color: T.subtleText, fontSize: 14, marginTop: 6, marginBottom: 24 }}>{pct === 100 ? "Perfect! You're a Git Master 🎉" : pct >= 70 ? "Great work! Review the missed ones." : "Keep exploring the modules and retry!"}</div>
         <div style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 12, padding: "16px 20px", marginBottom: 20, display: "inline-block", minWidth: isMobile ? "auto" : 260, width: isMobile ? "100%" : "auto" }}>
           <div style={{ display: "flex", gap: 8, justifyContent: "center", marginBottom: 8 }}>
             <div style={{ width: `${pct}%`, minWidth: 4, height: 8, background: `linear-gradient(90deg,${T.green},${T.teal})`, borderRadius: 4 }} />
@@ -71,7 +71,7 @@ function Quiz({ isMobile }) {
       <div style={{ color: T.text, fontSize: 15, lineHeight: 1.6, marginBottom: 20, fontWeight: 500 }}>Q{idx + 1}. {q.q}</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 16 }}>
         {q.opts.map((opt, i) => {
-          let bg = T.card, border = T.border, col = "#94a3b8";
+          let bg = T.card, border = T.border, col = T.subtleText;
           if (sel !== null) {
             if (i === q.ans) { bg = "rgba(74,222,128,.1)"; border = "rgba(74,222,128,.4)"; col = T.green; }
             else if (i === sel && sel !== q.ans) { bg = "rgba(248,113,113,.1)"; border = "rgba(248,113,113,.35)"; col = T.red; }
@@ -88,7 +88,7 @@ function Quiz({ isMobile }) {
       {showExp && (
         <div style={{ background: "rgba(96,165,250,.07)", border: "1px solid rgba(96,165,250,.2)", borderRadius: 9, padding: "12px 14px", marginBottom: 14, animation: "slideIn .25s ease" }}>
           <div style={{ color: T.blue, fontSize: 11, fontWeight: 700, marginBottom: 6 }}>💡 EXPLANATION</div>
-          <div style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.7 }}>{q.exp}</div>
+          <div style={{ color: T.subtleText, fontSize: 13, lineHeight: 1.7 }}>{q.exp}</div>
         </div>
       )}
       {sel !== null && (

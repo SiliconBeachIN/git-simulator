@@ -79,7 +79,7 @@ jobs:
           <span style={{ color: T.amber, fontSize: 11, fontWeight: 700, letterSpacing: ".08em" }}>📄 .github/workflows/ci.yml</span>
           <CopyBtn text={fullYaml} />
         </div>
-        <pre style={{ margin: 0, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: "#94a3b8", lineHeight: 1.7, overflowX: "auto", whiteSpace: "pre-wrap" }}>
+        <pre style={{ margin: 0, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: T.subtleText, lineHeight: 1.7, overflowX: "auto", whiteSpace: "pre-wrap" }}>
           {`name: CI/CD Pipeline
 
 on:                                 `}<span style={{ color: T.blue }}>← triggers</span>{`

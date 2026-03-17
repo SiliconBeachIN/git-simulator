@@ -30,7 +30,7 @@ function APIExplorer({ isMobile }) {
             return (
               <button key={i} onClick={() => setSel(i)} style={{ display: "block", width: "100%", background: i === sel ? "rgba(45,212,191,.08)" : T.card, border: "1px solid " + (i === sel ? "rgba(45,212,191,.3)" : T.border), borderRadius: 7, padding: "9px 12px", textAlign: "left", cursor: "pointer", marginBottom: 6 }}>
                 <span style={{ background: eg ? "rgba(74,222,128,.15)" : "rgba(96,165,250,.15)", border: "1px solid " + (eg ? "rgba(74,222,128,.3)" : "rgba(96,165,250,.3)"), borderRadius: 4, fontSize: 9, color: eg ? T.green : T.blue, padding: "1px 6px", fontFamily: "monospace", marginRight: 7 }}>{e.method}</span>
-                <span style={{ color: i === sel ? T.text : "#94a3b8", fontSize: 11 }}>{e.label}</span>
+                <span style={{ color: i === sel ? T.text : T.subtleText, fontSize: 11 }}>{e.label}</span>
               </button>
             );
           })}
@@ -39,16 +39,16 @@ function APIExplorer({ isMobile }) {
           <div style={{ background: "#050b13", border: "1px solid #1a2540", borderRadius: 10, overflow: "hidden", marginBottom: 10 }}>
             <div style={{ background: T.surface, padding: "8px 14px", borderBottom: "1px solid #1a2540", display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
               <span style={methodStyle}>{ex.method}</span>
-              <code style={{ color: "#94a3b8", fontSize: 11, wordBreak: "break-all" }}>https://api.github.com{ex.path}</code>
+              <code style={{ color: T.subtleText, fontSize: 11, wordBreak: "break-all" }}>https://api.github.com{ex.path}</code>
             </div>
             <div style={{ padding: 14 }}>
               <div style={{ color: T.muted, fontSize: 10, fontWeight: 700, marginBottom: 8 }}>RESPONSE JSON</div>
-              <pre style={{ margin: 0, color: "#94a3b8", fontSize: 11, fontFamily: "'JetBrains Mono',monospace", lineHeight: 1.7, whiteSpace: "pre-wrap" }}>{JSON.stringify(ex.resp, null, 2)}</pre>
+              <pre style={{ margin: 0, color: T.subtleText, fontSize: 11, fontFamily: "'JetBrains Mono',monospace", lineHeight: 1.7, whiteSpace: "pre-wrap" }}>{JSON.stringify(ex.resp, null, 2)}</pre>
             </div>
           </div>
           <div style={{ background: T.card, border: "1px solid " + T.border, borderRadius: 10, padding: 14 }}>
             <div style={{ color: T.muted, fontSize: 10, fontWeight: 700, marginBottom: 8 }}>CALL IN JAVASCRIPT</div>
-            <pre style={{ margin: 0, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: "#94a3b8", lineHeight: 1.7, whiteSpace: "pre-wrap" }}>{`const res = await fetch(
+            <pre style={{ margin: 0, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: T.subtleText, lineHeight: 1.7, whiteSpace: "pre-wrap" }}>{`const res = await fetch(
   "https://api.github.com` + ex.path + `",
   { headers: { Authorization: "Bearer YOUR_TOKEN" } }
 );

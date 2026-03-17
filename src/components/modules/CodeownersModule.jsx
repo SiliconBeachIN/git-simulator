@@ -41,7 +41,7 @@ function CodeownersSim({ isMobile }) {
       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 12 }}>
         <div style={{ background: T.card, border: "1px solid " + T.border, borderRadius: 10, overflow: "hidden" }}>
           <div style={{ background: "rgba(6,11,24,.8)", borderBottom: "1px solid " + T.border, padding: "8px 14px" }}>
-            <span style={{ color: "#94a3b8", fontSize: 11, fontFamily: "monospace" }}>.github/CODEOWNERS</span>
+            <span style={{ color: T.subtleText, fontSize: 11, fontFamily: "monospace" }}>.github/CODEOWNERS</span>
           </div>
           <div style={{ padding: 14 }}>
             {rules.map((r, i) => (
@@ -73,7 +73,7 @@ function CodeownersSim({ isMobile }) {
           {matched ? (
             <div style={{ background: "rgba(74,222,128,.06)", border: "1px solid rgba(74,222,128,.2)", borderRadius: 8, padding: 12 }}>
               <div style={{ color: T.green, fontSize: 11, fontWeight: 700, marginBottom: 6 }}>Matched: {matched.pattern}</div>
-              <div style={{ color: "#94a3b8", fontSize: 12, marginBottom: 8 }}>Auto-assigned reviewers:</div>
+              <div style={{ color: T.subtleText, fontSize: 12, marginBottom: 8 }}>Auto-assigned reviewers:</div>
               <div>{matched.owners.split(" ").map((o) => (
                 <span key={o} style={{ display: "inline-block", background: "rgba(96,165,250,.12)", border: "1px solid rgba(96,165,250,.25)", borderRadius: 12, fontSize: 11, color: T.blue, padding: "3px 10px", margin: "2px" }}>{o}</span>
               ))}</div>

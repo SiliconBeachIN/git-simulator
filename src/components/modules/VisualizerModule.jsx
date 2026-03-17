@@ -82,7 +82,7 @@ function CommitGraph() {
               <g>
                 <rect x={tx} y={ty} width={boxW} height={boxH} rx="8" fill="#0d1526" stroke={hovered.color} strokeWidth="1" opacity=".97" />
                 <text x={tx + 12} y={ty + 18} fill={hovered.color} fontSize="11" fontFamily="monospace" fontWeight="bold">{hovered.id}</text>
-                <text x={tx + 12} y={ty + 34} fill="#94a3b8" fontSize="10" fontFamily="sans-serif">{hovered.msg.length > 28 ? hovered.msg.slice(0, 28) + "…" : hovered.msg}</text>
+                <text x={tx + 12} y={ty + 34} fill={T.subtleText} fontSize="10" fontFamily="sans-serif">{hovered.msg.length > 28 ? hovered.msg.slice(0, 28) + "…" : hovered.msg}</text>
                 <text x={tx + 12} y={ty + 52} fill={T.muted} fontSize="9" fontFamily="monospace">branch: {hovered.branch}</text>
               </g>
             );

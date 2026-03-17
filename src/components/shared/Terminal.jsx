@@ -754,6 +754,7 @@ export default function Terminal({ compact = false }) {
               if (m) setInput(m);
             }
           }}
+          aria-label="Git command input"
           placeholder="Type a git command… (↑↓ history, Tab autocomplete)"
           style={{
             flex: 1,

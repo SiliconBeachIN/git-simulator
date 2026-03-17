@@ -29,7 +29,7 @@ function ReleasesSimulator({ isMobile }) {
         {[{ bump: "MAJOR", ex: "v1.0.0 → v2.0.0", note: "Breaking change", c: T.red }, { bump: "MINOR", ex: "v1.0.0 → v1.1.0", note: "New feature", c: T.blue }, { bump: "PATCH", ex: "v1.0.0 → v1.0.1", note: "Bug fix only", c: T.green }].map((v) => (
           <div key={v.bump} style={{ background: v.c + "08", border: "1px solid " + v.c + "25", borderRadius: 8, padding: 10 }}>
             <div style={{ color: v.c, fontSize: 13, fontWeight: 700, fontFamily: "monospace", marginBottom: 4 }}>{v.bump}</div>
-            <div style={{ color: "#94a3b8", fontSize: 10, fontFamily: "monospace", marginBottom: 4 }}>{v.ex}</div>
+            <div style={{ color: T.subtleText, fontSize: 10, fontFamily: "monospace", marginBottom: 4 }}>{v.ex}</div>
             <div style={{ color: T.muted, fontSize: 10 }}>{v.note}</div>
           </div>
         ))}
@@ -62,7 +62,7 @@ function ReleasesSimulator({ isMobile }) {
             <textarea value={form.notes} onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))} placeholder={"What is new?\n- Feature\n- Fix"} rows={4} style={{ width: "100%", background: "rgba(6,11,24,.6)", border: "1px solid " + T.border, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 12, outline: "none", resize: "none", boxSizing: "border-box", marginBottom: 8 }} />
             <label style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12, cursor: "pointer" }}>
               <input type="checkbox" checked={form.pre} onChange={(e) => setForm((p) => ({ ...p, pre: e.target.checked }))} style={{ accentColor: T.amber }} />
-              <span style={{ color: "#94a3b8", fontSize: 12 }}>Pre-release (beta/alpha)</span>
+              <span style={{ color: T.subtleText, fontSize: 12 }}>Pre-release (beta/alpha)</span>
             </label>
             <button onClick={publish} style={{ width: "100%", background: "rgba(74,222,128,.1)", border: "1px solid rgba(74,222,128,.25)", borderRadius: 7, color: T.green, fontSize: 12, padding: 9, cursor: "pointer" }}>Publish Release</button>
           </div>

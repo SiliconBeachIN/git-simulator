@@ -100,7 +100,7 @@ function BranchSimulator({ isMobile }) {
           <div style={{ color: T.muted, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", marginTop: 12, marginBottom: 8 }}>GIT LOG</div>
           <div style={{ background: "#050b13", borderRadius: 6, padding: 8, height: 80, overflowY: "auto", scrollbarWidth: "thin" }}>
             {log.slice(0, 8).map((l, i) => (
-              <div key={i} style={{ color: i === 0 ? "#94a3b8" : T.muted, fontSize: 10, fontFamily: "monospace", lineHeight: 1.7 }}>
+              <div key={i} style={{ color: i === 0 ? T.subtleText : T.muted, fontSize: 10, fontFamily: "monospace", lineHeight: 1.7 }}>
                 {i === 0 ? "→ " : ""}{l}
               </div>
             ))}

@@ -53,7 +53,7 @@ function MergeSimulator() {
 
         {mode === "idle" && (
           <div style={{ textAlign: "center", padding: "20px 0" }}>
-            <div style={{ color: "#94a3b8", fontSize: 13, marginBottom: 16 }}>Two branches edited the same line. See what a conflict looks like — and how to fix it.</div>
+            <div style={{ color: T.subtleText, fontSize: 13, marginBottom: 16 }}>Two branches edited the same line. See what a conflict looks like — and how to fix it.</div>
             <button onClick={triggerMerge} style={{ background: "rgba(167,139,250,.12)", border: "1px solid rgba(167,139,250,.3)", borderRadius: 8, color: T.purple, fontSize: 13, padding: "10px 28px", cursor: "pointer" }}>
               🔀 Simulate: git merge feature/login
             </button>
@@ -66,9 +66,9 @@ function MergeSimulator() {
               <div style={{ color: mode === "conflict" ? T.red : T.green, fontSize: 11, fontWeight: 700, marginBottom: 8 }}>
                 {mode === "conflict" ? "⚠️ src/auth.js — CONFLICT DETECTED" : "✓ src/auth.js — CONFLICT RESOLVED"}
               </div>
-              <pre style={{ margin: 0, fontFamily: "'JetBrains Mono',monospace", fontSize: 11.5, color: "#94a3b8", lineHeight: 1.7, overflowX: "auto" }}>
+              <pre style={{ margin: 0, fontFamily: "'JetBrains Mono',monospace", fontSize: 11.5, color: T.subtleText, lineHeight: 1.7, overflowX: "auto" }}>
                 {file.split("\n").map((line, i) => (
-                  <div key={i} style={{ color: line.startsWith("<<<<") ? "#f87171" : line.startsWith("====") ? "#fbbf24" : line.startsWith(">>>>") ? "#60a5fa" : line.startsWith("+") ? "#4ade80" : "#94a3b8" }}>
+                  <div key={i} style={{ color: line.startsWith("<<<<") ? "#f87171" : line.startsWith("====") ? "#fbbf24" : line.startsWith(">>>>") ? "#60a5fa" : line.startsWith("+") ? "#4ade80" : T.subtleText }}>
                     {line}
                   </div>
                 ))}

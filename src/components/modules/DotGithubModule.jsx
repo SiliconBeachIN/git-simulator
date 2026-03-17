@@ -36,7 +36,7 @@ function DotGithubExplorer({ isMobile }) {
             ))}
           </div>
           <div style={{ padding: 14, overflowY: "auto" }}>
-            <pre style={{ margin: 0, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: "#94a3b8", lineHeight: 1.7, whiteSpace: "pre-wrap" }}>{file.txt}</pre>
+            <pre style={{ margin: 0, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: T.subtleText, lineHeight: 1.7, whiteSpace: "pre-wrap" }}>{file.txt}</pre>
           </div>
         </div>
       </div>

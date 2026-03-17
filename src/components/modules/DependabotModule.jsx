@@ -49,7 +49,7 @@ function DependabotSim({ isMobile }) {
         <div style={{ background: "rgba(74,222,128,.04)", border: "1px solid rgba(74,222,128,.15)", borderRadius: 10, padding: 14 }}>
           <div style={{ color: T.green, fontSize: 11, fontWeight: 700, marginBottom: 8 }}>OPENED PRs</div>
           {deps.filter((d) => d.pr).map((d) => (
-            <div key={d.name} style={{ color: "#94a3b8", fontSize: 11, padding: "5px 0", borderBottom: "1px solid " + T.border, fontFamily: "monospace" }}>
+            <div key={d.name} style={{ color: T.subtleText, fontSize: 11, padding: "5px 0", borderBottom: "1px solid " + T.border, fontFamily: "monospace" }}>
               chore(deps): bump {d.name} from {d.cur} to {d.lat}
             </div>
           ))}

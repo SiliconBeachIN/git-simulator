@@ -11,6 +11,7 @@ const T = {
   teal: "#2dd4bf",
   text: "#e2e8f0",
   muted: "#64748b",
+  subtleText: "#94a3b8",
   faint: "#1e293b",
 };
 

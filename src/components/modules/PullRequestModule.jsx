@@ -33,7 +33,7 @@ function PRSimulator() {
             <div style={{ background: i === step ? "rgba(74,222,128,.05)" : T.card, border: `1px solid ${i === step ? "rgba(74,222,128,.25)" : T.border}`, borderRadius: 9, padding: "11px 14px", marginBottom: 8, transition: "all .2s" }}>
               <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
                 <span style={{ fontSize: 16 }}>{s.icon}</span>
-                <span style={{ color: i === step ? T.text : "#94a3b8", fontWeight: i === step ? 600 : 400, fontSize: 13 }}>{s.label}</span>
+                <span style={{ color: i === step ? T.text : T.subtleText, fontWeight: i === step ? 600 : 400, fontSize: 13 }}>{s.label}</span>
                 {i < step && <Badge color={T.green}>done</Badge>}
                 {i === step && <Badge color={T.amber}>current</Badge>}
               </div>

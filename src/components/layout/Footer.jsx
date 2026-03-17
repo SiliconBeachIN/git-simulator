@@ -31,7 +31,7 @@ export default function Footer() {
           textDecoration: "none",
           transition: "color .2s",
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.color = "#94a3b8")}
+        onMouseEnter={(e) => (e.currentTarget.style.color = T.subtleText)}
         onMouseLeave={(e) => (e.currentTarget.style.color = "#475569")}
       >
         <svg

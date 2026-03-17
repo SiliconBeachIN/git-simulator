@@ -4,7 +4,7 @@ import { InfoBox, SectionTitle } from "../shared";
 
 function ProtectionSim({ isMobile }) {
   const [rules, setRules] = useState({ pr: true, approvals: 1, ci: true, noForce: true, noDel: true, upToDate: false, signed: false });
-  const [scenario, setScenario] = useState(null);
+  const [scenarioId, setScenarioId] = useState(null);
   const toggle = (k) => setRules((r) => ({ ...r, [k]: !r[k] }));
 
   const SCENARIOS = [
@@ -14,6 +14,7 @@ function ProtectionSim({ isMobile }) {
     { id: "force", label: "git push --force to main", passes: !rules.noForce, why: "Force pushes are blocked" },
     { id: "del", label: "Delete the main branch", passes: !rules.noDel, why: "Branch deletion is locked" },
   ];
+  const scenario = SCENARIOS.find((s) => s.id === scenarioId) || null;
 
   return (
     <div>
@@ -37,12 +38,12 @@ function ProtectionSim({ isMobile }) {
               <div style={{ width: 36, height: 20, borderRadius: 10, background: rules[r.k] ? "rgba(74,222,128,.3)" : "rgba(30,41,64,.5)", border: "1px solid " + (rules[r.k] ? "rgba(74,222,128,.5)" : T.border), position: "relative", flexShrink: 0 }}>
                 <div style={{ position: "absolute", top: 2, left: rules[r.k] ? 18 : 2, width: 14, height: 14, borderRadius: "50%", background: rules[r.k] ? T.green : T.muted, transition: "left .2s" }} />
               </div>
-              <span style={{ color: rules[r.k] ? T.text : "#94a3b8", fontSize: 12 }}>{r.label}</span>
+              <span style={{ color: rules[r.k] ? T.text : T.subtleText, fontSize: 12 }}>{r.label}</span>
             </div>
           ))}
           {rules.pr && (
             <div style={{ paddingTop: 10, borderTop: "1px solid " + T.border }}>
-              <div style={{ color: "#94a3b8", fontSize: 11, marginBottom: 6 }}>Required approvals: <span style={{ color: T.green }}>{rules.approvals}</span></div>
+              <div style={{ color: T.subtleText, fontSize: 11, marginBottom: 6 }}>Required approvals: <span style={{ color: T.green }}>{rules.approvals}</span></div>
               <input type="range" min={0} max={4} value={rules.approvals} onChange={(e) => setRules((r) => ({ ...r, approvals: Number(e.target.value) }))} style={{ width: "100%", accentColor: T.green }} />
             </div>
           )}
@@ -50,7 +51,7 @@ function ProtectionSim({ isMobile }) {
         <div style={{ background: T.card, border: "1px solid " + T.border, borderRadius: 10, padding: 14 }}>
           <div style={{ color: T.muted, fontSize: 11, fontWeight: 700, marginBottom: 10 }}>TEST YOUR RULES</div>
           {SCENARIOS.map((s) => (
-            <button key={s.id} onClick={() => setScenario(s)} style={{ display: "block", width: "100%", background: scenario && scenario.id === s.id ? (s.passes ? "rgba(74,222,128,.1)" : "rgba(248,113,113,.1)") : "rgba(13,21,38,.5)", border: "1px solid " + (scenario && scenario.id === s.id ? (s.passes ? "rgba(74,222,128,.3)" : "rgba(248,113,113,.3)") : T.border), borderRadius: 7, padding: "9px 12px", color: T.text, textAlign: "left", cursor: "pointer", marginBottom: 7, fontSize: 12 }}>
+            <button key={s.id} onClick={() => setScenarioId(s.id)} style={{ display: "block", width: "100%", background: scenario && scenario.id === s.id ? (s.passes ? "rgba(74,222,128,.1)" : "rgba(248,113,113,.1)") : "rgba(13,21,38,.5)", border: "1px solid " + (scenario && scenario.id === s.id ? (s.passes ? "rgba(74,222,128,.3)" : "rgba(248,113,113,.3)") : T.border), borderRadius: 7, padding: "9px 12px", color: T.text, textAlign: "left", cursor: "pointer", marginBottom: 7, fontSize: 12 }}>
               {s.label}
             </button>
           ))}
@@ -59,7 +60,7 @@ function ProtectionSim({ isMobile }) {
               <div style={{ color: scenario.passes ? T.green : T.red, fontSize: 12, fontWeight: 700, marginBottom: 4 }}>
                 {scenario.passes ? "ALLOWED" : "BLOCKED"}
               </div>
-              <div style={{ color: "#94a3b8", fontSize: 11 }}>{scenario.passes ? "Permitted by current rules." : scenario.why}</div>
+              <div style={{ color: T.subtleText, fontSize: 11 }}>{scenario.passes ? "Permitted by current rules." : scenario.why}</div>
             </div>
           )}
         </div>

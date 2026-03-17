@@ -1,57 +1,39 @@
-import HomeModule from "./HomeModule";
-import InitModule from "./InitModule";
-import StagingModule from "./StagingModule";
-import BranchModule from "./BranchModule";
-import MergeModule from "./MergeModule";
-import RemoteModule from "./RemoteModule";
-import PullRequestModule from "./PullRequestModule";
-import GitFlowModule from "./GitFlowModule";
-import AdvancedModule from "./AdvancedModule";
-import CollaborateModule from "./CollaborateModule";
-import VisualizerModule from "./VisualizerModule";
-import ActionsModule from "./ActionsModule";
-import SecurityModule from "./SecurityModule";
-import QuizModule from "./QuizModule";
-import IssuesModule from "./IssuesModule";
-import ProjectsModule from "./ProjectsModule";
-import PagesModule from "./PagesModule";
-import ReleasesModule from "./ReleasesModule";
-import ProtectionModule from "./ProtectionModule";
-import CodeownersModule from "./CodeownersModule";
-import GithubApiModule from "./GithubApiModule";
-import DotGithubModule from "./DotGithubModule";
-import DependabotModule from "./DependabotModule";
-import CodespacesModule from "./CodespacesModule";
+import { lazy, Suspense } from "react";
+import T from "../../constants/tokens";
 
 const MAP = {
-  home: HomeModule,
-  init: InitModule,
-  staging: StagingModule,
-  branch: BranchModule,
-  merge: MergeModule,
-  remote: RemoteModule,
-  pullrequest: PullRequestModule,
-  gitflow: GitFlowModule,
-  advanced: AdvancedModule,
-  collaborate: CollaborateModule,
-  visualizer: VisualizerModule,
-  actions: ActionsModule,
-  security: SecurityModule,
-  quiz: QuizModule,
-  issues: IssuesModule,
-  projects: ProjectsModule,
-  pages: PagesModule,
-  releases: ReleasesModule,
-  protection: ProtectionModule,
-  codeowners: CodeownersModule,
-  githubapi: GithubApiModule,
-  dotgithub: DotGithubModule,
-  dependabot: DependabotModule,
-  codespaces: CodespacesModule,
+  home: lazy(() => import("./HomeModule")),
+  init: lazy(() => import("./InitModule")),
+  staging: lazy(() => import("./StagingModule")),
+  branch: lazy(() => import("./BranchModule")),
+  merge: lazy(() => import("./MergeModule")),
+  remote: lazy(() => import("./RemoteModule")),
+  pullrequest: lazy(() => import("./PullRequestModule")),
+  gitflow: lazy(() => import("./GitFlowModule")),
+  advanced: lazy(() => import("./AdvancedModule")),
+  collaborate: lazy(() => import("./CollaborateModule")),
+  visualizer: lazy(() => import("./VisualizerModule")),
+  actions: lazy(() => import("./ActionsModule")),
+  security: lazy(() => import("./SecurityModule")),
+  quiz: lazy(() => import("./QuizModule")),
+  issues: lazy(() => import("./IssuesModule")),
+  projects: lazy(() => import("./ProjectsModule")),
+  pages: lazy(() => import("./PagesModule")),
+  releases: lazy(() => import("./ReleasesModule")),
+  protection: lazy(() => import("./ProtectionModule")),
+  codeowners: lazy(() => import("./CodeownersModule")),
+  githubapi: lazy(() => import("./GithubApiModule")),
+  dotgithub: lazy(() => import("./DotGithubModule")),
+  dependabot: lazy(() => import("./DependabotModule")),
+  codespaces: lazy(() => import("./CodespacesModule")),
 };
 
 export default function ModuleContent({ id, isMobile }) {
   const Mod = MAP[id];
-  if (!Mod) return <div style={{ color: "#94a3b8", padding: 40, textAlign: "center" }}>Module not found</div>;
-  return <Mod isMobile={isMobile} />;
+  if (!Mod) return <div style={{ color: T.subtleText, padding: 40, textAlign: "center" }}>Module not found</div>;
+  return (
+    <Suspense fallback={<div style={{ color: T.muted, padding: 40, textAlign: "center" }}>Loading…</div>}>
+      <Mod isMobile={isMobile} />
+    </Suspense>
+  );
 }

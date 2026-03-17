@@ -37,7 +37,7 @@ function CodespacesSim({ isMobile }) {
           {["Install Node.js", "Install Git", "Install VS Code", "Clone the repo", "Run npm install", "Debug why it works on their PC but not yours", "30–90 minutes before you can write a single line of code"].map((s, i) => (
             <div key={i} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 6 }}>
               <span style={{ color: T.red, fontSize: 11, flexShrink: 0, marginTop: 1 }}>✗</span>
-              <span style={{ color: "#94a3b8", fontSize: 12 }}>{s}</span>
+              <span style={{ color: T.subtleText, fontSize: 12 }}>{s}</span>
             </div>
           ))}
         </div>
@@ -46,7 +46,7 @@ function CodespacesSim({ isMobile }) {
           {["Open the repo on GitHub", "Click Code → Codespaces → New codespace", "Wait ~30 seconds", "VS Code opens in your browser, fully ready", "Start coding immediately — from any device"].map((s, i) => (
             <div key={i} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 6 }}>
               <span style={{ color: T.green, fontSize: 11, flexShrink: 0, marginTop: 1 }}>✓</span>
-              <span style={{ color: "#94a3b8", fontSize: 12 }}>{s}</span>
+              <span style={{ color: T.subtleText, fontSize: 12 }}>{s}</span>
             </div>
           ))}
         </div>
@@ -55,12 +55,12 @@ function CodespacesSim({ isMobile }) {
       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 12 }}>
         <div style={{ background: T.card, border: "1px solid " + T.border, borderRadius: 10, padding: 14 }}>
           <div style={{ color: T.muted, fontSize: 11, fontWeight: 700, marginBottom: 6 }}>📄 .devcontainer/devcontainer.json</div>
-          <div style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.7, marginBottom: 10 }}>
+          <div style={{ color: T.subtleText, fontSize: 12, lineHeight: 1.7, marginBottom: 10 }}>
             This file tells Codespaces exactly how to set up your environment. Think of it as a{" "}
             <span style={{ color: T.amber, fontWeight: 600 }}>recipe card</span> — it lists the
             operating system, tools to install, and commands to run when the space starts.
           </div>
-          <pre style={{ margin: 0, background: "#050b13", border: "1px solid #1a2540", borderRadius: 8, padding: 12, fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: "#94a3b8", lineHeight: 1.8, whiteSpace: "pre-wrap" }}>{`{
+          <pre style={{ margin: 0, background: "#050b13", border: "1px solid #1a2540", borderRadius: 8, padding: 12, fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: T.subtleText, lineHeight: 1.8, whiteSpace: "pre-wrap" }}>{`{
   // Which OS + runtime to use
   "image": "node:20",
 
@@ -100,7 +100,7 @@ function CodespacesSim({ isMobile }) {
             <div>
               <div style={{ background: "rgba(74,222,128,.06)", border: "1px solid rgba(74,222,128,.2)", borderRadius: 8, padding: "10px 14px", marginBottom: 10 }}>
                 <div style={{ color: T.green, fontSize: 12, fontWeight: 700, marginBottom: 4 }}>🎉 Codespace is live!</div>
-                <div style={{ color: "#94a3b8", fontSize: 11, marginBottom: 6 }}>Your VS Code editor is now running in the cloud. You would open it at:</div>
+                <div style={{ color: T.subtleText, fontSize: 11, marginBottom: 6 }}>Your VS Code editor is now running in the cloud. You would open it at:</div>
                 <code style={{ color: T.blue, fontSize: 10, fontFamily: "monospace", wordBreak: "break-all" }}>https://your-username-repo-name-abc123.github.dev</code>
               </div>
               <button onClick={() => { setPhase("idle"); setLog([]); }} style={{ width: "100%", background: "rgba(30,41,59,.5)", border: "1px solid #1a2540", borderRadius: 7, color: T.muted, fontSize: 12, padding: 9, cursor: "pointer" }}>↺ Reset</button>

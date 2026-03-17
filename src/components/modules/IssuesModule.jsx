@@ -18,7 +18,8 @@ function IssuesSimulator({ isMobile }) {
     { id: 3, title: "Fix typo in README", label: "good first issue", state: "closed", comments: 1, author: "charlie", body: "Line 42: recieve should be receive." },
   ]);
   const [form, setForm] = useState({ title: "", label: "bug", body: "" });
-  const [sel, setSel] = useState(null);
+  const [selId, setSelId] = useState(null);
+  const sel = issues.find((i) => i.id === selId) || null;
   const [filter, setFilter] = useState("open");
 
   const create = () => {
@@ -49,7 +50,7 @@ function IssuesSimulator({ isMobile }) {
             {shown.map((i) => {
               const lc = (ISSUE_LABELS.find((l) => l.name === i.label) || { color: T.blue }).color;
               return (
-                <div key={i.id} onClick={() => setSel(i)} style={{ padding: "10px 14px", borderBottom: "1px solid " + T.border, cursor: "pointer", background: sel && sel.id === i.id ? "rgba(74,222,128,.04)" : "transparent" }}>
+                <div key={i.id} onClick={() => setSelId(i.id)} style={{ padding: "10px 14px", borderBottom: "1px solid " + T.border, cursor: "pointer", background: sel && sel.id === i.id ? "rgba(74,222,128,.04)" : "transparent" }}>
                   <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
                     <span style={{ fontSize: 13, marginTop: 1 }}>{i.state === "open" ? "🟢" : "⚫"}</span>
                     <div style={{ flex: 1, minWidth: 0 }}>
@@ -75,7 +76,7 @@ function IssuesSimulator({ isMobile }) {
                 </button>
               </div>
               <div style={{ color: T.text, fontSize: 13, fontWeight: 600, marginBottom: 6 }}>{sel.title}</div>
-              <div style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.7, marginBottom: 8 }}>{sel.body}</div>
+              <div style={{ color: T.subtleText, fontSize: 12, lineHeight: 1.7, marginBottom: 8 }}>{sel.body}</div>
               <div style={{ color: T.green, fontSize: 11, background: "rgba(74,222,128,.05)", border: "1px solid rgba(74,222,128,.15)", borderRadius: 6, padding: "8px 10px" }}>
                 In a PR, write: Fixes #{sel.id} to auto-close on merge
               </div>
