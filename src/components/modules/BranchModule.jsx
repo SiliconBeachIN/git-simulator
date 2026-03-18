@@ -84,7 +84,7 @@ function BranchSimulator({ isMobile }) {
           <br />
           2. Click switch on a branch to move HEAD to that branch.
           <br />
-          3. Click git commit to add a new changes only on the current branch.
+          3. Click git commit to add new changes only to the current branch.
           <br />
           4. Use the GIT LOG panel to see actions in real time.
         </div>

@@ -89,11 +89,11 @@ const T = {
 
   redBgMedium:       "rgba(248,113,113,.10)", // medium red background (scenario button etc.)
   redBorderMedium:   "rgba(248,113,113,.30)", // medium red border
-    amberBgLight:      "rgba(251,191,36,.10)",  // amber badge / button background
-    amberBorderLight:  "rgba(251,191,36,.20)",  // amber badge border
-    amberBorderMedium: "rgba(251,191,36,.30)",  // amber card border (pre-release)
+  amberBgLight:      "rgba(251,191,36,.10)",  // amber badge / button background
+  amberBorderLight:  "rgba(251,191,36,.20)",  // amber badge border
+  amberBorderMedium: "rgba(251,191,36,.30)",  // amber card border (pre-release)
 
-    inputBgDark:       "rgba(6,11,24,.6)",       // darker input background (CODEOWNERS etc.)
+  inputBgDark:       "rgba(6,11,24,.6)",       // darker input background (CODEOWNERS etc.)
   inputBgFaint:      "rgba(6,11,24,.8)",       // faint dark input background
   selectionBgInactive: "rgba(13,21,38,.5)",    // unselected tab/button background
   cardBgInactive:    "rgba(13,21,38,.4)",      // unselected tree item background
