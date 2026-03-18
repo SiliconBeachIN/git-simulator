@@ -5,18 +5,20 @@ import CopyBtn from "./CopyBtn";
 export default function CommandCard({ cmd, desc, detail, example, warning, index = 0 }) {
   const [open, setOpen] = useState(false);
   return (
-    <div
+    <button
       onClick={() => setOpen((o) => !o)}
+      aria-expanded={open}
       style={{
         background: open ? T.greenBgSubtle : T.card,
         border: `1px solid ${open ? T.greenBorder : T.border}`,
-
         borderRadius: 10,
         padding: "13px 16px",
         cursor: "pointer",
         transition: "all .18s",
         marginBottom: 8,
         animation: `slideIn .3s ease ${index * 0.04}s both`,
+        width: "100%",
+        textAlign: "left",
       }}
     >
       <div
@@ -76,6 +78,6 @@ export default function CommandCard({ cmd, desc, detail, example, warning, index
           )}
         </div>
       )}
-    </div>
+    </button>
   );
 }

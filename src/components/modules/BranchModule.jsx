@@ -24,7 +24,7 @@ function BranchSimulator({ isMobile }) {
 
   const current = branches.find((b) => b.current) ?? branches[0];
   const branchNameError = getBranchNameError(newName, branches);
-  const canCreateBranch = newName.trim() && !branchNameError;
+  const canCreateBranch = Boolean(newName.trim()) && !branchNameError;
 
   const addBranch = () => {
     const n = newName.trim();
