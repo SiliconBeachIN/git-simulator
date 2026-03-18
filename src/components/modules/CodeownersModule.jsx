@@ -40,7 +40,7 @@ function CodeownersSim({ isMobile }) {
       </InfoBox>
       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 12 }}>
         <div style={{ background: T.card, border: "1px solid " + T.border, borderRadius: 10, overflow: "hidden" }}>
-          <div style={{ background: "rgba(6,11,24,.8)", borderBottom: "1px solid " + T.border, padding: "8px 14px" }}>
+          <div style={{ background: T.inputBgFaint, borderBottom: "1px solid " + T.border, padding: "8px 14px" }}>
             <span style={{ color: T.subtleText, fontSize: 11, fontFamily: "monospace" }}>.github/CODEOWNERS</span>
           </div>
           <div style={{ padding: 14 }}>
@@ -54,28 +54,28 @@ function CodeownersSim({ isMobile }) {
               </div>
             ))}
             <div style={{ display: "flex", gap: 6, marginTop: 6 }}>
-              <input value={newR.pattern} onChange={(e) => setNewR((p) => ({ ...p, pattern: e.target.value }))} placeholder="src/feature/" style={{ flex: 1, background: "rgba(6,11,24,.6)", border: "1px solid " + T.border, borderRadius: 5, padding: "5px 8px", color: T.text, fontSize: 11, outline: "none", fontFamily: "monospace" }} />
-              <input value={newR.owners} onChange={(e) => setNewR((p) => ({ ...p, owners: e.target.value }))} placeholder="@team" style={{ flex: 1, background: "rgba(6,11,24,.6)", border: "1px solid " + T.border, borderRadius: 5, padding: "5px 8px", color: T.text, fontSize: 11, outline: "none" }} />
-              <button onClick={addRule} style={{ background: "rgba(74,222,128,.1)", border: "1px solid rgba(74,222,128,.2)", borderRadius: 5, color: T.green, fontSize: 10, padding: "5px 10px", cursor: "pointer" }}>+</button>
+              <input value={newR.pattern} onChange={(e) => setNewR((p) => ({ ...p, pattern: e.target.value }))} placeholder="src/feature/" style={{ flex: 1, background: T.inputBgDark, border: "1px solid " + T.border, borderRadius: 5, padding: "5px 8px", color: T.text, fontSize: 11, outline: "none", fontFamily: "monospace" }} />
+              <input value={newR.owners} onChange={(e) => setNewR((p) => ({ ...p, owners: e.target.value }))} placeholder="@team" style={{ flex: 1, background: T.inputBgDark, border: "1px solid " + T.border, borderRadius: 5, padding: "5px 8px", color: T.text, fontSize: 11, outline: "none" }} />
+              <button onClick={addRule} style={{ background: T.greenBgMedium, border: `1px solid ${T.greenBorderMedium}`, borderRadius: 5, color: T.green, fontSize: 10, padding: "5px 10px", cursor: "pointer" }}>+</button>
             </div>
           </div>
         </div>
         <div style={{ background: T.card, border: "1px solid " + T.border, borderRadius: 10, padding: 14 }}>
           <div style={{ color: T.muted, fontSize: 11, fontWeight: 700, marginBottom: 12 }}>WHO REVIEWS THIS FILE?</div>
-          <input value={testFile} onChange={(e) => setTestFile(e.target.value)} placeholder="Type a file path" style={{ width: "100%", background: "rgba(6,11,24,.6)", border: "1px solid " + T.border, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 12, outline: "none", fontFamily: "monospace", boxSizing: "border-box", marginBottom: 10 }} />
+          <input value={testFile} onChange={(e) => setTestFile(e.target.value)} placeholder="Type a file path" style={{ width: "100%", background: T.inputBgDark, border: "1px solid " + T.border, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 12, outline: "none", fontFamily: "monospace", boxSizing: "border-box", marginBottom: 10 }} />
           <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 10 }}>
             {["src/payments/checkout.js", "src/auth/login.js", "README.md", ".github/ci.yml", "src/utils/helper.js"].map((f) => (
-              <button key={f} onClick={() => setTestFile(f)} style={{ background: testFile === f ? "rgba(96,165,250,.12)" : "rgba(13,21,38,.5)", border: "1px solid " + (testFile === f ? "rgba(96,165,250,.3)" : T.border), borderRadius: 5, color: testFile === f ? T.blue : T.muted, fontSize: 10, padding: "3px 8px", cursor: "pointer" }}>
+              <button key={f} onClick={() => setTestFile(f)} style={{ background: testFile === f ? T.blueBgMedium : T.selectionBgInactive, border: "1px solid " + (testFile === f ? T.blueBorderMedium : T.border), borderRadius: 5, color: testFile === f ? T.blue : T.muted, fontSize: 10, padding: "3px 8px", cursor: "pointer" }}>
                 {f.split("/").pop()}
               </button>
             ))}
           </div>
           {matched ? (
-            <div style={{ background: "rgba(74,222,128,.06)", border: "1px solid rgba(74,222,128,.2)", borderRadius: 8, padding: 12 }}>
+            <div style={{ background: T.greenBgSmall, border: `1px solid ${T.greenBorderLight}`, borderRadius: 8, padding: 12 }}>
               <div style={{ color: T.green, fontSize: 11, fontWeight: 700, marginBottom: 6 }}>Matched: {matched.pattern}</div>
               <div style={{ color: T.subtleText, fontSize: 12, marginBottom: 8 }}>Auto-assigned reviewers:</div>
               <div>{matched.owners.split(" ").map((o) => (
-                <span key={o} style={{ display: "inline-block", background: "rgba(96,165,250,.12)", border: "1px solid rgba(96,165,250,.25)", borderRadius: 12, fontSize: 11, color: T.blue, padding: "3px 10px", margin: "2px" }}>{o}</span>
+                <span key={o} style={{ display: "inline-block", background: T.blueBgMedium, border: `1px solid ${T.blueBorderLight}`, borderRadius: 12, fontSize: 11, color: T.blue, padding: "3px 10px", margin: "2px" }}>{o}</span>
               ))}</div>
             </div>
           ) : (

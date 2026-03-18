@@ -8,13 +8,13 @@ const INIT_KANBAN = {
   review: [{ id: 5, title: "Add rate limiting", tag: "bug" }],
   done: [{ id: 6, title: "Setup CI pipeline", tag: "enhancement" }, { id: 7, title: "Write unit tests", tag: "docs" }],
 };
-const KCOLS = { todo: { label: "To Do", color: "#64748b" }, inprog: { label: "In Progress", color: "#fbbf24" }, review: { label: "In Review", color: "#60a5fa" }, done: { label: "Done", color: "#4ade80" } };
+const KCOLS = { todo: { label: "To Do", color: T.muted }, inprog: { label: "In Progress", color: T.amber }, review: { label: "In Review", color: T.blue }, done: { label: "Done", color: T.green } };
 
 function ProjectsSimulator({ isMobile }) {
   const [cols, setCols] = useState(INIT_KANBAN);
   const [drag, setDrag] = useState(null);
   const [over, setOver] = useState(null);
-  const tcolor = (t) => ({ bug: "#f87171", enhancement: "#60a5fa", docs: "#a78bfa" })[t] || T.muted;
+  const tcolor = (t) => ({ bug: T.red, enhancement: T.blue, docs: T.purple })[t] || T.muted;
 
   const drop = (colId) => {
     if (!drag || drag.col === colId) { setDrag(null); setOver(null); return; }
@@ -30,12 +30,15 @@ function ProjectsSimulator({ isMobile }) {
         can be a card. Cards move through columns as work progresses. When you close an issue the
         card auto-moves. Drag cards between columns below to try it.
       </InfoBox>
+      <div style={{ background: T.blueBgLight, border: `1px solid ${T.blueBorderLight}`, borderRadius: 8, color: T.subtleText, fontSize: 11, padding: "8px 10px", marginBottom: 10 }}>
+        Drag any task card and drop it into <strong style={{ color: T.blue }}>In Progress</strong>, <strong style={{ color: T.blue }}>In Review</strong>, or <strong style={{ color: T.blue }}>Done</strong>.
+      </div>
       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4,1fr)", gap: 10, overflowX: isMobile ? "auto" : "visible" }}>
         {Object.entries(cols).map(([colId, cards]) => {
           const meta = KCOLS[colId];
           const isOver = over === colId;
           return (
-            <div key={colId} onDragOver={(e) => { e.preventDefault(); setOver(colId); }} onDrop={() => drop(colId)} onDragLeave={() => setOver(null)} style={{ background: isOver ? "rgba(74,222,128,.05)" : T.card, border: "1px solid " + (isOver ? "rgba(74,222,128,.3)" : T.border), borderRadius: 10, padding: 10, minHeight: 180 }}>
+            <div key={colId} onDragOver={(e) => { e.preventDefault(); setOver(colId); }} onDrop={(e) => { e.preventDefault(); drop(colId); }} onDragLeave={() => setOver(null)} style={{ background: isOver ? T.greenBgLight : T.card, border: "1px solid " + (isOver ? T.greenBorderStrong : T.border), borderRadius: 10, padding: 10, minHeight: 180 }}>
               <div style={{ color: meta.color, fontSize: 11, fontWeight: 700, marginBottom: 10, display: "flex", justifyContent: "space-between" }}>
                 <span>{meta.label}</span>
                 <span style={{ background: meta.color + "20", borderRadius: 10, padding: "1px 7px", fontSize: 10 }}>{cards.length}</span>
@@ -43,13 +46,14 @@ function ProjectsSimulator({ isMobile }) {
               {cards.map((card) => {
                 const isDrag = drag && drag.card.id === card.id;
                 return (
-                  <div key={card.id} draggable onDragStart={() => setDrag({ card, col: colId })} onDragEnd={() => { setDrag(null); setOver(null); }} style={{ background: "rgba(6,11,24,.6)", border: "1px solid " + (isDrag ? "rgba(74,222,128,.3)" : T.border), borderRadius: 7, padding: "9px 10px", marginBottom: 7, cursor: "grab", opacity: isDrag ? 0.5 : 1 }}>
+                  <div key={card.id} draggable onDragStart={() => setDrag({ card, col: colId })} onDragOver={(e) => { e.preventDefault(); setOver(colId); }} onDrop={(e) => { e.preventDefault(); e.stopPropagation(); drop(colId); }} onDragEnd={() => { setDrag(null); setOver(null); }} style={{ background: T.inputBgDark, border: "1px solid " + (isDrag ? T.greenBorderStrong : T.border), borderRadius: 7, padding: "9px 10px", marginBottom: 7, cursor: "grab", opacity: isDrag ? 0.5 : 1 }}>
                     <div style={{ color: T.text, fontSize: 11, marginBottom: 5 }}>{card.title}</div>
+                    <div style={{ color: T.muted, fontSize: 9, marginBottom: 5, fontFamily: "monospace" }}>⇅ drag me</div>
                     <span style={{ background: tcolor(card.tag) + "18", border: "1px solid " + tcolor(card.tag) + "40", borderRadius: 8, fontSize: 9, color: tcolor(card.tag), padding: "1px 6px" }}>{card.tag}</span>
                   </div>
                 );
               })}
-              {isOver && drag && <div style={{ border: "2px dashed rgba(74,222,128,.3)", borderRadius: 7, padding: 16, textAlign: "center", color: "rgba(74,222,128,.5)", fontSize: 11 }}>Drop here</div>}
+              {isOver && drag && <div style={{ border: `2px dashed ${T.greenBorderStrong}`, borderRadius: 7, padding: 16, textAlign: "center", color: T.greenBgHalfAlpha, fontSize: 11 }}>Drop here</div>}
             </div>
           );
         })}

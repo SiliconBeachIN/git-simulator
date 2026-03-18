@@ -26,13 +26,13 @@ export default function Footer() {
           display: "flex",
           alignItems: "center",
           gap: 7,
-          color: "#475569",
+          color: T.linkColor,
           fontSize: 11,
           textDecoration: "none",
           transition: "color .2s",
         }}
         onMouseEnter={(e) => (e.currentTarget.style.color = T.subtleText)}
-        onMouseLeave={(e) => (e.currentTarget.style.color = "#475569")}
+        onMouseLeave={(e) => (e.currentTarget.style.color = T.linkColor)}
       >
         <svg
           width="14"

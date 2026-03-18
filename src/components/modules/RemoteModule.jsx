@@ -1,5 +1,5 @@
 import T from "../../constants/tokens";
-import { InfoBox, ConceptDiagram, SectionTitle, CommandCard, Terminal } from "../shared";
+import { InfoBox, SectionTitle, CommandCard, Terminal } from "../shared";
 
 export default function RemoteModule() {
   return (
@@ -7,14 +7,6 @@ export default function RemoteModule() {
       <InfoBox icon="☁" title="Local vs Remote" color={T.blue}>
         Your <strong style={{ color: T.amber }}>local repo</strong> lives on your machine — fast, private, no internet needed. A <strong style={{ color: T.blue }}>remote</strong> is another copy, usually on GitHub. The name <code style={{ color: T.green }}>origin</code> is just a convention — it's the primary remote.
       </InfoBox>
-      <ConceptDiagram>{`  Your machine                      GitHub (origin)
-  ┌─────────────────┐    push →    ┌─────────────────┐
-  │  local/main     │◄────────────►│  origin/main    │
-  │  local/feat     │    ← pull    │  origin/feat    │
-  └─────────────────┘              └─────────────────┘
-         │                                  ↕
-      git fetch                     other developers
-  (download, don't merge)          clone / pull / push`}</ConceptDiagram>
       <SectionTitle>CLI Commands</SectionTitle>
       {[
         { cmd: "git remote add origin https://github.com/user/repo.git", desc: "Link local repo to GitHub", detail: "'origin' is the conventional name. You can call it anything. This just stores the URL — no data transferred yet.", example: "Connecting your local lab notebook to the cloud library ☁️" },

@@ -27,12 +27,12 @@ function CodespacesSim({ isMobile }) {
     );
   };
 
-  const lc = { info: "#60a5fa", ok: "#34d399", done: "#4ade80" };
+  const lc = { info: T.blue, ok: T.terminalOk, done: T.green };
 
   return (
     <div>
       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 12, marginBottom: 14 }}>
-        <div style={{ background: "rgba(248,113,113,.05)", border: "1px solid rgba(248,113,113,.2)", borderRadius: 10, padding: 14 }}>
+        <div style={{ background: T.redBgSubtle, border: `1px solid ${T.redBorderLight}`, borderRadius: 10, padding: 14 }}>
           <div style={{ color: T.red, fontSize: 11, fontWeight: 700, marginBottom: 10 }}>😩 WITHOUT CODESPACES</div>
           {["Install Node.js", "Install Git", "Install VS Code", "Clone the repo", "Run npm install", "Debug why it works on their PC but not yours", "30–90 minutes before you can write a single line of code"].map((s, i) => (
             <div key={i} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 6 }}>
@@ -41,7 +41,7 @@ function CodespacesSim({ isMobile }) {
             </div>
           ))}
         </div>
-        <div style={{ background: "rgba(74,222,128,.05)", border: "1px solid rgba(74,222,128,.2)", borderRadius: 10, padding: 14 }}>
+        <div style={{ background: T.greenBgLight, border: `1px solid ${T.greenBorderLight}`, borderRadius: 10, padding: 14 }}>
           <div style={{ color: T.green, fontSize: 11, fontWeight: 700, marginBottom: 10 }}>🚀 WITH CODESPACES</div>
           {["Open the repo on GitHub", "Click Code → Codespaces → New codespace", "Wait ~30 seconds", "VS Code opens in your browser, fully ready", "Start coding immediately — from any device"].map((s, i) => (
             <div key={i} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 6 }}>
@@ -60,7 +60,7 @@ function CodespacesSim({ isMobile }) {
             <span style={{ color: T.amber, fontWeight: 600 }}>recipe card</span> — it lists the
             operating system, tools to install, and commands to run when the space starts.
           </div>
-          <pre style={{ margin: 0, background: "#050b13", border: "1px solid #1a2540", borderRadius: 8, padding: 12, fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: T.subtleText, lineHeight: 1.8, whiteSpace: "pre-wrap" }}>{`{
+          <pre style={{ margin: 0, background: T.terminalBg, border: `1px solid ${T.border}`, borderRadius: 8, padding: 12, fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: T.subtleText, lineHeight: 1.8, whiteSpace: "pre-wrap" }}>{`{
   // Which OS + runtime to use
   "image": "node:20",
 
@@ -81,29 +81,29 @@ function CodespacesSim({ isMobile }) {
 
         <div style={{ background: T.card, border: "1px solid " + T.border, borderRadius: 10, padding: 14 }}>
           <div style={{ color: T.muted, fontSize: 11, fontWeight: 700, marginBottom: 6 }}>⚡ WHAT HAPPENS WHEN YOU CLICK "NEW CODESPACE"</div>
-          <div style={{ color: "#64748b", fontSize: 11, marginBottom: 10 }}>Watch the steps GitHub takes behind the scenes:</div>
-          <div style={{ background: "#050b13", border: "1px solid #1a2540", borderRadius: 8, padding: 12, height: 190, overflowY: "auto", marginBottom: 12, scrollbarWidth: "thin" }}>
+          <div style={{ color: T.muted, fontSize: 11, marginBottom: 10 }}>Watch the steps GitHub takes behind the scenes:</div>
+          <div style={{ background: T.terminalBg, border: `1px solid ${T.border}`, borderRadius: 8, padding: 12, height: 190, overflowY: "auto", marginBottom: 12, scrollbarWidth: "thin" }}>
             {log.length === 0 && phase === "idle" && (
               <div style={{ color: T.muted, fontSize: 11, textAlign: "center", paddingTop: 60 }}>Press the button below to simulate the boot</div>
             )}
             {log.map((l, i) => (
-              <div key={i} style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10.5, color: lc[l.type] || "#64748b", lineHeight: 1.8 }}>
+              <div key={i} style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10.5, color: lc[l.type] || T.muted, lineHeight: 1.8 }}>
                 {l.type === "ok" || l.type === "done" ? "✓ " : "→ "}{l.msg}
               </div>
             ))}
           </div>
           {phase !== "ready" ? (
-            <button onClick={boot} disabled={phase === "booting"} style={{ width: "100%", background: "rgba(45,212,191,.1)", border: "1px solid rgba(45,212,191,.25)", borderRadius: 7, color: T.teal, fontSize: 12, padding: 10, cursor: phase === "idle" ? "pointer" : "default", fontWeight: 600 }}>
+            <button onClick={boot} disabled={phase === "booting"} style={{ width: "100%", background: T.tealBgLight, border: `1px solid ${T.tealBorderLight}`, borderRadius: 7, color: T.teal, fontSize: 12, padding: 10, cursor: phase === "idle" ? "pointer" : "default", fontWeight: 600 }}>
               {phase === "booting" ? "Setting up your Codespace…" : "▶  Simulate: New Codespace"}
             </button>
           ) : (
             <div>
-              <div style={{ background: "rgba(74,222,128,.06)", border: "1px solid rgba(74,222,128,.2)", borderRadius: 8, padding: "10px 14px", marginBottom: 10 }}>
+              <div style={{ background: T.greenBgSmall, border: `1px solid ${T.greenBorderLight}`, borderRadius: 8, padding: "10px 14px", marginBottom: 10 }}>
                 <div style={{ color: T.green, fontSize: 12, fontWeight: 700, marginBottom: 4 }}>🎉 Codespace is live!</div>
                 <div style={{ color: T.subtleText, fontSize: 11, marginBottom: 6 }}>Your VS Code editor is now running in the cloud. You would open it at:</div>
                 <code style={{ color: T.blue, fontSize: 10, fontFamily: "monospace", wordBreak: "break-all" }}>https://your-username-repo-name-abc123.github.dev</code>
               </div>
-              <button onClick={() => { setPhase("idle"); setLog([]); }} style={{ width: "100%", background: "rgba(30,41,59,.5)", border: "1px solid #1a2540", borderRadius: 7, color: T.muted, fontSize: 12, padding: 9, cursor: "pointer" }}>↺ Reset</button>
+              <button onClick={() => { setPhase("idle"); setLog([]); }} style={{ width: "100%", background: T.resetBg, border: `1px solid ${T.border}`, borderRadius: 7, color: T.muted, fontSize: 12, padding: 9, cursor: "pointer" }}>↺ Reset</button>
             </div>
           )}
         </div>

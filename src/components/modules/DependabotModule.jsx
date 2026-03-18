@@ -25,7 +25,7 @@ function DependabotSim({ isMobile }) {
       <div style={{ background: T.card, border: "1px solid " + T.border, borderRadius: 10, overflow: "hidden", marginBottom: 14 }}>
         <div style={{ padding: "10px 14px", borderBottom: "1px solid " + T.border, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <span style={{ color: T.muted, fontSize: 11, fontWeight: 700 }}>DEPENDENCY SCAN</span>
-          <button onClick={openAll} style={{ background: "rgba(167,139,250,.1)", border: "1px solid rgba(167,139,250,.25)", borderRadius: 5, color: T.purple, fontSize: 10, padding: "3px 10px", cursor: "pointer" }}>Open All PRs</button>
+          <button onClick={openAll} style={{ background: T.purpleBgLight, border: `1px solid ${T.purpleBorderLight}`, borderRadius: 5, color: T.purple, fontSize: 10, padding: "3px 10px", cursor: "pointer" }}>Open All PRs</button>
         </div>
         {deps.map((d) => (
           <div key={d.name} style={{ padding: "11px 14px", borderBottom: "1px solid " + T.border, display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
@@ -40,13 +40,13 @@ function DependabotSim({ isMobile }) {
             {d.pr ? (
               <span style={{ color: T.green, fontSize: 11 }}>PR opened</span>
             ) : (
-              <button onClick={() => openPR(d.name)} style={{ background: "rgba(74,222,128,.08)", border: "1px solid rgba(74,222,128,.2)", borderRadius: 5, color: T.green, fontSize: 10, padding: "3px 10px", cursor: "pointer" }}>Open PR</button>
+              <button onClick={() => openPR(d.name)} style={{ background: T.greenBgLight, border: `1px solid ${T.greenBorderLight}`, borderRadius: 5, color: T.green, fontSize: 10, padding: "3px 10px", cursor: "pointer" }}>Open PR</button>
             )}
           </div>
         ))}
       </div>
       {deps.some((d) => d.pr) && (
-        <div style={{ background: "rgba(74,222,128,.04)", border: "1px solid rgba(74,222,128,.15)", borderRadius: 10, padding: 14 }}>
+        <div style={{ background: T.greenBgSubtle, border: `1px solid ${T.greenBorderLight}`, borderRadius: 10, padding: 14 }}>
           <div style={{ color: T.green, fontSize: 11, fontWeight: 700, marginBottom: 8 }}>OPENED PRs</div>
           {deps.filter((d) => d.pr).map((d) => (
             <div key={d.name} style={{ color: T.subtleText, fontSize: 11, padding: "5px 0", borderBottom: "1px solid " + T.border, fontFamily: "monospace" }}>

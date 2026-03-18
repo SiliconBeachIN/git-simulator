@@ -13,7 +13,7 @@ export default function CopyBtn({ text }) {
         }).catch(() => {});
       }}
       style={{
-        background: done ? "rgba(74,222,128,.18)" : "rgba(30,41,59,.7)",
+        background: done ? T.greenBgCopied : T.copyBtnBg,
         border: `1px solid ${done ? T.green : T.border}`,
         borderRadius: 6,
         color: done ? T.green : T.muted,

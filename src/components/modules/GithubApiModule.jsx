@@ -14,7 +14,7 @@ function APIExplorer({ isMobile }) {
   const [sel, setSel] = useState(0);
   const ex = API_EX[sel];
   const isGet = ex.method === "GET";
-  const methodStyle = { background: isGet ? "rgba(74,222,128,.15)" : "rgba(96,165,250,.15)", border: "1px solid " + (isGet ? "rgba(74,222,128,.3)" : "rgba(96,165,250,.3)"), borderRadius: 4, fontSize: 10, fontWeight: 700, color: isGet ? T.green : T.blue, padding: "2px 7px", fontFamily: "monospace" };
+  const methodStyle = { background: isGet ? T.greenBgMedium : T.blueBgLight, border: "1px solid " + (isGet ? T.greenBorderMedium : T.blueBorderLight), borderRadius: 4, fontSize: 10, fontWeight: 700, color: isGet ? T.green : T.blue, padding: "2px 7px", fontFamily: "monospace" };
 
   return (
     <div>
@@ -28,16 +28,16 @@ function APIExplorer({ isMobile }) {
           {API_EX.map((e, i) => {
             const eg = e.method === "GET";
             return (
-              <button key={i} onClick={() => setSel(i)} style={{ display: "block", width: "100%", background: i === sel ? "rgba(45,212,191,.08)" : T.card, border: "1px solid " + (i === sel ? "rgba(45,212,191,.3)" : T.border), borderRadius: 7, padding: "9px 12px", textAlign: "left", cursor: "pointer", marginBottom: 6 }}>
-                <span style={{ background: eg ? "rgba(74,222,128,.15)" : "rgba(96,165,250,.15)", border: "1px solid " + (eg ? "rgba(74,222,128,.3)" : "rgba(96,165,250,.3)"), borderRadius: 4, fontSize: 9, color: eg ? T.green : T.blue, padding: "1px 6px", fontFamily: "monospace", marginRight: 7 }}>{e.method}</span>
+              <button key={i} onClick={() => setSel(i)} style={{ display: "block", width: "100%", background: i === sel ? T.tealBgActive : T.card, border: "1px solid " + (i === sel ? T.tealBorderActive : T.border), borderRadius: 7, padding: "9px 12px", textAlign: "left", cursor: "pointer", marginBottom: 6 }}>
+                <span style={{ background: eg ? T.greenBgMedium : T.blueBgLight, border: "1px solid " + (eg ? T.greenBorderMedium : T.blueBorderLight), borderRadius: 4, fontSize: 9, color: eg ? T.green : T.blue, padding: "1px 6px", fontFamily: "monospace", marginRight: 7 }}>{e.method}</span>
                 <span style={{ color: i === sel ? T.text : T.subtleText, fontSize: 11 }}>{e.label}</span>
               </button>
             );
           })}
         </div>
         <div>
-          <div style={{ background: "#050b13", border: "1px solid #1a2540", borderRadius: 10, overflow: "hidden", marginBottom: 10 }}>
-            <div style={{ background: T.surface, padding: "8px 14px", borderBottom: "1px solid #1a2540", display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+          <div style={{ background: T.terminalBg, border: `1px solid ${T.border}`, borderRadius: 10, overflow: "hidden", marginBottom: 10 }}>
+            <div style={{ background: T.surface, padding: "8px 14px", borderBottom: `1px solid ${T.border}`, display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
               <span style={methodStyle}>{ex.method}</span>
               <code style={{ color: T.subtleText, fontSize: 11, wordBreak: "break-all" }}>https://api.github.com{ex.path}</code>
             </div>

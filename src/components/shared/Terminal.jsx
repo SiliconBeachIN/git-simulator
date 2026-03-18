@@ -648,7 +648,7 @@ export default function Terminal({ compact = false }) {
 
   const col = {
     cmd: T.green,
-    ok: "#34d399",
+    ok: T.terminalOk,
     info: T.blue,
     err: T.red,
     diff: T.purple,
@@ -659,8 +659,9 @@ export default function Terminal({ compact = false }) {
   return (
     <div
       style={{
-        background: "#050b13",
-        border: "1px solid rgba(74,222,128,.2)",
+        background: T.terminalBg,
+        border: `1px solid ${T.greenBorderLight}`,
+
         borderRadius: 12,
         overflow: "hidden",
       }}
@@ -673,7 +674,8 @@ export default function Terminal({ compact = false }) {
           display: "flex",
           alignItems: "center",
           gap: 6,
-          borderBottom: "1px solid rgba(74,222,128,.1)",
+          borderBottom: `1px solid ${T.greenBgLight}`,
+
         }}
       >
         {[T.red, T.amber, T.green].map((c) => (
@@ -684,7 +686,7 @@ export default function Terminal({ compact = false }) {
         ))}
         <span
           style={{
-            color: "#334155",
+          color: T.scrollBarLine,
             fontSize: 11,
             marginLeft: 8,
             fontFamily: "monospace",
@@ -713,7 +715,7 @@ export default function Terminal({ compact = false }) {
               color: col[l.t] || col.out,
             }}
           >
-            {l.t === "cmd" && <span style={{ color: "#a78bfa" }}>$ </span>}
+            {l.t === "cmd" && <span style={{ color: T.purple }}>$ </span>}
             {l.v}
           </div>
         ))}
@@ -722,14 +724,15 @@ export default function Terminal({ compact = false }) {
       {/* input */}
       <div
         style={{
-          borderTop: "1px solid rgba(74,222,128,.08)",
+          borderTop: `1px solid ${T.greenBgLight}`,
+
           padding: "9px 14px",
           display: "flex",
           gap: 10,
           alignItems: "center",
         }}
       >
-        <span style={{ color: "#a78bfa", fontFamily: "monospace", fontSize: 13 }}>
+        <span style={{ color: T.purple, fontFamily: "monospace", fontSize: 13 }}>
           $
         </span>
         <input
@@ -769,8 +772,9 @@ export default function Terminal({ compact = false }) {
         <button
           onClick={run}
           style={{
-            background: "rgba(74,222,128,.12)",
-            border: "1px solid rgba(74,222,128,.25)",
+            background: T.greenBgMedium,
+            border: `1px solid ${T.greenBorderMedium}`,
+
             borderRadius: 6,
             color: T.green,
             padding: "4px 12px",

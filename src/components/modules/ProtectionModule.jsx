@@ -35,7 +35,7 @@ function ProtectionSim({ isMobile }) {
             { k: "signed", label: "Require signed commits" },
           ].map((r) => (
             <div key={r.k} onClick={() => toggle(r.k)} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12, cursor: "pointer" }}>
-              <div style={{ width: 36, height: 20, borderRadius: 10, background: rules[r.k] ? "rgba(74,222,128,.3)" : "rgba(30,41,64,.5)", border: "1px solid " + (rules[r.k] ? "rgba(74,222,128,.5)" : T.border), position: "relative", flexShrink: 0 }}>
+              <div style={{ width: 36, height: 20, borderRadius: 10, background: rules[r.k] ? T.greenBgToggle : T.toggleInactiveBg, border: "1px solid " + (rules[r.k] ? T.greenBorderActive : T.border), position: "relative", flexShrink: 0 }}>
                 <div style={{ position: "absolute", top: 2, left: rules[r.k] ? 18 : 2, width: 14, height: 14, borderRadius: "50%", background: rules[r.k] ? T.green : T.muted, transition: "left .2s" }} />
               </div>
               <span style={{ color: rules[r.k] ? T.text : T.subtleText, fontSize: 12 }}>{r.label}</span>
@@ -51,12 +51,12 @@ function ProtectionSim({ isMobile }) {
         <div style={{ background: T.card, border: "1px solid " + T.border, borderRadius: 10, padding: 14 }}>
           <div style={{ color: T.muted, fontSize: 11, fontWeight: 700, marginBottom: 10 }}>TEST YOUR RULES</div>
           {SCENARIOS.map((s) => (
-            <button key={s.id} onClick={() => setScenarioId(s.id)} style={{ display: "block", width: "100%", background: scenario && scenario.id === s.id ? (s.passes ? "rgba(74,222,128,.1)" : "rgba(248,113,113,.1)") : "rgba(13,21,38,.5)", border: "1px solid " + (scenario && scenario.id === s.id ? (s.passes ? "rgba(74,222,128,.3)" : "rgba(248,113,113,.3)") : T.border), borderRadius: 7, padding: "9px 12px", color: T.text, textAlign: "left", cursor: "pointer", marginBottom: 7, fontSize: 12 }}>
+            <button key={s.id} onClick={() => setScenarioId(s.id)} style={{ display: "block", width: "100%", background: scenario && scenario.id === s.id ? (s.passes ? T.greenBgMedium : T.redBgMedium) : T.selectionBgInactive, border: "1px solid " + (scenario && scenario.id === s.id ? (s.passes ? T.greenBorderStrong : T.redBorderMedium) : T.border), borderRadius: 7, padding: "9px 12px", color: T.text, textAlign: "left", cursor: "pointer", marginBottom: 7, fontSize: 12 }}>
               {s.label}
             </button>
           ))}
           {scenario && (
-            <div style={{ marginTop: 10, background: scenario.passes ? "rgba(74,222,128,.06)" : "rgba(248,113,113,.06)", border: "1px solid " + (scenario.passes ? "rgba(74,222,128,.2)" : "rgba(248,113,113,.2)"), borderRadius: 8, padding: "10px 12px" }}>
+            <div style={{ marginTop: 10, background: scenario.passes ? T.greenBgSmall : T.redBgLight, border: "1px solid " + (scenario.passes ? T.greenBorderLight : T.redBorderLight), borderRadius: 8, padding: "10px 12px" }}>
               <div style={{ color: scenario.passes ? T.green : T.red, fontSize: 12, fontWeight: 700, marginBottom: 4 }}>
                 {scenario.passes ? "ALLOWED" : "BLOCKED"}
               </div>

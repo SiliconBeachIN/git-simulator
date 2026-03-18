@@ -4,7 +4,7 @@ export default function ConceptDiagram({ children }) {
   return (
     <div
       style={{
-        background: "#050b16",
+        background: T.diagramBg,
         border: `1px solid ${T.border}`,
         borderRadius: 10,
         padding: "16px 20px",

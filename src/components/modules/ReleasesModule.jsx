@@ -38,15 +38,15 @@ function ReleasesSimulator({ isMobile }) {
         <div>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
             <div style={{ color: T.muted, fontSize: 11, fontWeight: 700 }}>RELEASES</div>
-            <button onClick={() => setOpen((o) => !o)} style={{ background: "rgba(74,222,128,.1)", border: "1px solid rgba(74,222,128,.25)", borderRadius: 5, color: T.green, fontSize: 10, padding: "3px 10px", cursor: "pointer" }}>
+            <button onClick={() => setOpen((o) => !o)} style={{ background: T.greenBgMedium, border: `1px solid ${T.greenBorderMedium}`, borderRadius: 5, color: T.green, fontSize: 10, padding: "3px 10px", cursor: "pointer" }}>
               {open ? "Cancel" : "+ New"}
             </button>
           </div>
           {releases.map((r, i) => (
-            <div key={i} style={{ background: T.card, border: "1px solid " + (r.pre ? "rgba(251,191,36,.3)" : T.border), borderRadius: 8, padding: "10px 12px", marginBottom: 8 }}>
+            <div key={i} style={{ background: T.card, border: "1px solid " + (r.pre ? T.amberBorderMedium : T.border), borderRadius: 8, padding: "10px 12px", marginBottom: 8 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-                <span style={{ background: "rgba(74,222,128,.12)", border: "1px solid rgba(74,222,128,.2)", borderRadius: 5, fontSize: 10, color: T.green, padding: "1px 7px", fontFamily: "monospace" }}>{r.tag}</span>
-                {r.pre && <span style={{ background: "rgba(251,191,36,.1)", border: "1px solid rgba(251,191,36,.2)", borderRadius: 5, fontSize: 9, color: T.amber, padding: "1px 6px" }}>pre-release</span>}
+                <span style={{ background: T.greenBgMedium, border: `1px solid ${T.greenBorderLight}`, borderRadius: 5, fontSize: 10, color: T.green, padding: "1px 7px", fontFamily: "monospace" }}>{r.tag}</span>
+                {r.pre && <span style={{ background: T.amberBgLight, border: `1px solid ${T.amberBorderLight}`, borderRadius: 5, fontSize: 9, color: T.amber, padding: "1px 6px" }}>pre-release</span>}
                 <span style={{ color: T.muted, fontSize: 10, marginLeft: "auto" }}>{r.date}</span>
               </div>
               <div style={{ color: T.text, fontSize: 12, fontWeight: 500, marginBottom: 4 }}>{r.name}</div>
@@ -55,16 +55,16 @@ function ReleasesSimulator({ isMobile }) {
           ))}
         </div>
         {open && (
-          <div style={{ background: T.card, border: "1px solid rgba(74,222,128,.2)", borderRadius: 10, padding: 14 }}>
+          <div style={{ background: T.card, border: `1px solid ${T.greenBorderLight}`, borderRadius: 10, padding: 14 }}>
             <div style={{ color: T.green, fontSize: 11, fontWeight: 700, marginBottom: 12 }}>CREATE RELEASE</div>
-            <input value={form.tag} onChange={(e) => setForm((p) => ({ ...p, tag: e.target.value }))} placeholder="Tag: v1.2.3" style={{ width: "100%", background: "rgba(6,11,24,.6)", border: "1px solid " + T.border, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 12, outline: "none", marginBottom: 8, boxSizing: "border-box" }} />
-            <input value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} placeholder="Release title" style={{ width: "100%", background: "rgba(6,11,24,.6)", border: "1px solid " + T.border, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 12, outline: "none", marginBottom: 8, boxSizing: "border-box" }} />
-            <textarea value={form.notes} onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))} placeholder={"What is new?\n- Feature\n- Fix"} rows={4} style={{ width: "100%", background: "rgba(6,11,24,.6)", border: "1px solid " + T.border, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 12, outline: "none", resize: "none", boxSizing: "border-box", marginBottom: 8 }} />
+            <input value={form.tag} onChange={(e) => setForm((p) => ({ ...p, tag: e.target.value }))} placeholder="Tag: v1.2.3" style={{ width: "100%", background: T.inputBgDark, border: "1px solid " + T.border, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 12, outline: "none", marginBottom: 8, boxSizing: "border-box" }} />
+            <input value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} placeholder="Release title" style={{ width: "100%", background: T.inputBgDark, border: "1px solid " + T.border, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 12, outline: "none", marginBottom: 8, boxSizing: "border-box" }} />
+            <textarea value={form.notes} onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))} placeholder={"What is new?\n- Feature\n- Fix"} rows={4} style={{ width: "100%", background: T.inputBgDark, border: "1px solid " + T.border, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 12, outline: "none", resize: "none", boxSizing: "border-box", marginBottom: 8 }} />
             <label style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12, cursor: "pointer" }}>
               <input type="checkbox" checked={form.pre} onChange={(e) => setForm((p) => ({ ...p, pre: e.target.checked }))} style={{ accentColor: T.amber }} />
               <span style={{ color: T.subtleText, fontSize: 12 }}>Pre-release (beta/alpha)</span>
             </label>
-            <button onClick={publish} style={{ width: "100%", background: "rgba(74,222,128,.1)", border: "1px solid rgba(74,222,128,.25)", borderRadius: 7, color: T.green, fontSize: 12, padding: 9, cursor: "pointer" }}>Publish Release</button>
+            <button onClick={publish} style={{ width: "100%", background: T.greenBgMedium, border: `1px solid ${T.greenBorderMedium}`, borderRadius: 7, color: T.green, fontSize: 12, padding: 9, cursor: "pointer" }}>Publish Release</button>
           </div>
         )}
       </div>

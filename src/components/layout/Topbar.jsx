@@ -8,7 +8,7 @@ export default function Topbar({ active, isMobile, onMenuToggle }) {
       style={{
         padding: isMobile ? "10px 14px" : "12px 22px",
         borderBottom: `1px solid ${T.border}`,
-        background: "rgba(8,13,26,.99)",
+        background: T.navbarBg,
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
@@ -20,8 +20,8 @@ export default function Topbar({ active, isMobile, onMenuToggle }) {
         <button
           onClick={onMenuToggle}
           style={{
-            background: "rgba(74,222,128,.08)",
-            border: `1px solid rgba(74,222,128,.2)`,
+            background: T.greenBgLight,
+            border: `1px solid ${T.greenBorderLight}`,
             borderRadius: 6,
             color: T.green,
             fontSize: 18,

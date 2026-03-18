@@ -53,7 +53,7 @@ function Quiz({ isMobile }) {
           <div style={{ color: T.muted, fontSize: 12 }}>{pct}% correct</div>
         </div>
         <br />
-        <button onClick={() => { setIdx(0); setSel(null); setScore(0); setDone(false); setShowExp(false); }} style={{ background: "rgba(74,222,128,.12)", border: "1px solid rgba(74,222,128,.3)", borderRadius: 9, color: T.green, fontSize: 13, padding: "10px 28px", cursor: "pointer" }}>Try Again</button>
+        <button onClick={() => { setIdx(0); setSel(null); setScore(0); setDone(false); setShowExp(false); }} style={{ background: T.greenBgMedium, border: `1px solid ${T.greenBorderStrong}`, borderRadius: 9, color: T.green, fontSize: 13, padding: "10px 28px", cursor: "pointer" }}>Try Again</button>
       </div>
     );
   }
@@ -73,8 +73,8 @@ function Quiz({ isMobile }) {
         {q.opts.map((opt, i) => {
           let bg = T.card, border = T.border, col = T.subtleText;
           if (sel !== null) {
-            if (i === q.ans) { bg = "rgba(74,222,128,.1)"; border = "rgba(74,222,128,.4)"; col = T.green; }
-            else if (i === sel && sel !== q.ans) { bg = "rgba(248,113,113,.1)"; border = "rgba(248,113,113,.35)"; col = T.red; }
+            if (i === q.ans) { bg = T.greenBgMedium; border = T.greenBorderStrong; col = T.green; }
+            else if (i === sel && sel !== q.ans) { bg = T.redBgMedium; border = T.redBorderMedium; col = T.red; }
           }
           return (
             <button key={i} onClick={() => pick(i)} style={{ background: bg, border: `1px solid ${border}`, borderRadius: 8, padding: "11px 15px", color: col, textAlign: "left", cursor: sel !== null ? "default" : "pointer", transition: "all .2s", fontSize: 13, lineHeight: 1.4 }}>
@@ -86,13 +86,13 @@ function Quiz({ isMobile }) {
         })}
       </div>
       {showExp && (
-        <div style={{ background: "rgba(96,165,250,.07)", border: "1px solid rgba(96,165,250,.2)", borderRadius: 9, padding: "12px 14px", marginBottom: 14, animation: "slideIn .25s ease" }}>
+        <div style={{ background: T.blueBgLight, border: `1px solid ${T.blueBorderLight}`, borderRadius: 9, padding: "12px 14px", marginBottom: 14, animation: "slideIn .25s ease" }}>
           <div style={{ color: T.blue, fontSize: 11, fontWeight: 700, marginBottom: 6 }}>💡 EXPLANATION</div>
           <div style={{ color: T.subtleText, fontSize: 13, lineHeight: 1.7 }}>{q.exp}</div>
         </div>
       )}
       {sel !== null && (
-        <button onClick={next} style={{ width: "100%", background: "rgba(74,222,128,.1)", border: "1px solid rgba(74,222,128,.25)", borderRadius: 8, color: T.green, fontSize: 13, padding: "11px", cursor: "pointer" }}>
+        <button onClick={next} style={{ width: "100%", background: T.greenBgMedium, border: `1px solid ${T.greenBorderMedium}`, borderRadius: 8, color: T.green, fontSize: 13, padding: "11px", cursor: "pointer" }}>
           {idx + 1 >= QUESTIONS.length ? "See Results 🏆" : "Next Question →"}
         </button>
       )}

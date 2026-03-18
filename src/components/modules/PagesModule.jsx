@@ -43,10 +43,10 @@ function PagesSimulator({ isMobile }) {
             </label>
           ))}
           <div style={{ height: 12 }} />
-          <button onClick={() => setStep((s) => Math.min(s + 1, 3))} disabled={step >= 3} style={{ width: "100%", background: "rgba(74,222,128,.08)", border: "1px solid rgba(74,222,128,.2)", borderRadius: 6, color: step >= 3 ? T.muted : T.green, fontSize: 11, padding: 8, cursor: step >= 3 ? "default" : "pointer", marginBottom: 8 }}>
+          <button onClick={() => setStep((s) => Math.min(s + 1, 3))} disabled={step >= 3} style={{ width: "100%", background: T.greenBgLight, border: `1px solid ${T.greenBorderLight}`, borderRadius: 6, color: step >= 3 ? T.muted : T.green, fontSize: 11, padding: 8, cursor: step >= 3 ? "default" : "pointer", marginBottom: 8 }}>
             {step === 0 ? "Save — Configure Branch" : step === 1 ? "Save — Commit Your Site" : step === 2 ? "Save — Push to GitHub" : "Settings Saved ✓"}
           </button>
-          <button onClick={deploy} disabled={step < 3 || deployed || building} style={{ width: "100%", background: deployed ? "rgba(74,222,128,.12)" : "rgba(96,165,250,.1)", border: "1px solid " + (deployed ? "rgba(74,222,128,.3)" : "rgba(96,165,250,.3)"), borderRadius: 6, color: deployed ? T.green : T.blue, fontSize: 11, padding: 8, cursor: (step < 3 || deployed || building) ? "default" : "pointer" }}>
+          <button onClick={deploy} disabled={step < 3 || deployed || building} style={{ width: "100%", background: deployed ? T.greenBgMedium : T.blueBgLight, border: "1px solid " + (deployed ? T.greenBorderStrong : T.blueBorderMedium), borderRadius: 6, color: deployed ? T.green : T.blue, fontSize: 11, padding: 8, cursor: (step < 3 || deployed || building) ? "default" : "pointer" }}>
             {building ? "Building..." : deployed ? "Site is Live!" : "Deploy Site"}
           </button>
         </div>
@@ -54,7 +54,7 @@ function PagesSimulator({ isMobile }) {
           <div style={{ color: T.muted, fontSize: 11, fontWeight: 700, marginBottom: 12 }}>DEPLOYMENT STEPS</div>
           {steps.map((s, i) => (
             <div key={i} style={{ display: "flex", gap: 10, alignItems: "center", marginBottom: 10 }}>
-              <div style={{ width: 20, height: 20, borderRadius: "50%", background: s.done ? "rgba(74,222,128,.2)" : "rgba(26,37,64,.5)", border: "1px solid " + (s.done ? T.green : T.border), display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, color: s.done ? T.green : T.muted, flexShrink: 0 }}>
+              <div style={{ width: 20, height: 20, borderRadius: "50%", background: s.done ? T.stepActiveBg : T.stepInactiveBg, border: "1px solid " + (s.done ? T.green : T.border), display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, color: s.done ? T.green : T.muted, flexShrink: 0 }}>
                 {s.done ? "✓" : i + 1}
               </div>
               <span style={{ color: s.done ? T.text : T.muted, fontSize: 12 }}>{s.label}</span>
@@ -62,11 +62,11 @@ function PagesSimulator({ isMobile }) {
           ))}
           {deployed && (
             <div style={{ marginTop: 10 }}>
-              <div style={{ background: "rgba(74,222,128,.06)", border: "1px solid rgba(74,222,128,.2)", borderRadius: 8, padding: 10, marginBottom: 10 }}>
+              <div style={{ background: T.greenBgSmall, border: `1px solid ${T.greenBorderLight}`, borderRadius: 8, padding: 10, marginBottom: 10 }}>
                 <div style={{ color: T.green, fontSize: 11, fontWeight: 700, marginBottom: 4 }}>🎉 Your site is live:</div>
                 <div style={{ color: T.blue, fontSize: 12, fontFamily: "monospace" }}>username.github.io/my-project</div>
               </div>
-              <button onClick={resetPages} style={{ width: "100%", background: "rgba(30,41,59,.5)", border: "1px solid #1a2540", borderRadius: 6, color: T.muted, fontSize: 11, padding: 7, cursor: "pointer" }}>↺ Reset</button>
+              <button onClick={resetPages} style={{ width: "100%", background: T.resetBg, border: `1px solid ${T.border}`, borderRadius: 6, color: T.muted, fontSize: 11, padding: 7, cursor: "pointer" }}>↺ Reset</button>
             </div>
           )}
         </div>
