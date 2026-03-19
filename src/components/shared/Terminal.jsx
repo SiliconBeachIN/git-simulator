@@ -606,10 +606,18 @@ function normaliseCmd(raw) {
 
   let result = "";
   let inQuote = null;
+
+  const isEscapedQuote = (text, idx) => {
+    let slashCount = 0;
+    for (let j = idx - 1; j >= 0 && text[j] === "\\"; j--) {
+      slashCount++;
+    }
+    return slashCount % 2 === 1;
+  };
+
   for (let i = 0; i < trimmed.length; i++) {
     const ch = trimmed[i];
-    const prev = i > 0 ? trimmed[i - 1] : "";
-    const isEscaped = prev === "\\";
+    const isEscaped = isEscapedQuote(trimmed, i);
     if (inQuote) {
       result += ch;
       if (ch === inQuote && !isEscaped) inQuote = null;
@@ -692,7 +700,7 @@ export default function Terminal({ compact = false }) {
       );
     } else if (normalised.startsWith("git ")) {
       // git executable recognised, but subcommand is unknown
-      const sub = normalised.slice(4).trim().split(/\s+/)[0] || "";
+      const sub = normalised.slice(3).trim().split(/\s+/)[0] || "";
       newEntries.push({
         t: "err",
         v: `git: '${sub}' is not a git command. See 'git help'.`,
