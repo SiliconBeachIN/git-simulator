@@ -244,7 +244,37 @@ const TERM_PATTERNS = [
     match: (k) => k.startsWith("git commit"),
     respond: (cmd) => {
       const msgMatch = cmd.match(/-m\s+["'](.+?)["']/);
-      const msg = msgMatch ? msgMatch[1] : "update code";
+      if (cmd === "git commit") {
+        return [
+          "hint: Waiting for your editor to close the file...",
+          "error: Terminal does not support opening an editor.",
+          "",
+          '💡 Use: git commit -m "your commit message"',
+        ];
+      }
+      if (cmd.match(/^git commit\s+-m\s*$/) || cmd.match(/^git commit\s+-m\s+["']["']\s*$/)) {
+        return [
+          "error: switch `m' requires a value",
+          "",
+          '💡 Usage: git commit -m "your commit message"',
+        ];
+      }
+      if (cmd.includes("-m") && !msgMatch) {
+        return [
+          'error: commit message must be wrapped in quotes.',
+          "",
+          '💡 Usage: git commit -m "your commit message"',
+        ];
+      }
+      if (!msgMatch) {
+        return [
+          "hint: Waiting for your editor to close the file...",
+          "error: Terminal does not support opening an editor.",
+          "",
+          '💡 Use: git commit -m "your commit message"',
+        ];
+      }
+      const msg = msgMatch[1];
       return [
         `[main e7f8a9b] ${msg}`,
         " 2 files changed, 15 insertions(+), 3 deletions(-)",
@@ -562,16 +592,45 @@ const TERM_PATTERNS = [
 ];
 
 /**
+ * Normalises a git command for matching purposes:
+ * - Everything outside of quoted strings is lowercased (handles mobile
+ *   auto-capitalisation of 'Git', 'Git Status', 'Git Stash Pop', etc.)
+ * - Content inside quotes is preserved (commit messages, etc.)
+ * - Non-git commands are returned unchanged.
+ */
+function normaliseCmd(raw) {
+  const trimmed = raw.trim();
+  if (!/^[Gg][Ii][Tt](\s|$)/.test(trimmed)) return trimmed;
+
+  let result = "";
+  let inQuote = null;
+  for (let i = 0; i < trimmed.length; i++) {
+    const ch = trimmed[i];
+    if (inQuote) {
+      result += ch;
+      if (ch === inQuote) inQuote = null;
+    } else if (ch === '"' || ch === "'") {
+      inQuote = ch;
+      result += ch;
+    } else {
+      result += ch.toLowerCase();
+    }
+  }
+  return result;
+}
+
+/**
  * Tries exact match first, then pattern match.
+ * The 'git' prefix is matched case-insensitively; everything else is exact.
  * Returns [response lines] or null.
  */
-function findResponse(cmd, key) {
+function findResponse(normalised) {
   // 1. Exact match
-  if (TERM_RESPONSES[key]) return TERM_RESPONSES[key];
+  if (TERM_RESPONSES[normalised]) return TERM_RESPONSES[normalised];
   // 2. Pattern match
   for (const p of TERM_PATTERNS) {
-    if (p.match(key)) {
-      const result = p.respond(cmd);
+    if (p.match(normalised)) {
+      const result = p.respond(normalised);
       if (result) return result;
     }
   }
@@ -596,15 +655,16 @@ export default function Terminal({ compact = false }) {
   const run = useCallback(() => {
     if (!input.trim()) return;
     const cmd = input.trim();
-    const key = cmd.toLowerCase();
+    const normalised = normaliseCmd(cmd);
 
-    if (key === "clear") {
+    // 'clear' is a shell built-in — accept any casing
+    if (cmd.toLowerCase() === "clear") {
       setLines([{ t: "info", v: "Terminal cleared. Ready." }]);
       setInput("");
       return;
     }
 
-    const resp = findResponse(cmd, key);
+    const resp = findResponse(normalised);
     const newEntries = [{ t: "cmd", v: cmd }];
 
     if (resp) {
@@ -623,20 +683,23 @@ export default function Terminal({ compact = false }) {
           v: r,
         })
       );
-    } else if (key.startsWith("git ")) {
-      newEntries.push({ t: "info", v: `Simulating: ${cmd}` });
+    } else if (normalised.startsWith("git ")) {
+      // git executable recognised, but subcommand is unknown
+      const sub = normalised.slice(4).split(" ")[0];
       newEntries.push({
-        t: "out",
-        v: "Command recognised! In a real terminal, this would execute against your repo.",
+        t: "err",
+        v: `git: '${sub}' is not a git command. See 'git help'.`,
       });
       newEntries.push({
-        t: "ok",
+        t: "info",
         v: "💡 Type 'git help' to see all supported commands.",
       });
     } else {
+      // Completely unknown executable
+      const base = cmd.split(" ")[0];
       newEntries.push({
         t: "err",
-        v: `bash: ${cmd}: command not found. Try 'git help' for git commands.`,
+        v: `bash: ${base}: command not found`,
       });
     }
     newEntries.push({ t: "out", v: "" });

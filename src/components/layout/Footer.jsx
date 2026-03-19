@@ -14,11 +14,7 @@ export default function Footer() {
         background: T.bg,
       }}
     >
-      <span style={{ color: T.muted, fontSize: 11 }}>
-        {new Date().getFullYear()}
-      </span>
-      <span style={{ color: T.faint, fontSize: 11 }}>|</span>
-      <a
+     <a
         href="https://github.com/SiliconBeachIN"
         target="_blank"
         rel="noopener noreferrer"
@@ -45,6 +41,10 @@ export default function Footer() {
         </svg>
         SiliconBeachIN
       </a>
+       <span style={{ color: T.faint, fontSize: 11 }}>|</span>
+       <span style={{ color: T.muted, fontSize: 11 }}>
+        {new Date().getFullYear()}
+      </span>
     </footer>
   );
 }
