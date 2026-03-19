@@ -608,10 +608,12 @@ function normaliseCmd(raw) {
   let inQuote = null;
   for (let i = 0; i < trimmed.length; i++) {
     const ch = trimmed[i];
+    const prev = i > 0 ? trimmed[i - 1] : "";
+    const isEscaped = prev === "\\";
     if (inQuote) {
       result += ch;
-      if (ch === inQuote) inQuote = null;
-    } else if (ch === '"' || ch === "'") {
+      if (ch === inQuote && !isEscaped) inQuote = null;
+    } else if ((ch === '"' || ch === "'") && !isEscaped) {
       inQuote = ch;
       result += ch;
     } else {
@@ -623,16 +625,19 @@ function normaliseCmd(raw) {
 
 /**
  * Tries exact match first, then pattern match.
- * The 'git' prefix is matched case-insensitively; everything else is exact.
+ * For git commands, matching uses the normalised form from normaliseCmd,
+ * while pattern responders still receive the raw command text to preserve
+ * user-entered casing in echoed values.
+ * Non-git commands are matched exactly.
  * Returns [response lines] or null.
  */
-function findResponse(normalised) {
+function findResponse(rawCmd, normalised) {
   // 1. Exact match
   if (TERM_RESPONSES[normalised]) return TERM_RESPONSES[normalised];
   // 2. Pattern match
   for (const p of TERM_PATTERNS) {
     if (p.match(normalised)) {
-      const result = p.respond(normalised);
+      const result = p.respond(rawCmd);
       if (result) return result;
     }
   }
@@ -666,7 +671,7 @@ export default function Terminal({ compact = false }) {
       return;
     }
 
-    const resp = findResponse(normalised);
+    const resp = findResponse(cmd, normalised);
     const newEntries = [{ t: "cmd", v: cmd }];
 
     if (resp) {
@@ -698,7 +703,7 @@ export default function Terminal({ compact = false }) {
       });
     } else {
       // Completely unknown executable
-      const base = cmd.split(" ")[0];
+      const base = cmd.split(/\s+/)[0];
       newEntries.push({
         t: "err",
         v: `bash: ${base}: command not found`,

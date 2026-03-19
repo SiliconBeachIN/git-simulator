@@ -14,7 +14,7 @@ export default function Footer() {
         background: T.bg,
       }}
     >
-     <a
+      <a
         href="https://github.com/SiliconBeachIN"
         target="_blank"
         rel="noopener noreferrer"
