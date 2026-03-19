@@ -244,6 +244,7 @@ const TERM_PATTERNS = [
     match: (k) => k.startsWith("git commit"),
     respond: (cmd) => {
       const msgMatch = cmd.match(/-m\s+["'](.+?)["']/);
+      const hasStandaloneMFlag = /(^|\s)-m(\s|$)/.test(cmd);
       if (cmd === "git commit") {
         return [
           "hint: Waiting for your editor to close the file...",
@@ -259,7 +260,7 @@ const TERM_PATTERNS = [
           '💡 Usage: git commit -m "your commit message"',
         ];
       }
-      if (cmd.includes("-m") && !msgMatch) {
+      if (hasStandaloneMFlag && !msgMatch) {
         return [
           'error: commit message must be wrapped in quotes.',
           "",
