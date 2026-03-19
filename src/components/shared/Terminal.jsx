@@ -244,7 +244,8 @@ const TERM_PATTERNS = [
     match: (k) => k.startsWith("git commit"),
     respond: (cmd) => {
       const msgMatch = cmd.match(/-m\s+["'](.+?)["']/);
-      const hasStandaloneMFlag = /(^|\s)-m(\s|$)/.test(cmd);
+      const cmdWithoutQuoted = cmd.replace(/(["']).*?\1/g, " ");
+      const hasStandaloneMFlag = /(^|\s)-m(\s|$)/.test(cmdWithoutQuoted);
       if (cmd === "git commit") {
         return [
           "hint: Waiting for your editor to close the file...",
