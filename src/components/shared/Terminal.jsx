@@ -686,7 +686,7 @@ export default function Terminal({ compact = false }) {
       );
     } else if (normalised.startsWith("git ")) {
       // git executable recognised, but subcommand is unknown
-      const sub = normalised.slice(4).split(" ")[0];
+      const sub = normalised.slice(4).trim().split(/\s+/)[0] || "";
       newEntries.push({
         t: "err",
         v: `git: '${sub}' is not a git command. See 'git help'.`,
