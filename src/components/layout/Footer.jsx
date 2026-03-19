@@ -41,8 +41,8 @@ export default function Footer() {
         </svg>
         SiliconBeachIN
       </a>
-     <span style={{ color: T.faint, fontSize: 11 }}>|</span>
-     <span style={{ color: T.muted, fontSize: 11 }}>
+      <span style={{ color: T.faint, fontSize: 11 }}>|</span>
+      <span style={{ color: T.muted, fontSize: 11 }}>
         {new Date().getFullYear()}
       </span>
     </footer>
