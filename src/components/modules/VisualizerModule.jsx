@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useRef, useEffect } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle, CommandCard } from "../shared";
 
@@ -23,12 +23,21 @@ function layoutGraph(commits, edges, branches) {
   const placed = new Map();
   let maxCol = 0;
 
+  // Pre-index parent edges by target commit id to avoid repeated filtering per commit.
+  const parentsByTarget = new Map();
+  for (const [fromId, toId] of edges) {
+    if (!parentsByTarget.has(toId)) {
+      parentsByTarget.set(toId, []);
+    }
+    parentsByTarget.get(toId).push(fromId);
+  }
+
   for (const c of commits) {
     const row = rowOf[c.branch] ?? nextRow;
-    const parentEdges = edges.filter(([, tid]) => tid === c.id);
+    const parentIds = parentsByTarget.get(c.id) || [];
     let myCol = 0;
-    if (parentEdges.length > 0) {
-      const parentCols = parentEdges.map(([fid]) => placed.get(fid)?.x ?? 0);
+    if (parentIds.length > 0) {
+      const parentCols = parentIds.map((fid) => placed.get(fid)?.x ?? 0);
       myCol = Math.max(...parentCols) + 1;
     } else if (placed.size > 0) {
       myCol = maxCol + 1;
@@ -342,10 +351,13 @@ function InteractiveSimulator() {
         "Available commands:",
         "  git branch <name>         — create a new branch",
         "  git checkout <name>       — switch to a branch",
+        "  git switch <name>         — alias of checkout",
         "  git checkout -b <name>    — create + switch",
+        "  git switch -b <name>      — alias of checkout -b",
         "  git commit -m \"message\"   — commit on current branch",
         "  git merge <branch>        — merge branch into current",
         "  git log                   — show commit log",
+        "  git log --oneline         — compact commit log",
         "  git branch                — list branches",
         "  git status                — show current state",
         "  reset                     — reset to initial state",
