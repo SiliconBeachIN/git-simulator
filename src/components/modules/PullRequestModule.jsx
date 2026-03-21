@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { Badge, InfoBox, ConceptDiagram, SectionTitle, CommandCard } from "../shared";
 
 function PRSimulator() {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = usePageState("step", 0);
   const steps = [
     { icon: "🌿", label: "Branch pushed", desc: "git push -u origin feature/user-auth" },
     { icon: "📝", label: "PR Opened", desc: "GitHub shows diff, you write description" },
@@ -90,3 +90,6 @@ Users need to sign in to access their saved data (Fixes #42)
     </div>
   );
 }
+
+
+

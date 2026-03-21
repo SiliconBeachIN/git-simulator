@@ -1,4 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle, CommandCard } from "../shared";
 
@@ -189,11 +190,11 @@ function InteractiveSimulator() {
   const inputRef = useRef(null);
 
   const initialCommit = { id: randId(), msg: "initial commit", branch: "main", color: T.green };
-  const [commits, setCommits] = useState([initialCommit]);
-  const [edges, setEdges] = useState([]);
-  const [branches, setBranches] = useState({ main: { color: T.green, tip: initialCommit.id, base: null } });
-  const [head, setHead] = useState("main");
-  const [log, setLog] = useState([
+  const [commits, setCommits] = usePageState("commits", [initialCommit]);
+  const [edges, setEdges] = usePageState("edges", []);
+  const [branches, setBranches] = usePageState("branches", { main: { color: T.green, tip: initialCommit.id, base: null } });
+  const [head, setHead] = usePageState("head", "main");
+  const [log, setLog] = usePageState("log", [
     { type: "system", text: "Repository initialized with branch 'main' and initial commit." },
     { type: "hint", text: "Try: git branch feature/login  →  git checkout feature/login  →  git commit -m \"add login\"" },
   ]);
@@ -499,3 +500,6 @@ export default function VisualizerModule({ isMobile }) {
     </div>
   );
 }
+
+
+

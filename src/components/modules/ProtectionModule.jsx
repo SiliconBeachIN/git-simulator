@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle } from "../shared";
 
 function ProtectionSim({ isMobile }) {
-  const [rules, setRules] = useState({ pr: true, approvals: 1, ci: true, noForce: true, noDel: true, upToDate: false, signed: false });
+  const [rules, setRules] = usePageState("rules", { pr: true, approvals: 1, ci: true, noForce: true, noDel: true, upToDate: false, signed: false });
   const [scenarioId, setScenarioId] = useState(null);
   const toggle = (k) => setRules((r) => ({ ...r, [k]: !r[k] }));
 
@@ -94,3 +95,6 @@ export default function ProtectionModule({ isMobile }) {
     </div>
   );
 }
+
+
+

@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle } from "../shared";
 
 function PagesSimulator({ isMobile }) {
-  const [source, setSource] = useState("branch");
-  const [step, setStep] = useState(0);
-  const [deployed, setDeployed] = useState(false);
+  const [source, setSource] = usePageState("source", "branch");
+  const [step, setStep] = usePageState("step", 0);
+  const [deployed, setDeployed] = usePageState("deployed", false);
   const [building, setBuilding] = useState(false);
 
   const deploy = () => {
@@ -100,3 +101,6 @@ export default function PagesModule({ isMobile }) {
     </div>
   );
 }
+
+
+

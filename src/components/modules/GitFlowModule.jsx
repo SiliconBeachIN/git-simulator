@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle, CommandCard } from "../shared";
 
@@ -46,8 +46,8 @@ const FLOW_STEPS = [
 ];
 
 function GitFlowSimulator({ isMobile }) {
-  const [stepIndex, setStepIndex] = useState(0);
-  const [log, setLog] = useState(["Simulator ready. Click Run Step to start Git Flow."]);
+  const [stepIndex, setStepIndex] = usePageState("stepIndex", 0);
+  const [log, setLog] = usePageState("log", ["Simulator ready. Click Run Step to start Git Flow."]);
 
   const done = stepIndex >= FLOW_STEPS.length;
   const currentStep = done ? null : FLOW_STEPS[stepIndex];
@@ -156,3 +156,6 @@ export default function GitFlowModule({ isMobile }) {
     </div>
   );
 }
+
+
+

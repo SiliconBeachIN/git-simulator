@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle, CommandCard } from "../shared";
 
 function MergeSimulator() {
-  const [mode, setMode] = useState("idle");
-  const [file, setFile] = useState("");
-  const [mergeLog, setMergeLog] = useState([]);
+  const [mode, setMode] = usePageState("mode", "idle");
+  const [file, setFile] = usePageState("file", "");
+  const [mergeLog, setMergeLog] = usePageState("mergeLog", []);
 
   const triggerMerge = () => {
     setMode("conflict");
@@ -137,3 +137,6 @@ export default function MergeModule() {
     </div>
   );
 }
+
+
+
