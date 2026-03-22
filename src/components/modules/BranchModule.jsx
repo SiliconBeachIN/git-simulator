@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { Badge, InfoBox, SectionTitle, CommandCard } from "../shared";
 
@@ -15,12 +16,12 @@ function getBranchNameError(name, branches) {
 }
 
 function BranchSimulator({ isMobile }) {
-  const [branches, setBranches] = useState([
+  const [branches, setBranches] = usePageState("branches", [
     { name: "main", commits: ["c0a1", "d4b2", "e9f3"], color: T.green, current: false },
     { name: "develop", commits: ["c0a1", "d4b2", "a1b2"], color: T.blue, current: true },
   ]);
   const [newName, setNewName] = useState("");
-  const [log, setLog] = useState(["Switched to branch 'develop'"]);
+  const [log, setLog] = usePageState("log", ["Switched to branch 'develop'"]);
 
   const current = branches.find((b) => b.current) ?? branches[0];
   const branchNameError = getBranchNameError(newName, branches);
@@ -186,3 +187,6 @@ export default function BranchModule({ isMobile }) {
     </div>
   );
 }
+
+
+

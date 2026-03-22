@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle } from "../shared";
 
@@ -13,7 +13,7 @@ const DG_FILES = {
 };
 
 function DotGithubExplorer({ isMobile }) {
-  const [sel, setSel] = useState("CODEOWNERS");
+  const [sel, setSel] = usePageState("sel", "CODEOWNERS");
   const file = DG_FILES[sel];
   return (
     <div>
@@ -70,3 +70,6 @@ export default function DotGithubModule({ isMobile }) {
     </div>
   );
 }
+
+
+

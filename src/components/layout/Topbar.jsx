@@ -1,7 +1,7 @@
 import T from "../../constants/tokens";
 import MODULES from "../../constants/modules";
 
-export default function Topbar({ active, isMobile, onMenuToggle }) {
+export default function Topbar({ active, isMobile, onMenuToggle, onResetPage }) {
   const mod = MODULES.find((m) => m.id === active);
   return (
     <div
@@ -53,6 +53,29 @@ export default function Topbar({ active, isMobile, onMenuToggle }) {
           </div>
         )}
       </div>
+      {active !== "home" && (
+        <button
+          onClick={onResetPage}
+          title="Reset this page's progress"
+          style={{
+            background: T.red + "12",
+            border: `1px solid ${T.red}30`,
+            borderRadius: 7,
+            color: T.red,
+            fontSize: 11,
+            fontWeight: 600,
+            padding: isMobile ? "5px 10px" : "6px 12px",
+            cursor: "pointer",
+            whiteSpace: "nowrap",
+            flexShrink: 0,
+            transition: "all .15s",
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = T.red + "22"; e.currentTarget.style.borderColor = T.red + "50"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = T.red + "12"; e.currentTarget.style.borderColor = T.red + "30"; }}
+        >
+          ↺ Reset Page
+        </button>
+      )}
     </div>
   );
 }

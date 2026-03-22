@@ -1,16 +1,17 @@
 import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle } from "../shared";
 
 function CodeownersSim({ isMobile }) {
-  const [rules, setRules] = useState([
+  const [rules, setRules] = usePageState("rules", [
     { pattern: "*", owners: "@alice @bob", note: "Default: review everything" },
     { pattern: "src/payments/", owners: "@payment-team", note: "Payment code" },
     { pattern: "*.md", owners: "@docs-team", note: "Documentation" },
     { pattern: ".github/", owners: "@devops", note: "CI and config" },
     { pattern: "src/auth/", owners: "@security-team", note: "Auth changes" },
   ]);
-  const [testFile, setTestFile] = useState("src/payments/checkout.js");
+  const [testFile, setTestFile] = usePageState("testFile", "src/payments/checkout.js");
   const [newR, setNewR] = useState({ pattern: "", owners: "" });
 
   const getMatch = (file) => {
@@ -112,3 +113,6 @@ export default function CodeownersModule({ isMobile }) {
     </div>
   );
 }
+
+
+

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle } from "../shared";
 
@@ -12,7 +13,7 @@ const ISSUE_LABELS = [
 ];
 
 function IssuesSimulator({ isMobile }) {
-  const [issues, setIssues] = useState([
+  const [issues, setIssues] = usePageState("issues", [
     { id: 1, title: "Login button crashes on Safari", label: "bug", state: "open", comments: 3, author: "alice", body: "Steps: open Safari, click login, app freezes." },
     { id: 2, title: "Add dark mode support", label: "enhancement", state: "open", comments: 7, author: "bob", body: "Users requested a dark theme." },
     { id: 3, title: "Fix typo in README", label: "good first issue", state: "closed", comments: 1, author: "charlie", body: "Line 42: recieve should be receive." },
@@ -20,7 +21,7 @@ function IssuesSimulator({ isMobile }) {
   const [form, setForm] = useState({ title: "", label: "bug", body: "" });
   const [selId, setSelId] = useState(null);
   const sel = issues.find((i) => i.id === selId) || null;
-  const [filter, setFilter] = useState("open");
+  const [filter, setFilter] = usePageState("filter", "open");
 
   const create = () => {
     if (!form.title.trim()) return;
@@ -122,3 +123,6 @@ export default function IssuesModule({ isMobile }) {
     </div>
   );
 }
+
+
+

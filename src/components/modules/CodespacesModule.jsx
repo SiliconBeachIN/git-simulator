@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle, CommandCard } from "../shared";
 
 function CodespacesSim({ isMobile }) {
-  const [phase, setPhase] = useState("idle");
-  const [log, setLog] = useState([]);
+  const [phase, setPhase] = usePageState("phase", "idle");
+  const [log, setLog] = usePageState("log", []);
 
   const boot = () => {
     setPhase("booting");
@@ -146,3 +146,6 @@ export default function CodespacesModule({ isMobile }) {
     </div>
   );
 }
+
+
+
