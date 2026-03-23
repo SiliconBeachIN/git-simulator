@@ -1,25 +1,34 @@
-﻿import { useState, useRef, useCallback, useEffect } from "react";
+﻿import { useRef, useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route, useNavigate, useLocation, Navigate } from "react-router-dom";
 import T from "./constants/tokens";
 import useMediaQuery from "./hooks/useMediaQuery";
 import { Sidebar, Topbar, Footer } from "./components/layout";
 import { ModuleContent } from "./components/modules";
+import MODULES from "./constants/modules";
 
 const MOBILE_QUERY = `(max-width:${T.mobileBreakpoint}px)`;
 
-export default function App() {
+function AppShell() {
   const isMobile = useMediaQuery(MOBILE_QUERY);
-  const [active, setActive] = useState("home");
-  const [sideOpen, setSideOpen] = useState(!isMobile);
   const scrollRef = useRef(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [sideOpen, setSideOpen] = useState(!isMobile);
 
   useEffect(() => {
     setSideOpen(!isMobile);
   }, [isMobile]);
 
-  const go = useCallback((id) => {
-    setActive(id);
+  // Extract module id from path
+  let active = location.pathname.slice(1) || "home";
+  if (!MODULES.some(m => m.id === active)) active = "home";
+
+  // Navigation handler updates URL
+  const go = (id) => {
+    if (id === "home") navigate("/");
+    else navigate(`/${id}`);
     setTimeout(() => { if (scrollRef.current) scrollRef.current.scrollTop = 0; }, 0);
-  }, []);
+  };
 
   return (
     <div style={{ display: "flex", height: "100%", minHeight: "100vh", background: T.bg, color: T.text, fontFamily: "'Segoe UI',system-ui,sans-serif", overflow: "hidden", position: "relative" }}>
@@ -51,7 +60,13 @@ export default function App() {
         <div ref={scrollRef} style={{ flex: 1, overflowY: "auto", padding: isMobile ? "16px 12px" : "22px 24px" }}>
           <div style={{ maxWidth: 820, margin: "0 auto" }}>
             <div style={{ animation: "fadeIn .2s ease" }}>
-              <ModuleContent id={active} isMobile={isMobile} />
+              <Routes>
+                <Route path="/" element={<ModuleContent id="home" isMobile={isMobile} />} />
+                {MODULES.filter(m => m.id !== "home").map(m => (
+                  <Route key={m.id} path={`/${m.id}`} element={<ModuleContent id={m.id} isMobile={isMobile} />} />
+                ))}
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
             </div>
           </div>
         </div>
@@ -59,5 +74,13 @@ export default function App() {
         <Footer />
       </div>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppShell />
+    </BrowserRouter>
   );
 }

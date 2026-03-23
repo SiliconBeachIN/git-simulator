@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import T from "../../constants/tokens";
 import MODULES from "../../constants/modules";
 
@@ -9,6 +10,8 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
       m.label.toLowerCase().includes(query.toLowerCase()) ||
       m.id.includes(query.toLowerCase())
   );
+  const location = useLocation();
+  const current = location.pathname.slice(1) || "home";
 
   const handleNav = (id) => {
     onNavigate(id);
@@ -78,7 +81,7 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
             ⚡
           </div>
           {(sideOpen || isMobile) && (
-            <div style={{ flex: 1, minWidth: 0 }}>
+            <>
               <div
                 style={{
                   fontFamily: "'Syne',sans-serif",
@@ -90,41 +93,14 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
               >
                 GitSimulator
               </div>
-            </div>
-          )}
-          {!isMobile && (
-            <button
-              onClick={() => setSideOpen((o) => !o)}
-              style={{
-                background: "transparent",
-                border: "none",
-                color: T.muted,
-                cursor: "pointer",
-                fontSize: 14,
-                padding: 4,
-                flexShrink: 0,
-                lineHeight: 1,
-              }}
-            >
-              {sideOpen ? "◀" : "▶"}
-            </button>
-          )}
-          {isMobile && (
-            <button
-              onClick={() => setSideOpen(false)}
-              style={{
-                background: "transparent",
-                border: "none",
-                color: T.muted,
-                cursor: "pointer",
-                fontSize: 18,
-                padding: 4,
-                flexShrink: 0,
-                lineHeight: 1,
-              }}
-            >
-              ✕
-            </button>
+              <button
+                onClick={() => setSideOpen((s) => !s)}
+                style={{ marginLeft: 8, background: 'transparent', border: 'none', color: T.muted, cursor: 'pointer' }}
+                aria-label="Toggle sidebar"
+              >
+                ✕
+              </button>
+            </>
           )}
         </div>
 
