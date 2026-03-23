@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle } from "../shared";
 
@@ -11,7 +12,7 @@ const INIT_KANBAN = {
 const KCOLS = { todo: { label: "To Do", color: T.muted }, inprog: { label: "In Progress", color: T.amber }, review: { label: "In Review", color: T.blue }, done: { label: "Done", color: T.green } };
 
 function ProjectsSimulator({ isMobile }) {
-  const [cols, setCols] = useState(INIT_KANBAN);
+  const [cols, setCols] = usePageState("cols", INIT_KANBAN);
   const [drag, setDrag] = useState(null);
   const [over, setOver] = useState(null);
   const tcolor = (t) => ({ bug: T.red, enhancement: T.blue, docs: T.purple })[t] || T.muted;
@@ -87,3 +88,6 @@ export default function ProjectsModule({ isMobile }) {
     </div>
   );
 }
+
+
+

@@ -31,6 +31,9 @@ jobs:
       - name: Audit dependencies
         run: npm audit --audit-level=high
 
+      - name: Generate sitemap
+        run: node ./scripts/generate-sitemap.mjs
+
       - name: Build
         run: npm run build
 

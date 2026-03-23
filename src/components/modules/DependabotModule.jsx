@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle } from "../shared";
 
 function DependabotSim({ isMobile }) {
-  const [deps, setDeps] = useState([
+  const [deps, setDeps] = usePageState("deps", [
     { name: "react", cur: "18.2.0", lat: "19.1.0", type: "major", sev: "none", pr: false },
     { name: "axios", cur: "1.6.0", lat: "1.7.2", type: "minor", sev: "none", pr: false },
     { name: "lodash", cur: "4.17.15", lat: "4.17.21", type: "patch", sev: "high", pr: false },
@@ -87,3 +87,6 @@ export default function DependabotModule({ isMobile }) {
     </div>
   );
 }
+
+
+

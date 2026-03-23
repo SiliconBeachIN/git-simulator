@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle } from "../shared";
 
@@ -11,7 +11,7 @@ const API_EX = [
 ];
 
 function APIExplorer({ isMobile }) {
-  const [sel, setSel] = useState(0);
+  const [sel, setSel] = usePageState("sel", 0);
   const ex = API_EX[sel];
   const isGet = ex.method === "GET";
   const methodStyle = { background: isGet ? T.greenBgMedium : T.blueBgLight, border: "1px solid " + (isGet ? T.greenBorderMedium : T.blueBorderLight), borderRadius: 4, fontSize: 10, fontWeight: 700, color: isGet ? T.green : T.blue, padding: "2px 7px", fontFamily: "monospace" };
@@ -85,3 +85,6 @@ export default function GithubApiModule({ isMobile }) {
     </div>
   );
 }
+
+
+

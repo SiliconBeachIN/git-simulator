@@ -1,7 +1,8 @@
-﻿import { useRef, useEffect, useState } from "react";
+﻿import { useRef, useEffect, useState, useCallback } from "react";
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Navigate } from "react-router-dom";
 import T from "./constants/tokens";
 import useMediaQuery from "./hooks/useMediaQuery";
+import { PageSessionProvider, clearPersistedPageState, getPersistedActivePage, setPersistedActivePage } from "./hooks/usePageState";
 import { Sidebar, Topbar, Footer } from "./components/layout";
 import { ModuleContent } from "./components/modules";
 import MODULES from "./constants/modules";
@@ -10,6 +11,7 @@ const MOBILE_QUERY = `(max-width:${T.mobileBreakpoint}px)`;
 
 function AppShell() {
   const isMobile = useMediaQuery(MOBILE_QUERY);
+  const [pageResetVersion, setPageResetVersion] = useState({});
   const scrollRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,6 +31,15 @@ function AppShell() {
     else navigate(`/${id}`);
     setTimeout(() => { if (scrollRef.current) scrollRef.current.scrollTop = 0; }, 0);
   };
+
+  useEffect(() => {
+    setPersistedActivePage(active);
+  }, [active]);
+
+  const handleResetPage = useCallback(() => {
+    clearPersistedPageState(active);
+    setPageResetVersion((prev) => ({ ...prev, [active]: (prev[active] || 0) + 1 }));
+  }, [active]);
 
   return (
     <div style={{ display: "flex", height: "100%", minHeight: "100vh", background: T.bg, color: T.text, fontFamily: "'Segoe UI',system-ui,sans-serif", overflow: "hidden", position: "relative" }}>
@@ -55,18 +66,14 @@ function AppShell() {
       <Sidebar active={active} onNavigate={go} sideOpen={sideOpen} setSideOpen={setSideOpen} isMobile={isMobile} />
 
       <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", zIndex: 1 }}>
-        <Topbar active={active} isMobile={isMobile} onMenuToggle={() => setSideOpen((o) => !o)} />
+        <Topbar active={active} isMobile={isMobile} onMenuToggle={() => setSideOpen((o) => !o)} onResetPage={handleResetPage} />
 
         <div ref={scrollRef} style={{ flex: 1, overflowY: "auto", padding: isMobile ? "16px 12px" : "22px 24px" }}>
           <div style={{ maxWidth: 820, margin: "0 auto" }}>
             <div style={{ animation: "fadeIn .2s ease" }}>
-              <Routes>
-                <Route path="/" element={<ModuleContent id="home" isMobile={isMobile} />} />
-                {MODULES.filter(m => m.id !== "home").map(m => (
-                  <Route key={m.id} path={`/${m.id}`} element={<ModuleContent id={m.id} isMobile={isMobile} />} />
-                ))}
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </Routes>
+              <PageSessionProvider pageId={active}>
+                <ModuleContent key={`${active}:${pageResetVersion[active] || 0}`} id={active} isMobile={isMobile} />
+              </PageSessionProvider>
             </div>
           </div>
         </div>

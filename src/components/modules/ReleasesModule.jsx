@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle } from "../shared";
 
 function ReleasesSimulator({ isMobile }) {
-  const [releases, setReleases] = useState([
+  const [releases, setReleases] = usePageState("releases", [
     { tag: "v2.1.0", name: "The Performance Update", date: "2026-03-01", pre: false, notes: "- 40% faster loads\n- Fixed 12 bugs\n- New dark mode" },
     { tag: "v2.0.0", name: "Major Rewrite", date: "2026-02-01", pre: false, notes: "- Complete redesign\n- New auth\n- Breaking: API v1 removed" },
     { tag: "v2.2.0-beta", name: "Beta: AI Features", date: "2026-03-08", pre: true, notes: "- Experimental AI\n- Not for production" },
@@ -97,3 +98,6 @@ export default function ReleasesModule({ isMobile }) {
     </div>
   );
 }
+
+
+

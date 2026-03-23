@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle, CommandCard } from "../shared";
 
@@ -11,10 +11,10 @@ const MOCK_FILES = [
 ];
 
 function StagingSimulator({ isMobile }) {
-  const [files, setFiles] = useState(MOCK_FILES.map((f) => ({ ...f, staged: false })));
-  const [committed, setCommitted] = useState([]);
-  const [msg, setMsg] = useState("");
-  const [phase, setPhase] = useState("working");
+  const [files, setFiles] = usePageState("files", MOCK_FILES.map((f) => ({ ...f, staged: false })));
+  const [committed, setCommitted] = usePageState("committed", []);
+  const [msg, setMsg] = usePageState("msg", "");
+  const [phase, setPhase] = usePageState("phase", "working");
 
   const unstaged = files.filter((f) => !f.staged);
   const staged = files.filter((f) => f.staged);
@@ -197,3 +197,6 @@ export default function StagingModule({ isMobile }) {
     </div>
   );
 }
+
+
+

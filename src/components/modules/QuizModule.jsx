@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox } from "../shared";
 
@@ -16,11 +16,11 @@ const QUESTIONS = [
 ];
 
 function Quiz({ isMobile }) {
-  const [idx, setIdx] = useState(0);
-  const [sel, setSel] = useState(null);
-  const [score, setScore] = useState(0);
-  const [done, setDone] = useState(false);
-  const [showExp, setShowExp] = useState(false);
+  const [idx, setIdx] = usePageState("idx", 0);
+  const [sel, setSel] = usePageState("sel", null);
+  const [score, setScore] = usePageState("score", 0);
+  const [done, setDone] = usePageState("done", false);
+  const [showExp, setShowExp] = usePageState("showExp", false);
 
   const q = QUESTIONS[idx];
 
@@ -112,3 +112,6 @@ export default function QuizModule({ isMobile }) {
     </div>
   );
 }
+
+
+
