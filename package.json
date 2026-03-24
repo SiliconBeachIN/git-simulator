@@ -5,7 +5,7 @@
   "description": "Interactive browser-based simulator for learning Git and GitHub workflows — no installation required.",
   "type": "module",
   "license": "MIT",
-  "homepage": "https://git-playground.netlify.app/",
+  "homepage": "https://gitsimulator.xyz/",
   "repository": {
     "type": "git",
     "url": "https://github.com/SiliconBeachIN/git-simulator.git"

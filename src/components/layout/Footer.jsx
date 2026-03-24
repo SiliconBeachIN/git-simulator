@@ -22,7 +22,7 @@ export default function Footer() {
           display: "flex",
           alignItems: "center",
           gap: 7,
-          color: T.linkColor,
+          color: T.text,
           fontSize: 11,
           textDecoration: "none",
           transition: "color .2s",
@@ -41,8 +41,8 @@ export default function Footer() {
         </svg>
         git-simulator
       </a>
-      <span style={{ color: T.faint, fontSize: 11 }}>|</span>
-      <span style={{ color: T.muted, fontSize: 11 }}>
+      <span style={{ color: T.subtleText, fontSize: 11 }}>|</span>
+      <span style={{ color: T.text, fontSize: 11 }}>
         {new Date().getFullYear()}
       </span>
     </footer>
