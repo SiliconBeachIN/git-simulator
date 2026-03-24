@@ -105,12 +105,44 @@ async function prerender() {
       } else {
         html = html.replace(/<head>/i, `<head>\n    <link rel="canonical" href="${canonical}" />`);
       }
-      // Open Graph
+      // Open Graph & social image
       if (/meta property="og:title"/i.test(html)) {
         html = html.replace(/<meta property="og:title" content=".*?"\s*\/?>/i, `<meta property="og:title" content="${title}" />`);
       }
       if (/meta property="og:description"/i.test(html)) {
         html = html.replace(/<meta property="og:description" content=".*?"\s*\/?>/i, `<meta property="og:description" content="${description}" />`);
+      }
+      const socialImage = meta.image || (id === 'home' ? 'https://gitsimulator.xyz/social/default.png' : `https://gitsimulator.xyz/social/${id}.png`);
+      if (/meta property="og:image"/i.test(html)) {
+        html = html.replace(/<meta property="og:image" content=".*?"\s*\/?>/i, `<meta property="og:image" content="${socialImage}" />`);
+      } else {
+        html = html.replace(/<head>/i, `<head>\n    <meta property="og:image" content="${socialImage}" />`);
+      }
+      if (/meta name="twitter:image"/i.test(html)) {
+        html = html.replace(/<meta name="twitter:image" content=".*?"\s*\/?>/i, `<meta name="twitter:image" content="${socialImage}" />`);
+      } else {
+        html = html.replace(/<head>/i, `<head>\n    <meta name="twitter:image" content="${socialImage}" />`);
+      }
+      // JSON-LD structured data (WebSite + BreadcrumbList)
+      const siteJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "GitSimulator",
+        "url": canonical
+      };
+      const breadcrumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": title,
+          "item": canonical
+        }]
+      };
+      const jsonLdScript = `<script type="application/ld+json">${JSON.stringify(siteJsonLd)}${JSON.stringify(breadcrumb)}</script>`;
+      if (!/application\/ld\+json/i.test(html)) {
+        html = html.replace(/<head>/i, `<head>\n    ${jsonLdScript}`);
       }
     } catch (e) {
       // ignore, fallback to captured HTML

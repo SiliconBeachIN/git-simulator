@@ -54,6 +54,8 @@ function ModuleMeta({ id }) {
         <link rel="canonical" href={canonical} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
+        <meta property="og:image" content={meta.image || (id === 'home' ? 'https://gitsimulator.xyz/social/default.png' : `https://gitsimulator.xyz/social/${id}.png`)} />
+        <meta name="twitter:image" content={meta.image || (id === 'home' ? 'https://gitsimulator.xyz/social/default.png' : `https://gitsimulator.xyz/social/${id}.png`)} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
@@ -62,3 +64,4 @@ function ModuleMeta({ id }) {
     return null;
   }
 }
+
