@@ -7,9 +7,15 @@
     <meta name="theme-color" content="#060b18" />
     <meta name="color-scheme" content="dark" />
     <link rel="canonical" href="https://gitsimulator.xyz/" />
+    <meta name="robots" content="index, follow" />
     <meta property="og:title" content="GitSimulator — Master GitHub" />
     <meta property="og:description" content="Interactive Git and GitHub learning with live terminal, commit graphs, and quizzes." />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content="/social/default.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="robots" content="index, follow" />
     <title>GitSimulator — Master GitHub</title>
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QGLJFHKHP4"></script>
@@ -19,6 +25,30 @@
       gtag('js', new Date());
       gtag('config', 'G-QGLJFHKHP4');
     </script>
+     <script type="application/ld+json">{
+       "@context":"https://schema.org",
+       "@type":"WebSite",
+       "url":"https://gitsimulator.xyz/",
+       "name":"GitHub Simulator",
+       "description":"Interactive simulator to learn Git and GitHub concepts with a live terminal and guided modules.",
+       "potentialAction":{
+         "@type":"SearchAction",
+         "target":"https://gitsimulator.xyz/?q={search_term_string}",
+         "query-input":"required name=search_term_string"
+       }
+     }</script>
+
+     <script type="application/ld+json">{
+       "@context": "https://schema.org",
+       "@type": "Organization",
+       "name": "GitHub Simulator",
+       "url": "https://gitsimulator.xyz/",
+       "logo": "https://gitsimulator.xyz/social/home.svg",
+       "sameAs": [
+         "https://github.com/",
+         "https://twitter.com/"
+       ]
+     }</script>
   </head>
   <body>
     <div id="root"></div>
