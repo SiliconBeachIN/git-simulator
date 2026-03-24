@@ -11,6 +11,8 @@
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat)
 ![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa?style=flat)
 
+[![CI](https://github.com/SiliconBeachIN/git-simulator/actions/workflows/ci.yml/badge.svg)](https://github.com/SiliconBeachIN/git-simulator/actions/workflows/ci.yml)
+
 ---
 
 ## What is GitSimulator?
@@ -25,6 +27,15 @@ Each module includes:
 - **Visual diagrams** — ASCII concept maps and commit graphs
 
 ---
+
+**Contributing (Quick)**
+
+- **Fork → branch → PR.** Follow `CONTRIBUTING.md` for full instructions.
+- **Run locally:** `npm install` then `npm run dev`. Verify UI and routes.
+- **Build check:** `npm run build` is run automatically on PRs by CI — ensure it passes before requesting review.
+- **Sitemap:** Top-level routes are driven from `src/constants/modules.js`. A sitemap is generated automatically at build time (`scripts/generate-sitemap.mjs`) and written to `public/sitemap.xml` — when adding a new module, update `MODULES` and the CI/build will include the sitemap.
+- **PR checklist:** include screenshot/GIF for UI changes, update docs if content changes, and follow the commit message format in `CONTRIBUTING.md`.
+
 
 ## Modules
 

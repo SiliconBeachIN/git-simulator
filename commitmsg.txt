@@ -1,0 +1,15 @@
+﻿Add sitemap, robots.txt, canonical and Netlify config
+
+What: Add sitemap (HTTPS), robots.txt, canonical meta, and Netlify SPA/config headers to improve SEO and deployability.
+
+Why: Verified DNS and Search Console readiness requires sitemap and robots; SPA needs Netlify redirect for client-side routing; security headers and canonical improve search engine behavior and security.
+
+Files changed:
+- src/App.jsx: import useState and fix runtime React reference (previous runtime error)
+- index.html: add canonical link and meta updates
+- public/sitemap.xml: updated to use https://gitsimulator.xyz/ for all routes
+- public/robots.txt: added and points to sitemap
+- public/_redirects: SPA fallback for Netlify
+- public/_headers: security headers for Netlify
+
+Notes: Build artifacts (dist/) are generated locally but not committed. After push, trigger Netlify redeploy and verify https://gitsimulator.xyz/sitemap.xml is reachable before submitting to Search Console.

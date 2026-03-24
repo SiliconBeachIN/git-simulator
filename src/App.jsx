@@ -1,27 +1,36 @@
-﻿import { useState, useRef, useCallback, useEffect } from "react";
+﻿import { useRef, useEffect, useState, useCallback } from "react";
+import { BrowserRouter, Routes, Route, useNavigate, useLocation, Navigate } from "react-router-dom";
 import T from "./constants/tokens";
 import useMediaQuery from "./hooks/useMediaQuery";
 import { PageSessionProvider, clearPersistedPageState, getPersistedActivePage, setPersistedActivePage } from "./hooks/usePageState";
 import { Sidebar, Topbar, Footer } from "./components/layout";
 import { ModuleContent } from "./components/modules";
+import MODULES from "./constants/modules";
 
 const MOBILE_QUERY = `(max-width:${T.mobileBreakpoint}px)`;
 
-export default function App() {
+function AppShell() {
   const isMobile = useMediaQuery(MOBILE_QUERY);
-  const [active, setActive] = useState(() => getPersistedActivePage() || "home");
   const [pageResetVersion, setPageResetVersion] = useState({});
-  const [sideOpen, setSideOpen] = useState(!isMobile);
   const scrollRef = useRef(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [sideOpen, setSideOpen] = useState(!isMobile);
 
   useEffect(() => {
     setSideOpen(!isMobile);
   }, [isMobile]);
 
-  const go = useCallback((id) => {
-    setActive(id);
+  // Extract module id from path
+  let active = location.pathname.slice(1) || "home";
+  if (!MODULES.some(m => m.id === active)) active = "home";
+
+  // Navigation handler updates URL
+  const go = (id) => {
+    if (id === "home") navigate("/");
+    else navigate(`/${id}`);
     setTimeout(() => { if (scrollRef.current) scrollRef.current.scrollTop = 0; }, 0);
-  }, []);
+  };
 
   useEffect(() => {
     setPersistedActivePage(active);
@@ -72,5 +81,13 @@ export default function App() {
         <Footer />
       </div>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppShell />
+    </BrowserRouter>
   );
 }
