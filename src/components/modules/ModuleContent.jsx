@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import { Helmet } from "react-helmet-async";
 import T from "../../constants/tokens";
 
 const MAP = {
@@ -33,7 +34,31 @@ export default function ModuleContent({ id, isMobile }) {
   if (!Mod) return <div style={{ color: T.subtleText, padding: 40, textAlign: "center" }}>Module not found</div>;
   return (
     <Suspense fallback={<div style={{ color: T.muted, padding: 40, textAlign: "center" }}>Loading…</div>}>
+      <ModuleMeta id={id} />
       <Mod isMobile={isMobile} />
     </Suspense>
   );
+}
+
+function ModuleMeta({ id }) {
+  try {
+    const MODULES = require("../../constants/modules").default;
+    const meta = MODULES.find((m) => m.id === id) || {};
+    const title = meta.title || (meta.label ? `${meta.label} — GitSimulator` : "GitSimulator — Master GitHub");
+    const description = meta.description || "Interactive Git and GitHub learning with live terminal, commit graphs, and quizzes.";
+    const canonical = meta.canonical || (id === "home" ? "https://gitsimulator.xyz/" : `https://gitsimulator.xyz/${id}`);
+    return (
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonical} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+    );
+  } catch (e) {
+    return null;
+  }
 }
