@@ -54,7 +54,7 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
             : {}),
         }}
       >
-        {/* logo */}
+        {/* logo + toggle */}
         <div
           style={{
             padding: "14px 12px",
@@ -63,23 +63,40 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
             alignItems: "center",
             gap: 9,
             flexShrink: 0,
+            minHeight: 60,
           }}
         >
           <div
+            onClick={!isMobile && !sideOpen ? () => setSideOpen(true) : undefined}
+            title={!isMobile && !sideOpen ? "Expand sidebar" : undefined}
             style={{
               width: 32,
               height: 32,
               borderRadius: 8,
-              background: T.logoGradient,
+              background: !isMobile && !sideOpen ? T.greenBgLight : T.logoGradient,
+              border: !isMobile && !sideOpen ? `1px solid ${T.greenBorderLight}` : "none",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 16,
+              fontSize: !isMobile && !sideOpen ? 18 : 16,
               flexShrink: 0,
+              cursor: !isMobile && !sideOpen ? "pointer" : "default",
+              transition: "background .15s, border-color .15s",
             }}
+            onMouseEnter={!isMobile && !sideOpen ? (e) => {
+              e.currentTarget.style.background = T.greenBgMedium;
+              e.currentTarget.style.borderColor = T.greenBorderMedium;
+            } : undefined}
+            onMouseLeave={!isMobile && !sideOpen ? (e) => {
+              e.currentTarget.style.background = T.greenBgLight;
+              e.currentTarget.style.borderColor = T.greenBorderLight;
+            } : undefined}
           >
-            ⚡
+            {!isMobile && !sideOpen ? (
+              <span style={{ color: T.green, lineHeight: 1 }}>☰</span>
+            ) : "⚡"}
           </div>
+
           {(sideOpen || isMobile) && (
             <>
               <div
@@ -89,17 +106,46 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
                   fontWeight: 800,
                   color: T.text,
                   letterSpacing: "-.01em",
+                  flex: 1,
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
                 }}
               >
                 GitSimulator
               </div>
-              <button
-                onClick={() => setSideOpen((s) => !s)}
-                style={{ marginLeft: 8, background: 'transparent', border: 'none', color: T.muted, cursor: 'pointer' }}
-                aria-label="Toggle sidebar"
-              >
-                ✕
-              </button>
+
+              {!isMobile && (
+                <button
+                  onClick={() => setSideOpen(false)}
+                  style={{
+                    background: T.greenBgLight,
+                    border: `1px solid ${T.greenBorderLight}`,
+                    borderRadius: 6,
+                    color: T.green,
+                    cursor: "pointer",
+                    width: 26,
+                    height: 26,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 14,
+                    flexShrink: 0,
+                    transition: "background .15s, border-color .15s",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = T.greenBgMedium;
+                    e.currentTarget.style.borderColor = T.greenBorderMedium;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = T.greenBgLight;
+                    e.currentTarget.style.borderColor = T.greenBorderLight;
+                  }}
+                  aria-label="Collapse sidebar"
+                  title="Collapse sidebar"
+                >
+                  ‹
+                </button>
+              )}
             </>
           )}
         </div>
