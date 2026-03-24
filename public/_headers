@@ -4,3 +4,6 @@
   Referrer-Policy: no-referrer-when-downgrade
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Content-Security-Policy: default-src 'self' https://*.googleapis.com https://www.googletagmanager.com 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: https:; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; frame-ancestors 'none'
+
+/sitemap.xml
+  Content-Type: application/xml
