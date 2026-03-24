@@ -9,9 +9,22 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.merged == true && github.event.pull_request.head.repo.full_name == github.repository }}
     steps:
-      - name: Delete head branch
-        uses: peter-evans/delete-branch@v3
+      - name: Delete head branch via API (no third-party action)
+        uses: actions/github-script@v6
         with:
-          branch: ${{ github.event.pull_request.head.ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          if-not-found: ignore
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const branch = context.payload.pull_request.head.ref;
+            const ref = `heads/${branch}`;
+            try {
+              await github.rest.git.deleteRef({ owner, repo, ref });
+              console.log(`Deleted branch ${branch}`);
+            } catch (error) {
+              if (error.status === 404 || error.status === 422) {
+                console.log(`Branch not found or already deleted: ${branch}`);
+              } else {
+                throw error;
+              }
+            }
