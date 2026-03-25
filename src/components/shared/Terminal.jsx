@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { safeScrollToBottom } from "../../utils/scroll";
 import T from "../../constants/tokens";
 
 /* ── Exact-match commands ── */
@@ -663,8 +664,22 @@ export default function Terminal({ compact = false }) {
   const [hIdx, setHIdx] = useState(-1);
   const endRef = useRef(null);
 
+  const mountedRef = useRef(false);
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = endRef.current;
+    const container = el?.parentElement;
+    if (!mountedRef.current) {
+      mountedRef.current = true;
+      return;
+    }
+    try {
+      if (!container) return;
+      const nearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 50;
+      if (!nearBottom) return; // don't force-scroll if user scrolled up
+      safeScrollToBottom(container, { smooth: true });
+    } catch (e) {
+      try { safeScrollToBottom(container, { smooth: true }); } catch (er) {}
+    }
   }, [lines]);
 
   const run = useCallback(() => {
