@@ -1,7 +1,8 @@
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef, useEffect, memo } from "react";
 import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle, CommandCard } from "../shared";
+import { safeScrollToBottom, safeFocus } from "../../utils/scroll";
 
 /* ─── Helpers ─── */
 const randId = () => Math.random().toString(36).slice(2, 9);
@@ -52,7 +53,7 @@ function layoutGraph(commits, edges, branches) {
 }
 
 /* ─── Graph SVG renderer ─── */
-function SimGraph({ commits, edges, branches, head, hovered, setHovered }) {
+const SimGraph = memo(function SimGraph({ commits, edges, branches, head, hovered, setHovered }) {
   const { placed, totalCols, totalRows, rowOf } = useMemo(
     () => layoutGraph(commits, edges, branches),
     [commits, edges, branches]
@@ -165,7 +166,7 @@ function SimGraph({ commits, edges, branches, head, hovered, setHovered }) {
       </svg>
     </div>
   );
-}
+});
 
 /* ─── Quick-action button ─── */
 function ActionBtn({ label, onClick, color = T.blue, disabled = false }) {
@@ -202,7 +203,7 @@ function InteractiveSimulator() {
   const [hovered, setHovered] = useState(null);
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    safeScrollToBottom(scrollRef.current, { smooth: true });
   }, [log]);
 
   const addLog = (type, text) => setLog((p) => [...p, { type, text }]);
@@ -373,7 +374,7 @@ function InteractiveSimulator() {
     e.preventDefault();
     processCommand(input);
     setInput("");
-    inputRef.current?.focus();
+    safeFocus(inputRef.current);
   };
 
   const quickBranch = (name) => {

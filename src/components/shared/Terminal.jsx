@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { safeScrollToBottom } from "../../utils/scroll";
 import T from "../../constants/tokens";
 
 /* ── Exact-match commands ── */
@@ -663,8 +664,32 @@ export default function Terminal({ compact = false }) {
   const [hIdx, setHIdx] = useState(-1);
   const endRef = useRef(null);
 
+  const mountedRef = useRef(false);
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = endRef.current;
+    const container = el?.parentElement;
+    if (!mountedRef.current) {
+      mountedRef.current = true;
+      return;
+    }
+    try {
+      if (!container) return;
+      // slightly larger threshold to account for high-DPI smooth anim timing
+      const nearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 150;
+      if (!nearBottom) return; // don't force-scroll if user scrolled up
+      // prefer the smooth animator but keep duration short for snappy feel
+      safeScrollToBottom(container, { smooth: true, duration: 60 });
+      // ensure a hard-set fallback after layout stabilises
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        try { container.scrollTop = container.scrollHeight; } catch (er) {}
+      }));
+    } catch (e) {
+      try {
+        requestAnimationFrame(() => {
+          try { container.scrollTop = container.scrollHeight; } catch (er) {}
+        });
+      } catch (er) {}
+    }
   }, [lines]);
 
   const run = useCallback(() => {
