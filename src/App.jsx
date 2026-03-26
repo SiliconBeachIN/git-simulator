@@ -4,6 +4,7 @@ import T from "./constants/tokens";
 import useMediaQuery from "./hooks/useMediaQuery";
 import { PageSessionProvider, clearPersistedPageState, getPersistedActivePage, setPersistedActivePage } from "./hooks/usePageState";
 import { Sidebar, Topbar, Footer } from "./components/layout";
+import Canonical from "./components/Meta/Canonical";
 import { ModuleContent } from "./components/modules";
 import MODULES from "./constants/modules";
 
@@ -66,6 +67,7 @@ function AppShell() {
       <Sidebar active={active} onNavigate={go} sideOpen={sideOpen} setSideOpen={setSideOpen} isMobile={isMobile} />
 
       <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", zIndex: 1 }}>
+        <Canonical />
         <Topbar active={active} isMobile={isMobile} onMenuToggle={() => setSideOpen((o) => !o)} onResetPage={handleResetPage} />
 
         <div ref={scrollRef} style={{ flex: 1, overflowY: "auto", padding: isMobile ? "16px 12px" : "22px 24px" }}>
