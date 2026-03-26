@@ -2,6 +2,7 @@ import { useState } from "react";
 import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle } from "../shared";
+import Tr from "../shared/Tr";
 
 function ReleasesSimulator({ isMobile }) {
   const [releases, setReleases] = usePageState("releases", [
@@ -65,7 +66,7 @@ function ReleasesSimulator({ isMobile }) {
               <input type="checkbox" checked={form.pre} onChange={(e) => setForm((p) => ({ ...p, pre: e.target.checked }))} style={{ accentColor: T.amber }} />
               <span style={{ color: T.subtleText, fontSize: 12 }}>Pre-release (beta/alpha)</span>
             </label>
-            <button onClick={publish} style={{ width: "100%", background: T.greenBgMedium, border: `1px solid ${T.greenBorderMedium}`, borderRadius: 7, color: T.green, fontSize: 12, padding: 9, cursor: "pointer" }}>Publish Release</button>
+            <button onClick={publish} style={{ width: "100%", background: T.greenBgMedium, border: `1px solid ${T.greenBorderMedium}`, borderRadius: 7, color: T.green, fontSize: 12, padding: 9, cursor: "pointer" }}><Tr>Publish Release</Tr></button>
           </div>
         )}
       </div>

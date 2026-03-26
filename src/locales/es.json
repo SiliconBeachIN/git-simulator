@@ -1,0 +1,31 @@
+{
+  "reset_page": "↺ Reiniciar página",
+  "description": "Haz clic en cualquier tarjeta de comando para expandir · Pasa el ratón sobre nodos de commits · Usa los terminales abajo",
+  "home_title": "Inicio",
+  "modules": {
+    "home": { "label": "Mission Control" },
+    "init": { "label": "git init" },
+    "staging": { "label": "Preparar & Cometer" },
+    "branch": { "label": "Ramas" },
+    "merge": { "label": "Merge & Rebase" },
+    "remote": { "label": "Remoto & Push" },
+    "pullrequest": { "label": "Pull Requests" },
+    "gitflow": { "label": "Git Flow" },
+    "advanced": { "label": "Magia Avanzada" },
+    "collaborate": { "label": "Open Source" },
+    "visualizer": { "label": "Gráfico de Commits" },
+    "actions": { "label": "GitHub Actions" },
+    "security": { "label": "Seguridad" },
+    "issues": { "label": "Issues" },
+    "projects": { "label": "GitHub Projects" },
+    "pages": { "label": "GitHub Pages" },
+    "releases": { "label": "Releases" },
+    "protection": { "label": "Protección de Ramas" },
+    "codeowners": { "label": "CODEOWNERS" },
+    "githubapi": { "label": "GitHub API" },
+    "dotgithub": { "label": ".github Folder" },
+    "dependabot": { "label": "Dependabot" },
+    "codespaces": { "label": "Codespaces" },
+    "quiz": { "label": "Master Quiz" }
+  }
+}

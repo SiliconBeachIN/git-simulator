@@ -1,0 +1,123 @@
+{
+  "reset_page": "↺ Reset Page",
+  "description": "Click any command card to expand · Hover commit nodes · Use terminals below",
+  "home_title": "Home",
+  "modules": {
+    "home": { "label": "Mission Control" },
+    "init": { "label": "git init" },
+    "staging": { "label": "Stage & Commit" },
+    "branch": { "label": "Branching" },
+    "merge": { "label": "Merge & Rebase" },
+    "remote": { "label": "Remote & Push" },
+    "pullrequest": { "label": "Pull Requests" },
+    "gitflow": { "label": "Git Flow" },
+    "advanced": { "label": "Advanced Magic" },
+    "collaborate": { "label": "Open Source" },
+    "visualizer": { "label": "Commit Graph" },
+    "actions": { "label": "GitHub Actions" },
+    "security": { "label": "Security" },
+    "issues": { "label": "Issues" },
+    "projects": { "label": "GitHub Projects" },
+    "pages": { "label": "GitHub Pages" },
+    "releases": { "label": "Releases" },
+    "protection": { "label": "Branch Protection" },
+    "codeowners": { "label": "CODEOWNERS" },
+    "githubapi": { "label": "GitHub API" },
+    "dotgithub": { "label": ".github Folder" },
+    "dependabot": { "label": "Dependabot" },
+    "codespaces": { "label": "Codespaces" },
+    "quiz": { "label": "Master Quiz" }
+    ,
+    "⚡ Welcome to GitSimulator": "⚡ Welcome to GitSimulator",
+    "📘 Start With README.md": "📘 Start With README.md",
+    "⚡ Interactive Terminal — Try Commands Now": "⚡ Interactive Terminal — Try Commands Now",
+    "GitSimulator Terminal v2.0 — type git commands to explore": "GitSimulator Terminal v2.0 — type git commands to explore",
+    "Try: git init  |  git status  |  git log  |  git help": "Try: git init  |  git status  |  git log  |  git help",
+    "Type a git command… (↑↓ history, Tab autocomplete)": "Type a git command… (↑↓ history, Tab autocomplete)",
+    "Run ↵": "Run ↵",
+    "Search…": "Search…",
+    "Collapse sidebar": "Collapse sidebar",
+    "Expand sidebar": "Expand sidebar",
+    "Module not found": "Module not found",
+    "Loading…": "Loading…",
+    "README.md — Your Project's Front Door": "README.md — Your Project's Front Door",
+    "How To Use This Simulator": "How To Use This Simulator",
+    "BRANCHES": "BRANCHES",
+    "ACTIONS ON:": "ACTIONS ON:",
+    "GIT LOG": "GIT LOG",
+    "NEW ISSUE": "NEW ISSUE",
+    "Issue title": "Issue title",
+    "Describe the issue": "Describe the issue",
+    "Submit Issue": "Submit Issue",
+    "📁 WORKING DIR": "📁 WORKING DIR",
+    "Use \"add →\" to stage files": "Use \"add →\" to stage files",
+    "git add . (stage all)": "git add . (stage all)",
+    "git commit -m \"feat: describe your change\"": "git commit -m \"feat: describe your change\"",
+    "Deploy Site": "Deploy Site",
+    "Building...": "Building...",
+    "Site is Live!": "Site is Live!",
+    "Publish Release": "Publish Release"
+    ,
+    "Git mastery · All features · v3.0": "Git mastery · All features · v3.0"
+  },
+  "home": {
+    "hero": {
+      "title": "⚡ Welcome to GitSimulator",
+      "line1": "You are a",
+      "emph1": "Time-Traveler Developer",
+      "line2": "Git is your time machine.",
+      "commit": "Every commit is a checkpoint you can return to.",
+      "branch": "Every branch is a parallel universe you can experiment in.",
+      "merge": "Every merge brings parallel timelines together."
+    },
+    "badges": {
+      "commit": "📸 Commit = Snapshot",
+      "branch": "🌿 Branch = Parallel Universe",
+      "remote": "☁️ Remote = Cloud Backup",
+      "pr": "🤝 PR = Code Review"
+    },
+    "readme": {
+      "title": "📘 Start With README.md"
+    },
+    "terminal": {
+      "title": "⚡ Interactive Terminal — Try Commands Now"
+    }
+    ,
+    "readme": {
+      "name": "README.md",
+      "body": {
+        "intro": "is the first file people read in a repository. It should quickly answer:",
+        "q1": "What is this project?",
+        "q2": "How do I run it?",
+        "q3": "What commands are important?",
+        "q4": "How can I contribute?",
+        "conclusion": "A good README saves time for beginners, teammates, and future you."
+      }
+    }
+  }
+  ,
+  "visualizer": {
+    "interactive": {
+      "title": "Interactive Commit Graph Simulator",
+      "line1": "Type git commands below and watch the graph build in real-time.",
+      "create": "Create branches",
+      "commit": "make commits",
+      "merge": "merge",
+      "line2": "the graph updates instantly to show exactly what happens.",
+      "help_prompt": "Type help for all commands."
+    },
+    "reading": {
+      "title": "Reading the Graph — Key Commands"
+    },
+    "head": "HEAD",
+    "quick": { "label": "Quick:" },
+    "action": {
+      "feature_branch": "+ feature branch",
+      "hotfix_branch": "+ hotfix branch",
+      "commit": "commit",
+      "merge_main": "merge to main",
+      "reset": "reset"
+    }
+  }
+ 
+}

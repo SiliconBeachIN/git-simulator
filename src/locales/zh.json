@@ -1,0 +1,99 @@
+{
+  "reset_page": "↺ 重置页面",
+  "description": "单击任何命令卡以展开 · 将鼠标悬停在提交节点上 · 使用下面的终端",
+  "home_title": "首页"
+  ,
+  "⚡ Welcome to GitSimulator": "⚡ 欢迎来到 GitSimulator",
+  "📘 Start With README.md": "📘 从 README.md 开始",
+  "⚡ Interactive Terminal — Try Commands Now": "⚡ 交互式终端 — 立即尝试命令",
+  "GitSimulator Terminal v2.0 — type git commands to explore": "GitSimulator 终端 v2.0 — 输入 git 命令进行探索",
+  "Try: git init  |  git status  |  git log  |  git help": "尝试：git init  |  git status  |  git log  |  git help",
+  "Type a git command… (↑↓ history, Tab autocomplete)": "输入 git 命令…（↑↓ 历史，Tab 自动完成）",
+  "Run ↵": "运行 ↵",
+  "Search…": "搜索…",
+  "Collapse sidebar": "收起侧边栏",
+  "Expand sidebar": "展开侧边栏",
+  "Module not found": "未找到模块",
+  "Loading…": "加载中…",
+  "README.md — Your Project's Front Door": "README.md — 仓库的门面文件",
+  "How To Use This Simulator": "如何使用此模拟器",
+  "BRANCHES": "分支",
+  "ACTIONS ON:": "操作于：",
+  "GIT LOG": "GIT 日志",
+  "NEW ISSUE": "新建 Issue",
+  "Issue title": "Issue 标题",
+  "Describe the issue": "描述问题",
+  "Submit Issue": "提交 Issue",
+  "📁 WORKING DIR": "📁 工作区",
+  "Use \"add →\" to stage files": "使用 \"add →\" 将文件暂存",
+  "git add . (stage all)": "git add .（全部暂存）",
+  "git commit -m \"feat: describe your change\"": "git commit -m \"feat: 描述你的更改\"",
+  "Deploy Site": "部署站点",
+  "Building...": "构建中...",
+  "Site is Live!": "站点已上线！",
+  "Publish Release": "发布 Release"
+  ,
+  "Git mastery · All features · v3.0": "Git 精通 · 全部功能 · v3.0",
+  "home": {
+    "hero": {
+      "title": "⚡ 欢迎来到 GitSimulator",
+      "line1": "你是一个",
+      "emph1": "时光旅行开发者",
+      "line2": "Git 是你的时光机。",
+      "commit": "每次提交都是你可以返回的检查点。",
+      "branch": "每个分支都是你可以在其中实验的平行宇宙。",
+      "merge": "每次合并将平行时间线汇聚在一起。"
+    },
+    "badges": {
+      "commit": "📸 提交 = 快照",
+      "branch": "🌿 分支 = 平行宇宙",
+      "remote": "☁️ 远程 = 云备份",
+      "pr": "🤝 PR = 代码审查"
+    },
+    "readme": {
+      "title": "📘 从 README.md 开始"
+    },
+    "terminal": {
+      "title": "⚡ 交互式终端 — 立即尝试命令"
+    }
+  }
+  ,
+  "modules": {
+    "home": { "label": "任务控制中心" }
+  },
+  "readme": {
+    "name": "README.md",
+    "body": {
+      "intro": "是仓库中人们首先阅读的文件。它应当简洁地回答：",
+      "q1": "这个项目是什么？",
+      "q2": "如何运行它？",
+      "q3": "哪些命令很重要？",
+      "q4": "如何贡献？",
+      "conclusion": "一份好的 README 能为初学者、队友和未来的你节省时间。"
+    }
+  },
+  "visualizer": {
+    "interactive": {
+      "title": "交互式提交图模拟器",
+      "line1": "在下面输入 git 命令，查看图形如何实时构建。",
+      "create": "创建分支",
+      "commit": "提交更改",
+      "merge": "合并",
+      "line2": "图表会立即更新，清晰展示发生的变化。",
+      "help_prompt": "输入 help 查看所有命令。"
+    },
+    "reading": {
+      "title": "阅读图表 — 关键命令"
+    },
+    "head": "HEAD",
+    "quick": { "label": "快速操作：" },
+    "action": {
+      "feature_branch": "+ feature 分支",
+      "hotfix_branch": "+ hotfix 分支",
+      "commit": "提交",
+      "merge_main": "合并到 main",
+      "reset": "重置"
+    }
+  }
+ 
+}

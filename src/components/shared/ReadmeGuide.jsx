@@ -1,23 +1,24 @@
 import T from "../../constants/tokens";
 import InfoBox from "./InfoBox";
+import { useTranslation } from "react-i18next";
 
 export default function ReadmeGuide() {
+  const { t } = useTranslation();
   return (
-    <InfoBox icon="📘" title="README.md — Your Project's Front Door" color={T.blue}>
+    <InfoBox icon="📘" title={t("README.md — Your Project's Front Door")} color={T.blue}>
       <div style={{ color: T.subtleText, fontSize: 12, lineHeight: 1.8 }}>
-        <strong style={{ color: T.text }}>README.md</strong> is the first file people read in a
-        repository. It should quickly answer:
+        <strong style={{ color: T.text }}>{t("readme.name")}</strong> {t("readme.body.intro")}
         <br />
-        1. What is this project?
+        1. {t("readme.body.q1")}
         <br />
-        2. How do I run it?
+        2. {t("readme.body.q2")}
         <br />
-        3. What commands are important?
+        3. {t("readme.body.q3")}
         <br />
-        4. How can I contribute?
+        4. {t("readme.body.q4")}
         <br />
         <br />
-        A good README saves time for beginners, teammates, and future you.
+        {t("readme.body.conclusion")}
       </div>
     </InfoBox>
   );

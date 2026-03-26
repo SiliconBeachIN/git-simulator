@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
+import Tr from "../shared/Tr";
 import { InfoBox, SectionTitle } from "../shared";
 
 function PagesSimulator({ isMobile }) {
@@ -40,15 +41,15 @@ function PagesSimulator({ isMobile }) {
           {[{ v: "branch", l: "Deploy from branch" }, { v: "actions", l: "GitHub Actions workflow" }].map((opt) => (
             <label key={opt.v} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8, cursor: "pointer" }}>
               <input type="radio" checked={source === opt.v} onChange={() => { setSource(opt.v); setStep((s) => Math.max(s, 1)); }} style={{ accentColor: T.green }} />
-              <span style={{ color: T.text, fontSize: 12 }}>{opt.l}</span>
+              <span style={{ color: T.text, fontSize: 12 }}><Tr>{opt.l}</Tr></span>
             </label>
           ))}
           <div style={{ height: 12 }} />
           <button onClick={() => setStep((s) => Math.min(s + 1, 3))} disabled={step >= 3} style={{ width: "100%", background: T.greenBgLight, border: `1px solid ${T.greenBorderLight}`, borderRadius: 6, color: step >= 3 ? T.muted : T.green, fontSize: 11, padding: 8, cursor: step >= 3 ? "default" : "pointer", marginBottom: 8 }}>
-            {step === 0 ? "Save — Configure Branch" : step === 1 ? "Save — Commit Your Site" : step === 2 ? "Save — Push to GitHub" : "Settings Saved ✓"}
+            {step === 0 ? <Tr>Save — Configure Branch</Tr> : step === 1 ? <Tr>Save — Commit Your Site</Tr> : step === 2 ? <Tr>Save — Push to GitHub</Tr> : <Tr>Settings Saved ✓</Tr>}
           </button>
           <button onClick={deploy} disabled={step < 3 || deployed || building} style={{ width: "100%", background: deployed ? T.greenBgMedium : T.blueBgLight, border: "1px solid " + (deployed ? T.greenBorderStrong : T.blueBorderMedium), borderRadius: 6, color: deployed ? T.green : T.blue, fontSize: 11, padding: 8, cursor: (step < 3 || deployed || building) ? "default" : "pointer" }}>
-            {building ? "Building..." : deployed ? "Site is Live!" : "Deploy Site"}
+            {building ? <Tr>Building...</Tr> : deployed ? <Tr>Site is Live!</Tr> : <Tr>Deploy Site</Tr>}
           </button>
         </div>
         <div style={{ background: T.card, border: "1px solid " + T.border, borderRadius: 10, padding: 14 }}>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle } from "../shared";
+import Tr from "../shared/Tr";
 
 const ISSUE_LABELS = [
   { name: "bug", color: T.red },
@@ -33,7 +34,7 @@ function IssuesSimulator({ isMobile }) {
 
   return (
     <div>
-      <InfoBox icon="🐛" title="Issues are your project memory" color={T.red}>
+      <InfoBox icon="🐛" title={<Tr>Issues are your project memory</Tr>} color={T.red}>
         Every bug report, feature request, or question lives as an Issue — a ticket system built
         into GitHub. Issues can be assigned, tagged with labels, linked to PRs, and tracked on a
         board. Write Fixes #42 in a PR description to auto-close the issue on merge.
@@ -84,13 +85,13 @@ function IssuesSimulator({ isMobile }) {
             </div>
           ) : (
             <div style={{ background: T.card, border: "1px solid " + T.border, borderRadius: 10, padding: 14 }}>
-              <div style={{ color: T.muted, fontSize: 11, fontWeight: 700, marginBottom: 10 }}>NEW ISSUE</div>
+              <div style={{ color: T.muted, fontSize: 11, fontWeight: 700, marginBottom: 10 }}><Tr>NEW ISSUE</Tr></div>
               <input value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))} placeholder="Issue title" style={{ width: "100%", background: T.inputBgDark, border: "1px solid " + T.border, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 12, outline: "none", marginBottom: 8, boxSizing: "border-box" }} />
               <select value={form.label} onChange={(e) => setForm((f) => ({ ...f, label: e.target.value }))} style={{ width: "100%", background: T.inputBgFaint, border: "1px solid " + T.border, borderRadius: 6, padding: "6px 10px", color: T.text, fontSize: 11, outline: "none", marginBottom: 8, boxSizing: "border-box" }}>
                 {ISSUE_LABELS.map((l) => <option key={l.name} value={l.name}>{l.name}</option>)}
               </select>
               <textarea value={form.body} onChange={(e) => setForm((f) => ({ ...f, body: e.target.value }))} placeholder="Describe the issue" rows={3} style={{ width: "100%", background: T.inputBgDark, border: "1px solid " + T.border, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 12, outline: "none", resize: "none", boxSizing: "border-box", marginBottom: 8 }} />
-              <button onClick={create} style={{ width: "100%", background: T.greenBgMedium, border: `1px solid ${T.greenBorderMedium}`, borderRadius: 7, color: T.green, fontSize: 12, padding: 9, cursor: "pointer" }}>Submit Issue</button>
+              <button onClick={create} style={{ width: "100%", background: T.greenBgMedium, border: `1px solid ${T.greenBorderMedium}`, borderRadius: 7, color: T.green, fontSize: 12, padding: 9, cursor: "pointer" }}><Tr>Submit Issue</Tr></button>
             </div>
           )}
         </div>

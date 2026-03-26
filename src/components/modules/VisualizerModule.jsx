@@ -3,6 +3,7 @@ import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { InfoBox, SectionTitle, CommandCard } from "../shared";
 import { safeScrollToBottom, safeFocus } from "../../utils/scroll";
+import Tr from "../shared/Tr";
 
 /* ─── Helpers ─── */
 const randId = () => Math.random().toString(36).slice(2, 9);
@@ -89,7 +90,7 @@ const SimGraph = memo(function SimGraph({ commits, edges, branches, head, hovere
               </text>
               {isHead && (
                 <text x={padX - 14} y={y + 16} textAnchor="end" fill={T.amber} fontSize="8" fontFamily="monospace" opacity=".7">
-                  HEAD
+                  <Tr>visualizer.head</Tr>
                 </text>
               )}
             </g>
@@ -389,11 +390,13 @@ function InteractiveSimulator() {
 
   return (
     <div>
-      <InfoBox icon="🧪" title="Interactive Commit Graph Simulator" color={T.teal}>
-        Type git commands below and watch the graph build in real-time.{" "}
-        <strong>Create branches</strong>, <strong>make commits</strong>, and{" "}
-        <strong>merge</strong> — the graph updates instantly to show exactly what happens.
-        Type <code style={{ color: T.amber }}>help</code> for all commands.
+      <InfoBox icon="🧪" title={<Tr>visualizer.interactive.title</Tr>} color={T.teal}>
+        <Tr>visualizer.interactive.line1</Tr>
+        <br />
+        <strong><Tr>visualizer.interactive.create</Tr></strong>, <strong><Tr>visualizer.interactive.commit</Tr></strong>, and <strong><Tr>visualizer.interactive.merge</Tr></strong> — <Tr>visualizer.interactive.line2</Tr>
+        <br />
+        <br />
+        <Tr>visualizer.interactive.help_prompt</Tr>
       </InfoBox>
 
       {/* Live graph */}
@@ -410,7 +413,7 @@ function InteractiveSimulator() {
           }}>
             <div style={{ width: 8, height: 8, borderRadius: "50%", background: data.color }} />
             {name}
-            {name === head && <span style={{ color: T.amber, fontSize: 9, marginLeft: 2 }}>HEAD</span>}
+            {name === head && <span style={{ color: T.amber, fontSize: 9, marginLeft: 2 }}><Tr>visualizer.head</Tr></span>}
           </div>
         ))}
         <span style={{ color: T.muted, fontSize: 10, marginLeft: "auto" }}>{commits.length} commit{commits.length !== 1 ? "s" : ""}</span>
@@ -418,15 +421,15 @@ function InteractiveSimulator() {
 
       {/* Quick actions */}
       <div style={{ display: "flex", gap: 8, marginTop: 10, flexWrap: "wrap" }}>
-        <span style={{ color: T.muted, fontSize: 10, lineHeight: "28px" }}>Quick:</span>
-        <ActionBtn label="+ feature branch" color={T.blue} onClick={() => quickBranch(`feature/${randId().slice(0, 4)}`)} />
-        <ActionBtn label="+ hotfix branch" color={T.red} onClick={() => quickBranch(`hotfix/${randId().slice(0, 4)}`)} />
-        <ActionBtn label="commit" color={T.green} onClick={() => quickCommit("update code")} />
-        <ActionBtn label="merge to main" color={T.purple}
+        <span style={{ color: T.muted, fontSize: 10, lineHeight: "28px" }}><Tr>visualizer.quick.label</Tr></span>
+        <ActionBtn label={<Tr>visualizer.action.feature_branch</Tr>} color={T.blue} onClick={() => quickBranch(`feature/${randId().slice(0, 4)}`)} />
+        <ActionBtn label={<Tr>visualizer.action.hotfix_branch</Tr>} color={T.red} onClick={() => quickBranch(`hotfix/${randId().slice(0, 4)}`)} />
+        <ActionBtn label={<Tr>visualizer.action.commit</Tr>} color={T.green} onClick={() => quickCommit("update code")} />
+        <ActionBtn label={<Tr>visualizer.action.merge_main</Tr>} color={T.purple}
           disabled={head === "main"}
           onClick={() => { const cur = headRef.current; processCommand("git checkout main"); processCommand(`git merge ${cur}`); }}
         />
-        <ActionBtn label="reset" color={T.red} onClick={() => processCommand("reset")} />
+        <ActionBtn label={<Tr>visualizer.action.reset</Tr>} color={T.red} onClick={() => processCommand("reset")} />
       </div>
 
       {/* Terminal log */}

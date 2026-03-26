@@ -1,5 +1,6 @@
 import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
+import Tr from "../shared/Tr";
 import { InfoBox, SectionTitle, CommandCard } from "../shared";
 
 const MOCK_FILES = [
@@ -68,7 +69,7 @@ function StagingSimulator({ isMobile }) {
       >
         {/* Working Dir */}
         <div style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 10, padding: 14 }}>
-          <div style={{ color: T.amber, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", marginBottom: 10 }}>📁 WORKING DIR</div>
+          <div style={{ color: T.amber, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", marginBottom: 10 }}><Tr>📁 WORKING DIR</Tr></div>
           {unstaged.length === 0 ? (
             <div style={{ color: T.muted, fontSize: 12, textAlign: "center", padding: 16 }}>✓ Nothing to stage</div>
           ) : (
@@ -82,7 +83,7 @@ function StagingSimulator({ isMobile }) {
           )}
           {unstaged.length > 0 && (
             <button onClick={stageAll} style={{ width: "100%", background: T.greenBgLight, border: `1px solid ${T.greenBorderLight}`, borderRadius: 6, color: T.green, fontSize: 11, padding: "6px", cursor: "pointer", marginTop: 6 }}>
-              git add . (stage all)
+              <Tr>git add . (stage all)</Tr>
             </button>
           )}
         </div>
