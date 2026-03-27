@@ -135,9 +135,13 @@ function BranchSimulator({ isMobile }) {
             </div>
           ))}
           <div style={{ marginTop: 12, display: "flex", gap: 6 }}>
-            <input value={newName} onChange={(e) => setNewName(e.target.value)} placeholder="new-branch-name" onKeyDown={(e) => e.key === "Enter" && addBranch()}
-            <input value={newName} onChange={(e) => setNewName(e.target.value)} placeholder={"new-branch-name"} onKeyDown={(e) => e.key === "Enter" && addBranch()}
-              style={{ flex: 1, background: T.inputBgDark, border: `1px solid ${T.border}`, borderRadius: 6, padding: "6px 9px", color: T.text, fontSize: 11, outline: "none", fontFamily: "monospace" }} />
+            <input
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              placeholder="new-branch-name"
+              onKeyDown={(e) => e.key === "Enter" && addBranch()}
+              style={{ flex: 1, background: T.inputBgDark, border: `1px solid ${T.border}`, borderRadius: 6, padding: "6px 9px", color: T.text, fontSize: 11, outline: "none", fontFamily: "monospace" }}
+            />
             <button onClick={addBranch} disabled={!canCreateBranch} style={{ background: canCreateBranch ? T.greenBgMedium : T.selectionBgInactive, border: `1px solid ${canCreateBranch ? T.greenBorderMedium : T.border}`, borderRadius: 6, color: canCreateBranch ? T.green : T.muted, fontSize: 11, padding: "6px 10px", cursor: canCreateBranch ? "pointer" : "default" }}><Tr>+ Branch</Tr></button>
           </div>
           {branchNameError && <div style={{ color: T.red, fontSize: 10, marginTop: 7 }}>{branchNameError}</div>}
