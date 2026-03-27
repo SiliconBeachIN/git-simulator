@@ -1,22 +1,17 @@
 import T from "../../constants/tokens";
 import { InfoBox, ConceptDiagram, SectionTitle, CommandCard, Terminal } from "../shared";
+import { useTranslation } from "react-i18next";
+import Tr from "../shared/Tr";
 
 export default function InitModule() {
+  const { t } = useTranslation();
   return (
     <div>
-      <InfoBox icon="📖" title="The Story" color={T.purple}>
-        In 2005, Linus Torvalds — creator of Linux — spent{" "}
-        <strong style={{ color: T.amber }}>just 10 days</strong> writing Git from scratch
-        to replace the BitKeeper version control system. He needed something fast,
-        distributed, and free. Today Git powers virtually all software development on
-        Earth.
+      <InfoBox icon="📖" title={t("init.story.title")} color={T.purple}>
+        {t("init.story.p1.part1")} <strong style={{ color: T.amber }}>{t("init.story.p1.emph")}</strong> {t("init.story.p1.part2")}
       </InfoBox>
-      <InfoBox icon="🌱" title="What git init actually does" color={T.green}>
-        When you run <code style={{ color: T.green }}>git init</code>, Git creates a hidden{" "}
-        <code style={{ color: T.green }}>.git/</code> folder. This folder IS your entire
-        repository — every commit, every branch, every piece of history lives here. If you
-        delete <code style={{ color: T.green }}>.git/</code>, you lose all history but your
-        files remain.
+      <InfoBox icon="🌱" title={t("init.what.title")} color={T.green}>
+        {t("init.what.p1.part1")} <code style={{ color: T.green }}>{t("init.what.code.gitinit")}</code> {t("init.what.p1.part2")} <code style={{ color: T.green }}>{t("init.what.code.gitfolder")}</code> {t("init.what.p1.part3")}
       </InfoBox>
       <ConceptDiagram>{`my-project/
 ├── .git/                 ← Git's database (don't touch!)
@@ -29,18 +24,18 @@ export default function InitModule() {
 │   └── config            ← Repo settings
 ├── src/
 └── README.md             ← Your actual files (working directory)`}</ConceptDiagram>
-      <SectionTitle>CLI Commands</SectionTitle>
+      <SectionTitle>{t("init.cli.title")}</SectionTitle>
       {[
-        { cmd: "git init my-project", desc: "Create new repo in a new folder", detail: "Creates 'my-project/' folder AND initialises .git/ inside it", example: "Like planting a seed in fresh soil 🌱" },
-        { cmd: "git init", desc: "Init repo in current directory", detail: "Turns ANY existing folder into a git repo. Your files stay untouched.", example: "Like installing a time machine into your house 🏠" },
-        { cmd: "git clone https://github.com/user/repo.git", desc: "Copy a remote repo (with full history)", detail: "Downloads the repo AND every commit ever made. You get the full time machine.", example: "Like copying a book with every draft the author ever wrote 📓" },
-        { cmd: "git clone --depth 1 https://github.com/user/repo.git", desc: "Shallow clone — latest snapshot only", detail: "Only downloads the most recent state, not full history. Much faster for large repos.", example: "Like reading today's newspaper, not the 30-year archive 📰" },
-        { cmd: 'git config --global user.name "Your Name"', desc: "Set your identity (do this first!)", detail: "Every commit is signed with your name and email. This is how blame/log shows who made changes.", example: "Signing your name on everything you photograph 🖊️" },
-        { cmd: 'git config --global user.email "you@email.com"', desc: "Set your email", detail: "Must match your GitHub account email for commits to link to your profile.", example: "" },
+        { cmd: "git init my-project", desc: t("init.cli.commands.0.desc"), detail: t("init.cli.commands.0.detail"), example: t("init.cli.commands.0.example") },
+        { cmd: "git init", desc: t("init.cli.commands.1.desc"), detail: t("init.cli.commands.1.detail"), example: t("init.cli.commands.1.example") },
+        { cmd: "git clone https://github.com/user/repo.git", desc: t("init.cli.commands.2.desc"), detail: t("init.cli.commands.2.detail"), example: t("init.cli.commands.2.example") },
+        { cmd: "git clone --depth 1 https://github.com/user/repo.git", desc: t("init.cli.commands.3.desc"), detail: t("init.cli.commands.3.detail"), example: t("init.cli.commands.3.example") },
+        { cmd: 'git config --global user.name "Your Name"', desc: t("init.cli.commands.4.desc"), detail: t("init.cli.commands.4.detail"), example: t("init.cli.commands.4.example") },
+        { cmd: 'git config --global user.email "you@email.com"', desc: t("init.cli.commands.5.desc"), detail: t("init.cli.commands.5.detail"), example: t("init.cli.commands.5.example") },
       ].map((c, i) => (
         <CommandCard key={i} index={i} {...c} />
       ))}
-      <SectionTitle>⚡ Try It — Live Terminal</SectionTitle>
+      <SectionTitle><Tr>init.try.title</Tr></SectionTitle>
       <Terminal compact />
     </div>
   );
