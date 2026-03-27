@@ -79,6 +79,40 @@
     "readme": {
       "title": "📘 Start With README.md"
     },
+    "init": {
+      "story": {
+        "title": "The Story",
+        "p1": {
+          "part1": "In 2005, Linus Torvalds — creator of Linux — spent",
+          "emph": "just 10 days",
+          "part2": "writing Git from scratch to replace the BitKeeper version control system. He needed something fast, distributed, and free. Today Git powers virtually all software development on Earth."
+        }
+      },
+      "what": {
+        "title": "What git init actually does",
+        "p1": {
+          "part1": "When you run",
+          "part2": ", Git creates a hidden",
+          "part3": "folder. This folder IS your entire repository — every commit, every branch, every piece of history lives here. If you delete"
+        },
+        "code": {
+          "gitinit": "git init",
+          "gitfolder": ".git/"
+        }
+      },
+      "cli": {
+        "title": "CLI Commands",
+        "commands": {
+          "0": { "desc": "Create new repo in a new folder", "detail": "Creates 'my-project/' folder AND initialises .git/ inside it", "example": "Like planting a seed in fresh soil 🌱" },
+          "1": { "desc": "Init repo in current directory", "detail": "Turns ANY existing folder into a git repo. Your files stay untouched.", "example": "Like installing a time machine into your house 🏠" },
+          "2": { "desc": "Copy a remote repo (with full history)", "detail": "Downloads the repo AND every commit ever made. You get the full time machine.", "example": "Like copying a book with every draft the author ever wrote 📓" },
+          "3": { "desc": "Shallow clone — latest snapshot only", "detail": "Only downloads the most recent state, not full history. Much faster for large repos.", "example": "Like reading today's newspaper, not the 30-year archive 📰" },
+          "4": { "desc": "Set your identity (do this first!)", "detail": "Every commit is signed with your name and email. This is how blame/log shows who made changes.", "example": "Signing your name on everything you photograph 🖊️" },
+          "5": { "desc": "Set your email", "detail": "Must match your GitHub account email for commits to link to your profile.", "example": "" }
+        }
+      },
+      "try": { "title": "⚡ Try It — Live Terminal" }
+    },
     "terminal": {
       "title": "⚡ Interactive Terminal — Try Commands Now"
     }
@@ -96,6 +130,40 @@
     }
   }
   ,
+  "init": {
+      "story": {
+        "title": "The Story",
+        "p1": {
+          "part1": "In 2005, Linus Torvalds — creator of Linux — spent",
+          "emph": "just 10 days",
+          "part2": "writing Git from scratch to replace the BitKeeper version control system. He needed something fast, distributed, and free. Today Git powers virtually all software development on Earth."
+        }
+      },
+      "what": {
+        "title": "What git init actually does",
+        "p1": {
+          "part1": "When you run",
+          "part2": ", Git creates a hidden",
+          "part3": "folder. This folder IS your entire repository — every commit, every branch, every piece of history lives here. If you delete"
+        },
+        "code": {
+          "gitinit": "git init",
+          "gitfolder": ".git/"
+        }
+      },
+      "cli": {
+        "title": "CLI Commands",
+        "commands": {
+          "0": { "desc": "Create new repo in a new folder", "detail": "Creates 'my-project/' folder AND initialises .git/ inside it", "example": "Like planting a seed in fresh soil 🌱" },
+          "1": { "desc": "Init repo in current directory", "detail": "Turns ANY existing folder into a git repo. Your files stay untouched.", "example": "Like installing a time machine into your house 🏠" },
+          "2": { "desc": "Copy a remote repo (with full history)", "detail": "Downloads the repo AND every commit ever made. You get the full time machine.", "example": "Like copying a book with every draft the author ever wrote 📓" },
+          "3": { "desc": "Shallow clone — latest snapshot only", "detail": "Only downloads the most recent state, not full history. Much faster for large repos.", "example": "Like reading today's newspaper, not the 30-year archive 📰" },
+          "4": { "desc": "Set your identity (do this first!)", "detail": "Every commit is signed with your name and email. This is how blame/log shows who made changes.", "example": "Signing your name on everything you photograph 🖊️" },
+          "5": { "desc": "Set your email", "detail": "Must match your GitHub account email for commits to link to your profile.", "example": "" }
+        }
+      },
+      "try": { "title": "⚡ Try It — Live Terminal" }
+    },
   "visualizer": {
     "interactive": {
       "title": "Interactive Commit Graph Simulator",
