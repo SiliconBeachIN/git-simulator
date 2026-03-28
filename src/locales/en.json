@@ -164,6 +164,45 @@
       },
       "try": { "title": "⚡ Try It — Live Terminal" }
     },
+    "staging": {
+      "how": {
+        "title": "How the Three Areas Work",
+        "p1": {
+          "part1": "Git has",
+          "emph": "3 areas",
+          "part2": ": your Working Directory (files you're editing), the Staging Area (selected changes ready to snapshot), and the Repository (permanent commit history). git add moves files to staging. git commit snapshots staging into the repo."
+        }
+      },
+      "grocery": {
+        "title": "The grocery store analogy",
+        "p1": "Think of your project like a grocery store. All your files are items on the shelves, and whenever you make changes, it is like picking items you might want to buy. Staging in Git (git add) is like putting those items into your shopping cart. You can walk around and pick up many things, but only the items in your cart are actually ready to be purchased. When you run git commit, it is like going to the checkout and paying. You get a receipt that records exactly what was in your cart. So staging is simply choosing which changes you want to include in your next commit.",
+        "p2": ""
+      },
+      "interactive": { "title": "🎬 Interactive Simulator" },
+      "workingDir": { "label": "📁 WORKING DIR", "empty": "✓ Nothing to stage" },
+      "addButton": "add →",
+      "stageAll": "git add . (stage all)",
+      "stagingArea": { "label": "📦 STAGING AREA", "empty": "Use \"add →\" to stage files" },
+      "undo": "← undo",
+      "commit": { "placeholder": "feat: describe your change", "buttonPrefix": "git commit -m" , "committed": "✓ Committed!" },
+      "repository": { "label": "🏛️ REPOSITORY", "empty": "Commits appear here" },
+      "reset": "↺ Reset Simulator",
+      "cli": {
+        "title": "CLI Commands",
+        "commands": {
+          "0": { "desc": "See all changes in your working directory", "detail": "Shows 3 categories: Untracked (new files), Modified (changed files), Staged (ready to commit). Your project health checkup.", "example": "Looking in a mirror before leaving the house 🪞" },
+          "1": { "desc": "Stage ONE specific file", "detail": "Only that file's changes go into the next commit. Useful for atomic commits.", "example": "Selecting one specific photo for the album 📷" },
+          "2": { "desc": "Stage ALL changes in current directory", "detail": "Every modified and new file goes to staging. Quick, but be careful you don't accidentally add secrets!", "example": "'Select all' for the photo album 🗂️" },
+          "3": { "desc": "Stage specific CHUNKS of a file", "detail": "Git shows each changed chunk and asks y/n. Lets you make surgical commits: 'only stage the bugfix, not the debug logs'.", "example": "Picking the exact best frame from a photo burst ✂️" },
+          "4": { "desc": "Save the snapshot permanently", "detail": "Creates an immutable commit object with: your changes, message, timestamp, author, and a pointer to the parent commit.", "example": "Taking the photograph and writing the caption on the back 📸" },
+          "5": { "desc": "Edit the last commit", "detail": "Replace the last commit's message or add forgotten changes. Creates a NEW commit hash — don't use on pushed commits!", "example": "Correcting the caption on the photo you just took ✏️", "warning": "Never amend commits you've already pushed to a shared branch!" },
+          "6": { "desc": "Visual commit history tree", "detail": "--oneline=compact, --graph=ASCII branch lines, --all=show all branches. Your best friend for understanding history.", "example": "The family album with a family tree showing who came from whom 📖" },
+          "7": { "desc": "Show unstaged changes line-by-line", "detail": "Red lines = removed, Green lines = added. Shows what's different between your working directory and the last commit.", "example": "Comparing two versions of a letter side by side 📄" },
+          "8": { "desc": "Show what IS staged (ready to commit)", "detail": "Same as diff but shows the staging area vs last commit. See exactly what your next commit will contain.", "example": "" },
+          "9": { "desc": "Discard unstaged changes to a file", "detail": "⚠️ Dangerous — this THROWS AWAY your changes! Use to revert a file to its last committed state.", "example": "Throwing away your photo and taking a fresh one 🗑️", "warning": "This permanently discards your local changes. Cannot be undone!" }
+        }
+      }
+    },
   "visualizer": {
     "interactive": {
       "title": "Interactive Commit Graph Simulator",

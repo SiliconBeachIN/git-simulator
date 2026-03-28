@@ -1,5 +1,6 @@
 import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
+import { useTranslation } from "react-i18next";
 import Tr from "../shared/Tr";
 import { InfoBox, SectionTitle, CommandCard } from "../shared";
 
@@ -12,6 +13,7 @@ const MOCK_FILES = [
 ];
 
 function StagingSimulator({ isMobile }) {
+  const { t } = useTranslation();
   const [files, setFiles] = usePageState("files", MOCK_FILES.map((f) => ({ ...f, staged: false })));
   const [committed, setCommitted] = usePageState("committed", []);
   const [msg, setMsg] = usePageState("msg", "");
@@ -51,14 +53,8 @@ function StagingSimulator({ isMobile }) {
 
   return (
     <div>
-      <InfoBox icon="🎬" title="How the Three Areas Work" color={T.blue}>
-        Git has <strong style={{ color: T.blue }}>3 areas</strong>: your{" "}
-        <strong style={{ color: T.amber }}>Working Directory</strong> (files you're editing),
-        the <strong style={{ color: T.green }}>Staging Area</strong> (selected changes ready
-        to snapshot), and the <strong style={{ color: T.purple }}>Repository</strong>{" "}
-        (permanent commit history). <code style={{ color: T.green }}>git add</code> moves
-        files to staging. <code style={{ color: T.green }}>git commit</code> snapshots
-        staging into the repo.
+      <InfoBox icon="🎬" title={t("staging.how.title")} color={T.blue}>
+        {t("staging.how.p1.part1")} <strong style={{ color: T.blue }}>{t("staging.how.p1.emph")}</strong>: {t("staging.how.p1.part2")}
       </InfoBox>
       <div
         style={{
@@ -69,54 +65,54 @@ function StagingSimulator({ isMobile }) {
       >
         {/* Working Dir */}
         <div style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 10, padding: 14 }}>
-          <div style={{ color: T.amber, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", marginBottom: 10 }}><Tr>📁 WORKING DIR</Tr></div>
+          <div style={{ color: T.amber, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", marginBottom: 10 }}>{t("staging.workingDir.label")}</div>
           {unstaged.length === 0 ? (
-            <div style={{ color: T.muted, fontSize: 12, textAlign: "center", padding: 16 }}>✓ Nothing to stage</div>
+            <div style={{ color: T.muted, fontSize: 12, textAlign: "center", padding: 16 }}>{t("staging.workingDir.empty")}</div>
           ) : (
             unstaged.map((f) => (
               <div key={f.name} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
                 <span style={{ color: statusColors[f.status], fontFamily: "monospace", fontSize: 11, fontWeight: 700, width: 14 }}>{statusLabels[f.status]}</span>
                 <span style={{ color: T.subtleText, fontSize: 11, flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name}</span>
-                <button onClick={() => stageFile(f.name)} style={{ background: T.greenBgMedium, border: `1px solid ${T.greenBorderLight}`, borderRadius: 4, color: T.green, fontSize: 10, padding: "2px 7px", cursor: "pointer" }}>add →</button>
+                <button onClick={() => stageFile(f.name)} style={{ background: T.greenBgMedium, border: `1px solid ${T.greenBorderLight}`, borderRadius: 4, color: T.green, fontSize: 10, padding: "2px 7px", cursor: "pointer" }}>{t("staging.addButton")}</button>
               </div>
             ))
           )}
           {unstaged.length > 0 && (
             <button onClick={stageAll} style={{ width: "100%", background: T.greenBgLight, border: `1px solid ${T.greenBorderLight}`, borderRadius: 6, color: T.green, fontSize: 11, padding: "6px", cursor: "pointer", marginTop: 6 }}>
-              <Tr>git add . (stage all)</Tr>
+              {t("staging.stageAll")}
             </button>
           )}
         </div>
         {/* Staging Area */}
         <div style={{ background: T.card, border: `1px solid ${staged.length > 0 ? T.greenBorderStrong : T.border}`, borderRadius: 10, padding: 14 }}>
-          <div style={{ color: T.green, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", marginBottom: 10 }}>📦 STAGING AREA</div>
+          <div style={{ color: T.green, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", marginBottom: 10 }}>{t("staging.stagingArea.label")}</div>
           {staged.length === 0 ? (
-            <div style={{ color: T.muted, fontSize: 12, textAlign: "center", padding: 16 }}>Use "add →" to stage files</div>
+            <div style={{ color: T.muted, fontSize: 12, textAlign: "center", padding: 16 }}>{t("staging.stagingArea.empty")}</div>
           ) : (
             staged.map((f) => (
               <div key={f.name} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
                 <span style={{ color: T.green, fontFamily: "monospace", fontSize: 11, fontWeight: 700, width: 14 }}>✓</span>
                 <span style={{ color: T.subtleText, fontSize: 11, flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name}</span>
-                <button onClick={() => unstage(f.name)} style={{ background: T.redBgMedium, border: `1px solid ${T.redBorderLight}`, borderRadius: 4, color: T.red, fontSize: 10, padding: "2px 7px", cursor: "pointer" }}>← undo</button>
+                <button onClick={() => unstage(f.name)} style={{ background: T.redBgMedium, border: `1px solid ${T.redBorderLight}`, borderRadius: 4, color: T.red, fontSize: 10, padding: "2px 7px", cursor: "pointer" }}>{t("staging.undo", "← undo")}</button>
               </div>
             ))
           )}
           {staged.length > 0 && (
             <div style={{ marginTop: 10 }}>
-              <input value={msg} onChange={(e) => setMsg(e.target.value)} placeholder="feat: describe your change"
+              <input value={msg} onChange={(e) => setMsg(e.target.value)} placeholder={t("staging.commit.placeholder")}
                 style={{ width: "100%", background: T.inputBgFaint, border: `1px solid ${T.border}`, borderRadius: 6, padding: "7px 10px", color: T.text, fontSize: 11, outline: "none", fontFamily: "monospace", boxSizing: "border-box" }}
                 onKeyDown={(e) => e.key === "Enter" && doCommit()} />
               <button onClick={doCommit} disabled={!msg.trim()} style={{ width: "100%", marginTop: 6, background: msg.trim() ? T.purpleBgMedium : T.cardBgInactive, border: `1px solid ${msg.trim() ? T.purpleBorderLight : T.border}`, borderRadius: 6, color: msg.trim() ? T.purple : T.muted, fontSize: 11, padding: "7px", cursor: msg.trim() ? "pointer" : "default", transition: "all .2s" }}>
-                {`git commit -m "${msg.trim() || "..."}"`}
+                {`${t("staging.commit.buttonPrefix")} "${msg.trim() || "..."}"`}
               </button>
             </div>
           )}
         </div>
         {/* Repository */}
         <div style={{ background: T.card, border: `1px solid ${T.border}`, borderRadius: 10, padding: 14 }}>
-          <div style={{ color: T.purple, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", marginBottom: 10 }}>🏛️ REPOSITORY</div>
+          <div style={{ color: T.purple, fontSize: 11, fontWeight: 700, letterSpacing: ".08em", marginBottom: 10 }}>{t("staging.repository.label")}</div>
           {committed.length === 0 ? (
-            <div style={{ color: T.muted, fontSize: 12, textAlign: "center", padding: 16 }}>Commits appear here</div>
+            <div style={{ color: T.muted, fontSize: 12, textAlign: "center", padding: 16 }}>{t("staging.repository.empty")}</div>
           ) : (
             committed.map((c) => (
               <div key={c.id} style={{ marginBottom: 10, paddingBottom: 10, borderBottom: `1px solid ${T.border}` }}>
@@ -137,7 +133,7 @@ function StagingSimulator({ isMobile }) {
           )}
           {phase === "committed" && (
             <div style={{ color: T.green, fontSize: 11, textAlign: "center", animation: "fadeIn .3s" }}>
-              ✓ Committed!
+              {t("staging.commit.committed")}
             </div>
           )}
         </div>
@@ -145,7 +141,7 @@ function StagingSimulator({ isMobile }) {
       {committed.length > 0 && files.length === 0 && (
         <div style={{ textAlign: "center", marginTop: 8, marginBottom: 4 }}>
           <button onClick={reset} style={{ background: T.resetBg, border: `1px solid ${T.border}`, borderRadius: 7, color: T.muted, fontSize: 11, padding: "7px 20px", cursor: "pointer" }}>
-            ↺ Reset Simulator
+            {t("staging.reset")}
           </button>
         </div>
       )}
@@ -154,44 +150,30 @@ function StagingSimulator({ isMobile }) {
 }
 
 export default function StagingModule({ isMobile }) {
+  const { t } = useTranslation();
+
   return (
     <div>
-      <InfoBox icon="📦" title="What is the staging area?" color={T.green}>
-        Most beginners think git works like this:{" "}
-        <strong style={{ color: T.amber }}>edit file → save → commit</strong>. But Git adds
-        a middle step called the <strong style={{ color: T.green }}>staging area</strong>{" "}
-        (also called the index). It's a preparation zone where you choose exactly which
-        changes go into your next commit.
-        <br /><br />
-        Why does this matter? Imagine you fixed a bug AND added a new feature in the same
-        session. Without staging, you'd have to commit everything together — messy. With
-        staging, you commit the bug fix first, then the feature separately. Clean,
-        professional history.
+      <InfoBox icon="📦" title={t("staging.how.title")} color={T.green}>
+        {t("staging.how.p1.part1")} <strong style={{ color: T.amber }}>{t("staging.how.p1.emph")}</strong> {t("staging.how.p1.part2")}
       </InfoBox>
-      <InfoBox icon="🛒" title="The grocery store analogy" color={T.teal}>
-        Think of your project like a grocery store. All your files are items on the shelves,
-        and whenever you make changes, it is like picking items you might want to buy. Staging
-        in Git (<code style={{ color: T.green }}>git add</code>) is like putting those items
-        into your shopping cart. You can walk around and pick up many things, but only the
-        items in your cart are actually ready to be purchased. When you run{" "}
-        <code style={{ color: T.amber }}>git commit</code>, it is like going to the checkout
-        and paying. You get a receipt that records exactly what was in your cart. So staging is
-        simply choosing which changes you want to include in your next commit.
+      <InfoBox icon="🛒" title={t("staging.grocery.title")} color={T.teal}>
+        <Tr>staging.grocery.p1</Tr>
       </InfoBox>
-      <SectionTitle>🎬 Interactive Simulator</SectionTitle>
+      <SectionTitle>{t("staging.interactive.title")}</SectionTitle>
       <StagingSimulator isMobile={isMobile} />
-      <SectionTitle>CLI Commands</SectionTitle>
+      <SectionTitle>{t("staging.cli.title")}</SectionTitle>
       {[
-        { cmd: "git status", desc: "See all changes in your working directory", detail: "Shows 3 categories: Untracked (new files), Modified (changed files), Staged (ready to commit). Your project health checkup.", example: "Looking in a mirror before leaving the house 🪞" },
-        { cmd: "git add filename.js", desc: "Stage ONE specific file", detail: "Only that file's changes go into the next commit. Useful for atomic commits.", example: "Selecting one specific photo for the album 📷" },
-        { cmd: "git add .", desc: "Stage ALL changes in current directory", detail: "Every modified and new file goes to staging. Quick, but be careful you don't accidentally add secrets!", example: "'Select all' for the photo album 🗂️" },
-        { cmd: "git add -p", desc: "Stage specific CHUNKS of a file", detail: "Git shows each changed chunk and asks y/n. Lets you make surgical commits: 'only stage the bugfix, not the debug logs'.", example: "Picking the exact best frame from a photo burst ✂️" },
-        { cmd: 'git commit -m "feat: add login"', desc: "Save the snapshot permanently", detail: "Creates an immutable commit object with: your changes, message, timestamp, author, and a pointer to the parent commit.", example: "Taking the photograph and writing the caption on the back 📸" },
-        { cmd: "git commit --amend", desc: "Edit the last commit", detail: "Replace the last commit's message or add forgotten changes. Creates a NEW commit hash — don't use on pushed commits!", example: "Correcting the caption on the photo you just took ✏️", warning: "Never amend commits you've already pushed to a shared branch!" },
-        { cmd: "git log --oneline --graph --all", desc: "Visual commit history tree", detail: "--oneline=compact, --graph=ASCII branch lines, --all=show all branches. Your best friend for understanding history.", example: "The family album with a family tree showing who came from whom 📖" },
-        { cmd: "git diff", desc: "Show unstaged changes line-by-line", detail: "Red lines = removed, Green lines = added. Shows what's different between your working directory and the last commit.", example: "Comparing two versions of a letter side by side 📄" },
-        { cmd: "git diff --staged", desc: "Show what IS staged (ready to commit)", detail: "Same as diff but shows the staging area vs last commit. See exactly what your next commit will contain.", example: "" },
-        { cmd: "git restore filename.js", desc: "Discard unstaged changes to a file", detail: "⚠️ Dangerous — this THROWS AWAY your changes! Use to revert a file to its last committed state.", example: "Throwing away your photo and taking a fresh one 🗑️", warning: "This permanently discards your local changes. Cannot be undone!" },
+        { cmd: "git status", desc: t("staging.cli.commands.0.desc"), detail: t("staging.cli.commands.0.detail"), example: t("staging.cli.commands.0.example") },
+        { cmd: "git add filename.js", desc: t("staging.cli.commands.1.desc"), detail: t("staging.cli.commands.1.detail"), example: t("staging.cli.commands.1.example") },
+        { cmd: "git add .", desc: t("staging.cli.commands.2.desc"), detail: t("staging.cli.commands.2.detail"), example: t("staging.cli.commands.2.example") },
+        { cmd: "git add -p", desc: t("staging.cli.commands.3.desc"), detail: t("staging.cli.commands.3.detail"), example: t("staging.cli.commands.3.example") },
+        { cmd: 'git commit -m "feat: add login"', desc: t("staging.cli.commands.4.desc"), detail: t("staging.cli.commands.4.detail"), example: t("staging.cli.commands.4.example") },
+        { cmd: "git commit --amend", desc: t("staging.cli.commands.5.desc"), detail: t("staging.cli.commands.5.detail"), example: t("staging.cli.commands.5.example"), warning: t("staging.cli.commands.5.warning") },
+        { cmd: "git log --oneline --graph --all", desc: t("staging.cli.commands.6.desc"), detail: t("staging.cli.commands.6.detail"), example: t("staging.cli.commands.6.example") },
+        { cmd: "git diff", desc: t("staging.cli.commands.7.desc"), detail: t("staging.cli.commands.7.detail"), example: t("staging.cli.commands.7.example") },
+        { cmd: "git diff --staged", desc: t("staging.cli.commands.8.desc"), detail: t("staging.cli.commands.8.detail"), example: t("staging.cli.commands.8.example") },
+        { cmd: "git restore filename.js", desc: t("staging.cli.commands.9.desc"), detail: t("staging.cli.commands.9.detail"), example: t("staging.cli.commands.9.example"), warning: t("staging.cli.commands.9.warning") },
       ].map((c, i) => (
         <CommandCard key={i} index={i} {...c} />
       ))}
