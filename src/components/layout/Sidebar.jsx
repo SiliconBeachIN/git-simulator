@@ -1,15 +1,23 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import T from "../../constants/tokens";
+import { useTranslation } from "react-i18next";
 import MODULES from "../../constants/modules";
 
 export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isMobile }) {
+  const { t } = useTranslation();
   const [query, setQuery] = useState("");
-  const filtered = MODULES.filter(
-    (m) =>
-      m.label.toLowerCase().includes(query.toLowerCase()) ||
-      m.id.includes(query.toLowerCase())
-  );
+  const filtered = MODULES.filter((m) => {
+    const localized = t(`modules.${m.id}.label`, { defaultValue: m.label }).toLowerCase();
+    const command = (m.command || "").toLowerCase();
+    const q = query.toLowerCase();
+    return (
+      localized.includes(q) ||
+      m.label.toLowerCase().includes(q) ||
+      command.includes(q) ||
+      m.id.includes(q)
+    );
+  });
   const location = useLocation();
   const current = location.pathname.slice(1) || "home";
 
@@ -68,7 +76,7 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
         >
           <div
             onClick={!isMobile && !sideOpen ? () => setSideOpen(true) : undefined}
-            title={!isMobile && !sideOpen ? "Expand sidebar" : undefined}
+            title={!isMobile && !sideOpen ? t("Expand sidebar") : undefined}
             style={{
               width: 32,
               height: 32,
@@ -140,8 +148,8 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
                     e.currentTarget.style.background = T.greenBgLight;
                     e.currentTarget.style.borderColor = T.greenBorderLight;
                   }}
-                  aria-label="Collapse sidebar"
-                  title="Collapse sidebar"
+                  aria-label={t("Collapse sidebar")}
+                  title={t("Collapse sidebar")}
                 >
                   ‹
                 </button>
@@ -162,7 +170,7 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search…"
+              placeholder={t("Search…")}
               style={{
                 width: "100%",
                 background: T.sidebarSearchBg,
@@ -201,24 +209,42 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
               }}
             >
               <span style={{ fontSize: 15, flexShrink: 0, opacity: 0.8 }}>
-                {m.icon}
+                  {m.icon}
               </span>
-              {(sideOpen || isMobile) && (
-                <span
-                  className="nlabel"
-                  style={{
-                    fontSize: 12,
-                    color: T.muted,
-                    fontWeight: 500,
-                    flex: 1,
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {m.label}
-                </span>
-              )}
+              {(sideOpen || isMobile) && (() => {
+                const localized = t(`modules.${m.id}.label`, { defaultValue: m.label });
+                return (
+                  <div style={{ flex: 1, overflow: "hidden" }}>
+                    <div
+                      className="nlabel"
+                      style={{
+                        fontSize: 12,
+                        color: T.muted,
+                        fontWeight: 600,
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {m.command ? m.command : localized}
+                    </div>
+                    {m.command && (
+                      <div
+                        style={{
+                          fontSize: 11,
+                          color: T.subtleText,
+                          marginTop: 3,
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {localized}
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
             </div>
           ))}
         </div>

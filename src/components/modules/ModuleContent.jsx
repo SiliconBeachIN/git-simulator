@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import T from "../../constants/tokens";
+import { useTranslation } from "react-i18next";
 
 const MAP = {
   home: lazy(() => import("./HomeModule")),
@@ -29,10 +30,11 @@ const MAP = {
 };
 
 export default function ModuleContent({ id, isMobile }) {
+  const { t } = useTranslation();
   const Mod = MAP[id];
-  if (!Mod) return <div style={{ color: T.subtleText, padding: 40, textAlign: "center" }}>Module not found</div>;
+  if (!Mod) return <div style={{ color: T.subtleText, padding: 40, textAlign: "center" }}>{t("Module not found")}</div>;
   return (
-    <Suspense fallback={<div style={{ color: T.muted, padding: 40, textAlign: "center" }}>Loading…</div>}>
+    <Suspense fallback={<div style={{ color: T.muted, padding: 40, textAlign: "center" }}>{t("Loading…")}</div>}>
       <Mod isMobile={isMobile} />
     </Suspense>
   );

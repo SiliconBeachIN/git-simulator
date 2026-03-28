@@ -787,9 +787,9 @@ export default function Terminal({ compact = false }) {
             style={{ width: 10, height: 10, borderRadius: "50%", background: c }}
           />
         ))}
-        <span
+          <span
           style={{
-          color: T.scrollBarLine,
+            color: T.scrollBarLine,
             fontSize: 11,
             marginLeft: 8,
             fontFamily: "monospace",
@@ -861,7 +861,7 @@ export default function Terminal({ compact = false }) {
             }
           }}
           aria-label="Git command input"
-          placeholder="Type a git command… (↑↓ history, Tab autocomplete)"
+          placeholder={'git commit -m "feat: add login"'}
           style={{
             flex: 1,
             background: "transparent",
@@ -872,7 +872,7 @@ export default function Terminal({ compact = false }) {
             fontSize: 12,
           }}
         />
-        <button
+          <button
           onClick={run}
           style={{
             background: T.greenBgMedium,

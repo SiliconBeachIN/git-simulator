@@ -1,0 +1,170 @@
+{
+  "reset_page": "↺ 重置页面",
+  "description": "单击任何命令卡以展开 · 将鼠标悬停在提交节点上 · 使用下面的终端",
+  "home_title": "首页"
+  ,
+  "⚡ Welcome to GitSimulator": "⚡ 欢迎来到 GitSimulator",
+  "📘 Start With README.md": "📘 从 README.md 开始",
+  "⚡ Interactive Terminal — Try Commands Now": "⚡ 交互式终端 — 立即尝试命令",
+  "GitSimulator Terminal v2.0 — type git commands to explore": "GitSimulator 终端 v2.0 — 输入 git 命令进行探索",
+  "Try: git init  |  git status  |  git log  |  git help": "尝试：git init  |  git status  |  git log  |  git help",
+  "Type a git command… (↑↓ history, Tab autocomplete)": "输入 git 命令…（↑↓ 历史，Tab 自动完成）",
+  "Run ↵": "运行 ↵",
+  "Search…": "搜索…",
+  "Collapse sidebar": "收起侧边栏",
+  "Expand sidebar": "展开侧边栏",
+  "Module not found": "未找到模块",
+  "Loading…": "加载中…",
+  "README.md — Your Project's Front Door": "README.md — 仓库的门面文件",
+  "How To Use This Simulator": "如何使用此模拟器",
+  "BRANCHES": "分支",
+  "ACTIONS ON:": "操作于：",
+  "GIT LOG": "GIT 日志",
+  "NEW ISSUE": "新建 Issue",
+  "Issue title": "Issue 标题",
+  "Describe the issue": "描述问题",
+  "Submit Issue": "提交 Issue",
+  "📁 WORKING DIR": "📁 工作区",
+  "Use \"add →\" to stage files": "使用 \"add →\" 将文件暂存",
+  "git add . (stage all)": "git add .（全部暂存）",
+  "git commit -m \"feat: describe your change\"": "git commit -m \"feat: 描述你的更改\"",
+  "Deploy Site": "部署站点",
+  "Building...": "构建中...",
+  "Site is Live!": "站点已上线！",
+  "Publish Release": "发布 Release"
+  ,
+  "Git mastery · All features · v3.0": "Git 精通 · 全部功能 · v3.0",
+  "home": {
+    "hero": {
+      "title": "⚡ 欢迎来到 GitSimulator",
+      "line1": "你是一个",
+      "emph1": "时光旅行开发者",
+      "line2": "Git 是你的时光机。",
+      "commit": "每次提交都是你可以返回的检查点。",
+      "branch": "每个分支都是你可以在其中实验的平行宇宙。",
+      "merge": "每次合并将平行时间线汇聚在一起。"
+    },
+    "badges": {
+      "commit": "📸 提交 = 快照",
+      "branch": "🌿 分支 = 平行宇宙",
+      "remote": "☁️ 远程 = 云备份",
+      "pr": "🤝 PR = 代码审查"
+    },
+    "readme": {
+      "title": "📘 从 README.md 开始"
+    },
+    "terminal": {
+      "title": "⚡ 交互式终端 — 立即尝试命令"
+    }
+  }
+  ,
+  "modules": {
+    "home": { "label": "任务控制中心" }
+  },
+  "readme": {
+    "name": "README.md",
+    "body": {
+      "intro": "是仓库中人们首先阅读的文件。它应当简洁地回答：",
+      "q1": "这个项目是什么？",
+      "q2": "如何运行它？",
+      "q3": "哪些命令很重要？",
+      "q4": "如何贡献？",
+      "conclusion": "一份好的 README 能为初学者、队友和未来的你节省时间。"
+    }
+  },
+  "visualizer": {
+    "interactive": {
+      "title": "交互式提交图模拟器",
+      "line1": "在下面输入 git 命令，查看图形如何实时构建。",
+      "create": "创建分支",
+      "commit": "提交更改",
+      "merge": "合并",
+      "line2": "图表会立即更新，清晰展示发生的变化。",
+      "help_prompt": "输入 help 查看所有命令。"
+    },
+    "reading": {
+      "title": "阅读图表 — 关键命令"
+    },
+    "head": "HEAD",
+    "quick": { "label": "快速操作：" },
+    "action": {
+      "feature_branch": "+ feature 分支",
+      "hotfix_branch": "+ hotfix 分支",
+      "commit": "提交",
+      "merge_main": "合并到 main",
+      "reset": "重置"
+    }
+  }
+  ,
+  "init": {
+    "story": {
+      "title": "故事",
+      "p1": {
+        "part1": "2005 年，Linux 的创始人 Linus Torvalds 在",
+        "emph": "短短 10 天 时间",
+        "part2": "内从零开始编写了 Git，以替代 BitKeeper 版本控制系统。他需要一个快速、分布式且开源的系统。如今 Git 支撑着几乎所有软件开发。"
+      }
+    },
+    "what": {
+      "title": "git init 实际上做了什么",
+      "p1": {
+        "part1": "当你运行",
+        "part2": ", Git 会创建一个隐藏的",
+        "part3": "文件夹。这个文件夹就是你的整个仓库 —— 每个提交、每个分支、每段历史都保存在这里。如果你删除"
+      },
+      "code": { "gitinit": "git init", "gitfolder": ".git/" }
+    },
+    "cli": {
+      "title": "命令行（CLI）命令",
+      "commands": {
+        "0": { "desc": "在新文件夹中创建仓库", "detail": "创建 'my-project/' 文件夹并在其中初始化 .git/", "example": "就像在新鲜的土壤中种下一颗种子 🌱" },
+        "1": { "desc": "在当前目录初始化仓库", "detail": "将任意已有文件夹转换为 git 仓库，你的文件保持不变。", "example": "就像在你的房子里安装了一台时光机 🏠" },
+        "2": { "desc": "复制远程仓库（包含完整历史）", "detail": "下载仓库以及所有提交。你将获得完整的时光机。", "example": "像复制一本包含所有草稿的书籍 📓" },
+        "3": { "desc": "浅克隆 — 只获取最新快照", "detail": "只下载最近的状态，不包含完整历史。对于大仓库更快。", "example": "像只阅读今天的报纸，而不是 30 年的档案 📰" },
+        "4": { "desc": "设置你的身份（先做）", "detail": "每次提交都会记录你的姓名和邮箱，这样 blame/log 才能显示是谁修改的。", "example": "在你拍的每张照片上签名 🖊️" },
+        "5": { "desc": "设置你的邮箱", "detail": "必须和你的 GitHub 账号邮箱匹配，提交才会关联到你的个人资料。", "example": "" }
+      }
+    },
+    "try": { "title": "⚡ 尝试 —— 实时终端" }
+  }
+  ,
+  "staging": {
+    "how": {
+      "title": "三大区域如何协作",
+      "p1": {
+        "part1": "Git 有",
+        "emph": "3 个区域",
+        "part2": ": 工作目录（你正在编辑的文件）、暂存区（准备快照的已选更改）和仓库（永久提交历史）。git add 将文件移动到暂存区。git commit 将暂存区的内容快照到仓库。"
+      }
+    },
+    "grocery": {
+      "title": "杂货店类比",
+      "p1": "把你的项目想象成一家杂货店。所有文件都像货架上的商品，当你修改文件时，就像挑选你想购买的商品。暂存（git add）就像把商品放入购物车。你可以走来走去，拿很多东西，但只有购物车里的物品才准备好结账。当你运行 git commit，就像去结账付款，购物小票记录了你买了什么。因此，暂存就是选择哪些更改要包含在下次提交中。",
+      "p2": ""
+    },
+    "interactive": { "title": "🎬 交互式模拟器" },
+    "workingDir": { "label": "📁 工作区", "empty": "✓ 无需暂存的内容" },
+    "addButton": "add →",
+    "stageAll": "git add .（全部暂存）",
+    "stagingArea": { "label": "📦 暂存区", "empty": "使用 \"add →\" 将文件暂存" },
+    "undo": "← 撤销",
+    "commit": { "placeholder": "feat: 描述你的更改", "buttonPrefix": "git commit -m", "committed": "✓ 已提交！" },
+    "repository": { "label": "🏛️ 仓库", "empty": "提交会显示在这里" },
+    "reset": "↺ 重置模拟器",
+    "cli": {
+      "title": "命令行（CLI）命令",
+      "commands": {
+        "0": { "desc": "查看工作目录中的所有更改", "detail": "显示 3 类：未跟踪（新文件）、已修改（更改的文件）、已暂存（准备提交）。你的项目体检表。", "example": "出门前照镜子检查状态 🪞" },
+        "1": { "desc": "暂存 单个 文件", "detail": "只有该文件的更改会进入下次提交。适用于原子提交。", "example": "为相册挑选一张特定的照片 📷" },
+        "2": { "desc": "暂存 当前目录下 所有更改", "detail": "将每个已修改和新文件加入暂存区。快速，但小心别意外加入敏感信息！", "example": "相册中全选 🗂️" },
+        "3": { "desc": "暂存文件的特定片段", "detail": "Git 会显示每个更改片段并询问是/否。可做精确提交：只暂存修复，忽略调试日志。", "example": "从连拍中选出最好的那一帧 ✂️" },
+        "4": { "desc": "永久保存快照", "detail": "创建一个不可变的提交对象，包含：更改、提交信息、时间戳、作者，以及指向父提交的引用。", "example": "拍照并在背面写下说明 📸" },
+        "5": { "desc": "编辑上一次提交", "detail": "替换上一次提交的信息或添加忘记的更改。会产生一个新的提交哈希 —— 已推送的提交不要这样做！", "example": "修改你刚拍的照片的说明 ✏️", "warning": "不要修改已推送到共享分支的提交！" },
+        "6": { "desc": "可视化的提交历史树", "detail": "--oneline=简洁，--graph=ASCII 分支线，--all=显示所有分支。理解历史的好帮手。", "example": "带有家谱的相册，展示谁来自谁 📖" },
+        "7": { "desc": "按行显示未暂存的更改", "detail": "红色=删除的行，绿色=新增的行。显示工作目录与上次提交的差异。", "example": "并排比较两版信件 📄" },
+        "8": { "desc": "显示已暂存的更改（将要提交的内容）", "detail": "与 git diff 相似，但显示暂存区与上次提交的差异。查看下次提交将包含什么。", "example": "" },
+        "9": { "desc": "丢弃文件的未暂存更改", "detail": "⚠️ 危险 — 这会 丢弃 你的更改！将文件恢复到上次提交状态。", "example": "扔掉你拍的照片并重新拍一张 🗑️", "warning": "这会永久丢失本地更改，无法恢复！" }
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import T from "../../constants/tokens";
 import { Badge, SectionTitle, Terminal, ReadmeGuide } from "../shared";
+import Tr from "../shared/Tr";
 
 export default function HomeModule({ isMobile }) {
   return (
@@ -22,7 +23,7 @@ export default function HomeModule({ isMobile }) {
             marginBottom: 8,
           }}
         >
-          ⚡ Welcome to GitSimulator
+          <Tr>home.hero.title</Tr>
         </div>
         <div
           style={{
@@ -32,34 +33,42 @@ export default function HomeModule({ isMobile }) {
             marginBottom: 16,
           }}
         >
-          You are a <strong style={{ color: T.green }}>Time-Traveler Developer</strong>.
-          Git is your time machine.
+          <span>
+            <Tr>home.hero.line1</Tr> <strong style={{ color: T.green }}><Tr>home.hero.emph1</Tr></strong>.
+          </span>
           <br />
-          Every <strong style={{ color: T.amber }}>commit</strong> is a checkpoint you can
-          return to.
+          <span>
+            <Tr>home.hero.line2</Tr>
+          </span>
           <br />
-          Every <strong style={{ color: T.blue }}>branch</strong> is a parallel universe you
-          can experiment in.
+          <span>
+            <Tr>home.hero.commit</Tr>
+          </span>
           <br />
-          Every <strong style={{ color: T.purple }}>merge</strong> brings parallel timelines
-          together.
+          <span>
+            <Tr>home.hero.branch</Tr>
+          </span>
+          <br />
+          <span>
+            <Tr>home.hero.merge</Tr>
+          </span>
         </div>
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
           {[
-            "📸 Commit = Snapshot",
-            "🌿 Branch = Parallel Universe",
-            "☁️ Remote = Cloud Backup",
-            "🤝 PR = Code Review",
-          ].map((t) => (
-            <Badge key={t} color={T.blue}>
-              {t}
+            "home.badges.commit",
+            "home.badges.branch",
+            "home.badges.remote",
+            "home.badges.pr",
+          ].map((key) => (
+            <Badge key={key} color={T.blue}>
+              <Tr>{key}</Tr>
             </Badge>
           ))}
         </div>
       </div>
-      <SectionTitle>📘 Start With README.md</SectionTitle>
+      <SectionTitle><Tr>home.readme.title</Tr></SectionTitle>
       <ReadmeGuide />
-      <SectionTitle>⚡ Interactive Terminal — Try Commands Now</SectionTitle>
+      <SectionTitle><Tr>home.terminal.title</Tr></SectionTitle>
       <Terminal />
     </div>
   );

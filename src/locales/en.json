@@ -1,0 +1,230 @@
+{
+  "reset_page": "↺ Reset Page",
+  "description": "Click any command card to expand · Hover commit nodes · Use terminals below",
+  "home_title": "Home",
+  "modules": {
+    "home": { "label": "Mission Control" },
+    "init": { "label": "git init" },
+    "staging": { "label": "Stage & Commit" },
+    "branch": { "label": "Branching" },
+    "merge": { "label": "Merge & Rebase" },
+    "remote": { "label": "Remote & Push" },
+    "pullrequest": { "label": "Pull Requests" },
+    "gitflow": { "label": "Git Flow" },
+    "advanced": { "label": "Advanced Magic" },
+    "collaborate": { "label": "Open Source" },
+    "visualizer": { "label": "Commit Graph" },
+    "actions": { "label": "GitHub Actions" },
+    "security": { "label": "Security" },
+    "issues": { "label": "Issues" },
+    "projects": { "label": "GitHub Projects" },
+    "pages": { "label": "GitHub Pages" },
+    "releases": { "label": "Releases" },
+    "protection": { "label": "Branch Protection" },
+    "codeowners": { "label": "CODEOWNERS" },
+    "githubapi": { "label": "GitHub API" },
+    "dotgithub": { "label": ".github Folder" },
+    "dependabot": { "label": "Dependabot" },
+    "codespaces": { "label": "Codespaces" },
+    "quiz": { "label": "Master Quiz" }
+    ,
+    "⚡ Welcome to GitSimulator": "⚡ Welcome to GitSimulator",
+    "📘 Start With README.md": "📘 Start With README.md",
+    "⚡ Interactive Terminal — Try Commands Now": "⚡ Interactive Terminal — Try Commands Now",
+    "GitSimulator Terminal v2.0 — type git commands to explore": "GitSimulator Terminal v2.0 — type git commands to explore",
+    "Try: git init  |  git status  |  git log  |  git help": "Try: git init  |  git status  |  git log  |  git help",
+    "Type a git command… (↑↓ history, Tab autocomplete)": "Type a git command… (↑↓ history, Tab autocomplete)",
+    "Run ↵": "Run ↵",
+    "Search…": "Search…",
+    "Collapse sidebar": "Collapse sidebar",
+    "Expand sidebar": "Expand sidebar",
+    "Module not found": "Module not found",
+    "Loading…": "Loading…",
+    "README.md — Your Project's Front Door": "README.md — Your Project's Front Door",
+    "How To Use This Simulator": "How To Use This Simulator",
+    "BRANCHES": "BRANCHES",
+    "ACTIONS ON:": "ACTIONS ON:",
+    "GIT LOG": "GIT LOG",
+    "NEW ISSUE": "NEW ISSUE",
+    "Issue title": "Issue title",
+    "Describe the issue": "Describe the issue",
+    "Submit Issue": "Submit Issue",
+    "📁 WORKING DIR": "📁 WORKING DIR",
+    "Use \"add →\" to stage files": "Use \"add →\" to stage files",
+    "git add . (stage all)": "git add . (stage all)",
+    "git commit -m \"feat: describe your change\"": "git commit -m \"feat: describe your change\"",
+    "Deploy Site": "Deploy Site",
+    "Building...": "Building...",
+    "Site is Live!": "Site is Live!",
+    "Publish Release": "Publish Release"
+    ,
+    "Git mastery · All features · v3.0": "Git mastery · All features · v3.0"
+  },
+  "home": {
+    "hero": {
+      "title": "⚡ Welcome to GitSimulator",
+      "line1": "You are a",
+      "emph1": "Time-Traveler Developer",
+      "line2": "Git is your time machine.",
+      "commit": "Every commit is a checkpoint you can return to.",
+      "branch": "Every branch is a parallel universe you can experiment in.",
+      "merge": "Every merge brings parallel timelines together."
+    },
+    "badges": {
+      "commit": "📸 Commit = Snapshot",
+      "branch": "🌿 Branch = Parallel Universe",
+      "remote": "☁️ Remote = Cloud Backup",
+      "pr": "🤝 PR = Code Review"
+    },
+    "readme": {
+      "title": "📘 Start With README.md"
+    },
+    "init": {
+      "story": {
+        "title": "The Story",
+        "p1": {
+          "part1": "In 2005, Linus Torvalds — creator of Linux — spent",
+          "emph": "just 10 days",
+          "part2": "writing Git from scratch to replace the BitKeeper version control system. He needed something fast, distributed, and free. Today Git powers virtually all software development on Earth."
+        }
+      },
+      "what": {
+        "title": "What git init actually does",
+        "p1": {
+          "part1": "When you run",
+          "part2": ", Git creates a hidden",
+          "part3": "folder. This folder IS your entire repository — every commit, every branch, every piece of history lives here. If you delete"
+        },
+        "code": {
+          "gitinit": "git init",
+          "gitfolder": ".git/"
+        }
+      },
+      "cli": {
+        "title": "CLI Commands",
+        "commands": {
+          "0": { "desc": "Create new repo in a new folder", "detail": "Creates 'my-project/' folder AND initialises .git/ inside it", "example": "Like planting a seed in fresh soil 🌱" },
+          "1": { "desc": "Init repo in current directory", "detail": "Turns ANY existing folder into a git repo. Your files stay untouched.", "example": "Like installing a time machine into your house 🏠" },
+          "2": { "desc": "Copy a remote repo (with full history)", "detail": "Downloads the repo AND every commit ever made. You get the full time machine.", "example": "Like copying a book with every draft the author ever wrote 📓" },
+          "3": { "desc": "Shallow clone — latest snapshot only", "detail": "Only downloads the most recent state, not full history. Much faster for large repos.", "example": "Like reading today's newspaper, not the 30-year archive 📰" },
+          "4": { "desc": "Set your identity (do this first!)", "detail": "Every commit is signed with your name and email. This is how blame/log shows who made changes.", "example": "Signing your name on everything you photograph 🖊️" },
+          "5": { "desc": "Set your email", "detail": "Must match your GitHub account email for commits to link to your profile.", "example": "" }
+        }
+      },
+      "try": { "title": "⚡ Try It — Live Terminal" }
+    },
+    "terminal": {
+      "title": "⚡ Interactive Terminal — Try Commands Now"
+    }
+    ,
+    "readme": {
+      "name": "README.md",
+      "body": {
+        "intro": "is the first file people read in a repository. It should quickly answer:",
+        "q1": "What is this project?",
+        "q2": "How do I run it?",
+        "q3": "What commands are important?",
+        "q4": "How can I contribute?",
+        "conclusion": "A good README saves time for beginners, teammates, and future you."
+      }
+    }
+  }
+  ,
+  "init": {
+      "story": {
+        "title": "The Story",
+        "p1": {
+          "part1": "In 2005, Linus Torvalds — creator of Linux — spent",
+          "emph": "just 10 days",
+          "part2": "writing Git from scratch to replace the BitKeeper version control system. He needed something fast, distributed, and free. Today Git powers virtually all software development on Earth."
+        }
+      },
+      "what": {
+        "title": "What git init actually does",
+        "p1": {
+          "part1": "When you run",
+          "part2": ", Git creates a hidden",
+          "part3": "folder. This folder IS your entire repository — every commit, every branch, every piece of history lives here. If you delete"
+        },
+        "code": {
+          "gitinit": "git init",
+          "gitfolder": ".git/"
+        }
+      },
+      "cli": {
+        "title": "CLI Commands",
+        "commands": {
+          "0": { "desc": "Create new repo in a new folder", "detail": "Creates 'my-project/' folder AND initialises .git/ inside it", "example": "Like planting a seed in fresh soil 🌱" },
+          "1": { "desc": "Init repo in current directory", "detail": "Turns ANY existing folder into a git repo. Your files stay untouched.", "example": "Like installing a time machine into your house 🏠" },
+          "2": { "desc": "Copy a remote repo (with full history)", "detail": "Downloads the repo AND every commit ever made. You get the full time machine.", "example": "Like copying a book with every draft the author ever wrote 📓" },
+          "3": { "desc": "Shallow clone — latest snapshot only", "detail": "Only downloads the most recent state, not full history. Much faster for large repos.", "example": "Like reading today's newspaper, not the 30-year archive 📰" },
+          "4": { "desc": "Set your identity (do this first!)", "detail": "Every commit is signed with your name and email. This is how blame/log shows who made changes.", "example": "Signing your name on everything you photograph 🖊️" },
+          "5": { "desc": "Set your email", "detail": "Must match your GitHub account email for commits to link to your profile.", "example": "" }
+        }
+      },
+      "try": { "title": "⚡ Try It — Live Terminal" }
+    },
+    "staging": {
+      "how": {
+        "title": "How the Three Areas Work",
+        "p1": {
+          "part1": "Git has",
+          "emph": "3 areas",
+          "part2": ": your Working Directory (files you're editing), the Staging Area (selected changes ready to snapshot), and the Repository (permanent commit history). git add moves files to staging. git commit snapshots staging into the repo."
+        }
+      },
+      "grocery": {
+        "title": "The grocery store analogy",
+        "p1": "Think of your project like a grocery store. All your files are items on the shelves, and whenever you make changes, it is like picking items you might want to buy. Staging in Git (git add) is like putting those items into your shopping cart. You can walk around and pick up many things, but only the items in your cart are actually ready to be purchased. When you run git commit, it is like going to the checkout and paying. You get a receipt that records exactly what was in your cart. So staging is simply choosing which changes you want to include in your next commit.",
+        "p2": ""
+      },
+      "interactive": { "title": "🎬 Interactive Simulator" },
+      "workingDir": { "label": "📁 WORKING DIR", "empty": "✓ Nothing to stage" },
+      "addButton": "add →",
+      "stageAll": "git add . (stage all)",
+      "stagingArea": { "label": "📦 STAGING AREA", "empty": "Use \"add →\" to stage files" },
+      "undo": "← undo",
+      "commit": { "placeholder": "feat: describe your change", "buttonPrefix": "git commit -m" , "committed": "✓ Committed!" },
+      "repository": { "label": "🏛️ REPOSITORY", "empty": "Commits appear here" },
+      "reset": "↺ Reset Simulator",
+      "cli": {
+        "title": "CLI Commands",
+        "commands": {
+          "0": { "desc": "See all changes in your working directory", "detail": "Shows 3 categories: Untracked (new files), Modified (changed files), Staged (ready to commit). Your project health checkup.", "example": "Looking in a mirror before leaving the house 🪞" },
+          "1": { "desc": "Stage ONE specific file", "detail": "Only that file's changes go into the next commit. Useful for atomic commits.", "example": "Selecting one specific photo for the album 📷" },
+          "2": { "desc": "Stage ALL changes in current directory", "detail": "Every modified and new file goes to staging. Quick, but be careful you don't accidentally add secrets!", "example": "'Select all' for the photo album 🗂️" },
+          "3": { "desc": "Stage specific CHUNKS of a file", "detail": "Git shows each changed chunk and asks y/n. Lets you make surgical commits: 'only stage the bugfix, not the debug logs'.", "example": "Picking the exact best frame from a photo burst ✂️" },
+          "4": { "desc": "Save the snapshot permanently", "detail": "Creates an immutable commit object with: your changes, message, timestamp, author, and a pointer to the parent commit.", "example": "Taking the photograph and writing the caption on the back 📸" },
+          "5": { "desc": "Edit the last commit", "detail": "Replace the last commit's message or add forgotten changes. Creates a NEW commit hash — don't use on pushed commits!", "example": "Correcting the caption on the photo you just took ✏️", "warning": "Never amend commits you've already pushed to a shared branch!" },
+          "6": { "desc": "Visual commit history tree", "detail": "--oneline=compact, --graph=ASCII branch lines, --all=show all branches. Your best friend for understanding history.", "example": "The family album with a family tree showing who came from whom 📖" },
+          "7": { "desc": "Show unstaged changes line-by-line", "detail": "Red lines = removed, Green lines = added. Shows what's different between your working directory and the last commit.", "example": "Comparing two versions of a letter side by side 📄" },
+          "8": { "desc": "Show what IS staged (ready to commit)", "detail": "Same as diff but shows the staging area vs last commit. See exactly what your next commit will contain.", "example": "" },
+          "9": { "desc": "Discard unstaged changes to a file", "detail": "⚠️ Dangerous — this THROWS AWAY your changes! Use to revert a file to its last committed state.", "example": "Throwing away your photo and taking a fresh one 🗑️", "warning": "This permanently discards your local changes. Cannot be undone!" }
+        }
+      }
+    },
+  "visualizer": {
+    "interactive": {
+      "title": "Interactive Commit Graph Simulator",
+      "line1": "Type git commands below and watch the graph build in real-time.",
+      "create": "Create branches",
+      "commit": "make commits",
+      "merge": "merge",
+      "line2": "the graph updates instantly to show exactly what happens.",
+      "help_prompt": "Type help for all commands."
+    },
+    "reading": {
+      "title": "Reading the Graph — Key Commands"
+    },
+    "head": "HEAD",
+    "quick": { "label": "Quick:" },
+    "action": {
+      "feature_branch": "+ feature branch",
+      "hotfix_branch": "+ hotfix branch",
+      "commit": "commit",
+      "merge_main": "merge to main",
+      "reset": "reset"
+    }
+  }
+ 
+}

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { usePageState } from "../../hooks/usePageState";
 import T from "../../constants/tokens";
 import { Badge, InfoBox, SectionTitle, CommandCard } from "../shared";
+import { useTranslation } from "react-i18next";
+import Tr from "../shared/Tr";
 
 function getBranchNameError(name, branches) {
   const n = name.trim();
@@ -77,9 +79,9 @@ function BranchSimulator({ isMobile }) {
           marginBottom: 12,
         }}
       >
-        <div style={{ color: T.blue, fontSize: 12, fontWeight: 700, marginBottom: 7 }}>
-          How To Use This Simulator
-        </div>
+          <div style={{ color: T.blue, fontSize: 12, fontWeight: 700, marginBottom: 7 }}>
+            <Tr>How To Use This Simulator</Tr>
+          </div>
         <div style={{ color: T.subtleText, fontSize: 12, lineHeight: 1.7 }}>
           1. Create a branch using the name box and + Branch.
           <br />
@@ -90,6 +92,7 @@ function BranchSimulator({ isMobile }) {
           4. Use the GIT LOG panel to see actions in real time.
         </div>
       </div>
+          <div style={{ color: T.muted, fontSize: 11, fontWeight: 700, marginBottom: 10 }}><Tr>BRANCHES</Tr></div>
 
       {/* Branch visual */}
       <div style={{ background: T.terminalBg, border: `1px solid ${T.border}`, borderRadius: 10, padding: 16, marginBottom: 14, overflowX: "auto" }}>
@@ -127,14 +130,19 @@ function BranchSimulator({ isMobile }) {
               <div style={{ width: 8, height: 8, borderRadius: "50%", background: b.color, flexShrink: 0 }} />
               <span style={{ flex: 1, color: b.current ? T.text : T.muted, fontSize: 12, fontFamily: "monospace" }}>{b.name}</span>
               {b.current && <Badge color={T.amber}>current</Badge>}
-              {!b.current && <button onClick={() => switchBranch(b.name)} style={{ background: T.blueBgLight, border: `1px solid ${T.blueBorderLight}`, borderRadius: 4, color: T.blue, fontSize: 10, padding: "2px 7px", cursor: "pointer" }}>switch</button>}
-              {b.name !== "main" && !b.current && <button onClick={() => deleteBranch(b.name)} style={{ background: T.redBgLight, border: `1px solid ${T.redBorderLight}`, borderRadius: 4, color: T.red, fontSize: 10, padding: "2px 7px", cursor: "pointer" }}>del</button>}
+              {!b.current && <button onClick={() => switchBranch(b.name)} style={{ background: T.blueBgLight, border: `1px solid ${T.blueBorderLight}`, borderRadius: 4, color: T.blue, fontSize: 10, padding: "2px 7px", cursor: "pointer" }}><Tr>switch</Tr></button>}
+              {b.name !== "main" && !b.current && <button onClick={() => deleteBranch(b.name)} style={{ background: T.redBgLight, border: `1px solid ${T.redBorderLight}`, borderRadius: 4, color: T.red, fontSize: 10, padding: "2px 7px", cursor: "pointer" }}><Tr>del</Tr></button>}
             </div>
           ))}
           <div style={{ marginTop: 12, display: "flex", gap: 6 }}>
-            <input value={newName} onChange={(e) => setNewName(e.target.value)} placeholder="new-branch-name" onKeyDown={(e) => e.key === "Enter" && addBranch()}
-              style={{ flex: 1, background: T.inputBgDark, border: `1px solid ${T.border}`, borderRadius: 6, padding: "6px 9px", color: T.text, fontSize: 11, outline: "none", fontFamily: "monospace" }} />
-            <button onClick={addBranch} disabled={!canCreateBranch} style={{ background: canCreateBranch ? T.greenBgMedium : T.selectionBgInactive, border: `1px solid ${canCreateBranch ? T.greenBorderMedium : T.border}`, borderRadius: 6, color: canCreateBranch ? T.green : T.muted, fontSize: 11, padding: "6px 10px", cursor: canCreateBranch ? "pointer" : "default" }}>+ Branch</button>
+            <input
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              placeholder="new-branch-name"
+              onKeyDown={(e) => e.key === "Enter" && addBranch()}
+              style={{ flex: 1, background: T.inputBgDark, border: `1px solid ${T.border}`, borderRadius: 6, padding: "6px 9px", color: T.text, fontSize: 11, outline: "none", fontFamily: "monospace" }}
+            />
+            <button onClick={addBranch} disabled={!canCreateBranch} style={{ background: canCreateBranch ? T.greenBgMedium : T.selectionBgInactive, border: `1px solid ${canCreateBranch ? T.greenBorderMedium : T.border}`, borderRadius: 6, color: canCreateBranch ? T.green : T.muted, fontSize: 11, padding: "6px 10px", cursor: canCreateBranch ? "pointer" : "default" }}><Tr>+ Branch</Tr></button>
           </div>
           {branchNameError && <div style={{ color: T.red, fontSize: 10, marginTop: 7 }}>{branchNameError}</div>}
         </div>
