@@ -51,9 +51,11 @@ export default function Canonical() {
   useEffect(() => {
     const path = location.pathname || "/";
     const moduleId = path.slice(1) || "home";
+    const isValidModule = MODULES.some((m) => m.id === moduleId);
     const mod = MODULES.find((m) => m.id === moduleId) || MODULES[0];
 
-    const canonicalUrl = `${BASE}${path === "/" ? "/" : path}`;
+    const canonicalPath = isValidModule ? (path || "/") : "/";
+    const canonicalUrl = `${BASE}${canonicalPath}`;
     const image = `${BASE}/social/${mod.id}.png`;
 
     document.title = mod.title;

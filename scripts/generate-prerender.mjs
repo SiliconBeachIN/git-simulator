@@ -43,8 +43,10 @@ function replaceCanonical(html, url) {
   return re.test(html) ? html.replace(re, tag) : html.replace('</head>', `  ${tag}\n  </head>`);
 }
 
+const SITE_BASE = process.env.SITE_BASE || 'https://gitsimulator.xyz';
+
 function injectAllMeta(html, mod, canonicalUrl) {
-  const image = `https://gitsimulator.xyz/social/${mod.id}.png`;
+  const image = `${SITE_BASE}/social/${mod.id}.png`;
   html = replaceTitle(html, mod.title);
   html = replaceMetaName(html, 'description', mod.description);
   html = replaceMetaName(html, 'keywords', mod.keywords);
@@ -73,7 +75,7 @@ async function main() {
     if (mod.id === 'home') continue;
     const routeDir = path.join(distDir, mod.id);
     if (!fs.existsSync(routeDir)) fs.mkdirSync(routeDir, { recursive: true });
-    const canonicalUrl = `https://gitsimulator.xyz/${mod.id}`;
+    const canonicalUrl = `${SITE_BASE}/${mod.id}`;
     const html = injectAllMeta(indexHtml, mod, canonicalUrl);
     fs.writeFileSync(path.join(routeDir, 'index.html'), html, 'utf8');
     count++;
@@ -82,7 +84,7 @@ async function main() {
   // Patch root index.html with home meta
   const homeMod = MODULES.find((m) => m.id === 'home');
   if (homeMod) {
-    const homeHtml = injectAllMeta(indexHtml, homeMod, 'https://gitsimulator.xyz/');
+    const homeHtml = injectAllMeta(indexHtml, homeMod, `${SITE_BASE}/`);
     fs.writeFileSync(path.join(distDir, 'index.html'), homeHtml, 'utf8');
   }
 
