@@ -5,7 +5,7 @@
   "description": "Interactive browser-based simulator for learning Git and GitHub workflows — no installation required.",
   "type": "module",
   "license": "MIT",
-  "homepage": "https://gitsimulator.xyz/",
+  "homepage": "https://githubsimulator.xyz/",
   "repository": {
     "type": "git",
     "url": "https://github.com/SiliconBeachIN/git-simulator.git"
@@ -24,7 +24,7 @@
   "scripts": {
     "dev": "vite",
     "generate-sitemap": "node ./scripts/generate-sitemap.mjs",
-    "build": "node ./scripts/generate-sitemap.mjs && vite build",
+    "build": "node ./scripts/generate-sitemap.mjs && vite build && node ./scripts/generate-prerender.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

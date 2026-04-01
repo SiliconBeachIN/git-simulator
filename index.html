@@ -3,20 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="GitSimulator — Interactive Git and GitHub learning app. Master git init, branching, merging, pull requests, and more through hands-on simulators." />
+    <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#060b18" />
     <meta name="color-scheme" content="dark" />
-    <!-- canonical is handled client-side to allow per-route values for this SPA -->
-    <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="GitSimulator — Master GitHub" />
-    <meta property="og:description" content="Interactive Git and GitHub learning with live terminal, commit graphs, and quizzes." />
+    <meta name="author" content="GitSimulator" />
+    <title>GitSimulator — Learn Git &amp; GitHub Interactively | Free</title>
+    <meta name="description" content="Learn Git and GitHub for free with interactive simulators, a live terminal, commit graphs, and quizzes. 24 modules. No sign-up required." />
+    <meta name="keywords" content="git tutorial, github tutorial, learn git online, interactive git simulator, git for beginners, github learning" />
+    <link rel="canonical" href="https://githubsimulator.xyz/" />
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/social/default.png" />
+    <meta property="og:site_name" content="GitSimulator" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://githubsimulator.xyz/" />
+    <meta property="og:title" content="GitSimulator — Learn Git &amp; GitHub Interactively | Free" />
+    <meta property="og:description" content="Learn Git and GitHub for free with interactive simulators, a live terminal, commit graphs, and quizzes. 24 modules. No sign-up required." />
+    <meta property="og:image" content="https://githubsimulator.xyz/social/home.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="robots" content="index, follow" />
-    <title>GitSimulator — Master GitHub</title>
+    <meta name="twitter:title" content="GitSimulator — Learn Git &amp; GitHub Interactively | Free" />
+    <meta name="twitter:description" content="Learn Git and GitHub for free with interactive simulators, a live terminal, commit graphs, and quizzes. 24 modules. No sign-up required." />
+    <meta name="twitter:image" content="https://githubsimulator.xyz/social/home.png" />
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QGLJFHKHP4"></script>
     <script>
@@ -25,30 +34,40 @@
       gtag('js', new Date());
       gtag('config', 'G-QGLJFHKHP4');
     </script>
-     <script type="application/ld+json">{
-       "@context":"https://schema.org",
-       "@type":"WebSite",
-       "url":"https://gitsimulator.xyz/",
-       "name":"GitHub Simulator",
-       "description":"Interactive simulator to learn Git and GitHub concepts with a live terminal and guided modules.",
-       "potentialAction":{
-         "@type":"SearchAction",
-         "target":"https://gitsimulator.xyz/?q={search_term_string}",
-         "query-input":"required name=search_term_string"
-       }
-     }</script>
-
-     <script type="application/ld+json">{
-       "@context": "https://schema.org",
-       "@type": "Organization",
-       "name": "GitHub Simulator",
-       "url": "https://gitsimulator.xyz/",
-       "logo": "https://gitsimulator.xyz/social/home.svg",
-       "sameAs": [
-         "https://github.com/",
-         "https://twitter.com/"
-       ]
-     }</script>
+    <script type="application/ld+json">{
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://githubsimulator.xyz/",
+      "name": "GitSimulator",
+      "description": "Interactive simulator to learn Git and GitHub concepts with a live terminal and guided modules.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://githubsimulator.xyz/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }</script>
+    <script type="application/ld+json">{
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "GitSimulator",
+      "url": "https://githubsimulator.xyz/",
+      "description": "Interactive browser-based simulator for learning Git and GitHub workflows — no installation required.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "isAccessibleForFree": true,
+      "inLanguage": ["en", "ar", "de", "es", "fr", "hi", "ja", "ko", "pt", "ru", "zh"],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "GitSimulator",
+        "url": "https://githubsimulator.xyz/",
+        "sameAs": ["https://github.com/SiliconBeachIN/git-simulator"]
+      }
+    }</script>
   </head>
   <body>
     <div id="root"></div>
