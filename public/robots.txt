@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://githubsimulator.xyz/sitemap.xml
+Sitemap: https://gitsimulator.xyz/sitemap.xml
 # Crawl-delay can be added if needed by specific crawlers

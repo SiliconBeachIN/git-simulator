@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import MODULES from "../../constants/modules";
 
-const BASE = "https://githubsimulator.xyz";
+const BASE = "https://gitsimulator.xyz";
 
 function setMetaName(name, content) {
   let el = document.querySelector(`meta[name='${name}']`);

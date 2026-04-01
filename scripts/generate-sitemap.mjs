@@ -13,7 +13,7 @@ async function loadModules() {
 }
 
 function buildSitemap(modules) {
-  const base = process.env.SITE_BASE || 'https://githubsimulator.xyz';
+  const base = process.env.SITE_BASE || 'https://gitsimulator.xyz';
   const today = new Date().toISOString().split('T')[0];
   const lines = [];
   lines.push('<?xml version="1.0" encoding="UTF-8"?>');
