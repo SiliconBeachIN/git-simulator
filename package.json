@@ -24,7 +24,7 @@
   "scripts": {
     "dev": "vite",
     "generate-sitemap": "node ./scripts/generate-sitemap.mjs",
-    "build": "node ./scripts/generate-sitemap.mjs && vite build",
+    "build": "node ./scripts/generate-sitemap.mjs && vite build && node ./scripts/generate-prerender.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

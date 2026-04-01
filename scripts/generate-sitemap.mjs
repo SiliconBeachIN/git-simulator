@@ -12,24 +12,30 @@ async function loadModules() {
   return mod.default || [];
 }
 
-function buildSitemap(urls) {
+function buildSitemap(modules) {
+  const base = process.env.SITE_BASE || 'https://gitsimulator.xyz';
+  const today = new Date().toISOString().split('T')[0];
   const lines = [];
   lines.push('<?xml version="1.0" encoding="UTF-8"?>');
   lines.push('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
-  urls.forEach(u => {
+  for (const m of modules) {
+    const loc = m.id === 'home' ? `${base}/` : `${base}/${m.id}`;
+    const priority = m.id === 'home' ? '1.0' : m.id === 'quiz' ? '0.8' : '0.9';
+    const changefreq = m.id === 'home' ? 'weekly' : 'monthly';
     lines.push('  <url>');
-    lines.push(`    <loc>${u}</loc>`);
+    lines.push(`    <loc>${loc}</loc>`);
+    lines.push(`    <lastmod>${today}</lastmod>`);
+    lines.push(`    <changefreq>${changefreq}</changefreq>`);
+    lines.push(`    <priority>${priority}</priority>`);
     lines.push('  </url>');
-  });
+  }
   lines.push('</urlset>');
   return lines.join('\n') + '\n';
 }
 
 async function main() {
   const MODULES = await loadModules();
-  const base = process.env.SITE_BASE || 'https://gitsimulator.xyz';
-  const urls = MODULES.map(m => (m.id === 'home' ? `${base}/` : `${base}/${m.id}`));
-  const xml = buildSitemap(urls);
+  const xml = buildSitemap(MODULES);
   const outPath = path.resolve(projectRoot, 'public', 'sitemap.xml');
   fs.writeFileSync(outPath, xml, 'utf8');
   console.log('Wrote', outPath);

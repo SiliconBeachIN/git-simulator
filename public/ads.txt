@@ -1,0 +1,1 @@
+google.com, pub-REPLACE_WITH_YOUR_CA_PUB_ID, DIRECT, f08c47fec0942fa0

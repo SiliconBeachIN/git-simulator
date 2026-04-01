@@ -234,7 +234,7 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
             <div
               style={{
                 fontSize: 9,
-                color: T.faint,
+                color: T.subtleText,
                 textAlign: "center",
                 lineHeight: 1.6,
               }}
