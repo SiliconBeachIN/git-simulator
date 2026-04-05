@@ -29,6 +29,19 @@ function buildSitemap(modules) {
     lines.push(`    <priority>${priority}</priority>`);
     lines.push('  </url>');
   }
+  // Add static pages
+  const staticPages = [
+    { path: '/privacy', priority: '0.3', changefreq: 'yearly' },
+    { path: '/terms', priority: '0.3', changefreq: 'yearly' },
+  ];
+  for (const sp of staticPages) {
+    lines.push('  <url>');
+    lines.push(`    <loc>${base}${sp.path}</loc>`);
+    lines.push(`    <lastmod>${today}</lastmod>`);
+    lines.push(`    <changefreq>${sp.changefreq}</changefreq>`);
+    lines.push(`    <priority>${sp.priority}</priority>`);
+    lines.push('  </url>');
+  }
   lines.push('</urlset>');
   return lines.join('\n') + '\n';
 }

@@ -15,9 +15,10 @@ export default function HomeModule({ isMobile }) {
       >
         <div
           style={{
-            fontFamily: "'Syne',sans-serif",
+            fontFamily: "'Segoe UI', system-ui, -apple-system, sans-serif",
             fontSize: isMobile ? 18 : 22,
-            fontWeight: 800,
+            fontWeight: 700,
+            letterSpacing: "-0.02em",
             color: T.text,
             marginBottom: 8,
           }}

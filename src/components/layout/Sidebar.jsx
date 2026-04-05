@@ -101,11 +101,11 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
             <>
               <div
                 style={{
-                  fontFamily: "'Syne',sans-serif",
+                  fontFamily: "'Segoe UI', system-ui, -apple-system, sans-serif",
                   fontSize: 13.5,
-                  fontWeight: 800,
+                  fontWeight: 700,
                   color: T.text,
-                  letterSpacing: "-.01em",
+                  letterSpacing: "-.02em",
                   flex: 1,
                   overflow: "hidden",
                   whiteSpace: "nowrap",
