@@ -45,6 +45,55 @@ function replaceCanonical(html, url) {
 
 const SITE_BASE = process.env.SITE_BASE || 'https://gitsimulator.xyz';
 
+function buildBreadcrumbSchema(mod, canonicalUrl) {
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": `${SITE_BASE}/`
+      }
+    ]
+  };
+  if (mod.id !== 'home') {
+    breadcrumb.itemListElement.push({
+      "@type": "ListItem",
+      "position": 2,
+      "name": mod.label,
+      "item": canonicalUrl
+    });
+  }
+  return JSON.stringify(breadcrumb);
+}
+
+function buildArticleSchema(mod, canonicalUrl) {
+  if (mod.id === 'home') return null;
+  const article = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": mod.title,
+    "description": mod.description,
+    "url": canonicalUrl,
+    "image": `${SITE_BASE}/social/${mod.id}.png`,
+    "author": {
+      "@type": "Organization",
+      "name": "GitSimulator",
+      "url": `${SITE_BASE}/`
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "GitSimulator",
+      "url": `${SITE_BASE}/`
+    },
+    "isAccessibleForFree": true,
+    "inLanguage": "en"
+  };
+  return JSON.stringify(article);
+}
+
 function injectAllMeta(html, mod, canonicalUrl) {
   const image = `${SITE_BASE}/social/${mod.id}.png`;
   html = replaceTitle(html, mod.title);
@@ -58,6 +107,13 @@ function injectAllMeta(html, mod, canonicalUrl) {
   html = replaceMetaName(html, 'twitter:title', mod.title);
   html = replaceMetaName(html, 'twitter:description', mod.description);
   html = replaceMetaName(html, 'twitter:image', image);
+
+  // Inject per-page structured data
+  const breadcrumbTag = `<script type="application/ld+json">${buildBreadcrumbSchema(mod, canonicalUrl)}</script>`;
+  const articleSchema = buildArticleSchema(mod, canonicalUrl);
+  const articleTag = articleSchema ? `\n    <script type="application/ld+json">${articleSchema}</script>` : '';
+  html = html.replace('</head>', `    ${breadcrumbTag}${articleTag}\n  </head>`);
+
   return html;
 }
 

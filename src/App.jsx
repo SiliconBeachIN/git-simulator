@@ -1,4 +1,4 @@
-﻿import { useRef, useEffect, useState, useCallback } from "react";
+﻿import { useRef, useEffect, useState, useCallback, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, Navigate } from "react-router-dom";
 import T from "./constants/tokens";
 import useMediaQuery from "./hooks/useMediaQuery";
@@ -6,7 +6,11 @@ import { PageSessionProvider, clearPersistedPageState, getPersistedActivePage, s
 import { Sidebar, Topbar, Footer } from "./components/layout";
 import Canonical from "./components/Meta/Canonical";
 import { ModuleContent } from "./components/modules";
+import CookieConsent from "./components/shared/CookieConsent";
 import MODULES from "./constants/modules";
+
+const PrivacyPolicy = lazy(() => import("./components/pages/PrivacyPolicy"));
+const TermsOfService = lazy(() => import("./components/pages/TermsOfService"));
 
 const MOBILE_QUERY = `(max-width:${T.mobileBreakpoint}px)`;
 
@@ -23,8 +27,9 @@ function AppShell() {
   }, [isMobile]);
 
   // Extract module id from path
+  const isStaticPage = ["/privacy", "/terms"].includes(location.pathname);
   let active = location.pathname.slice(1) || "home";
-  if (!MODULES.some(m => m.id === active)) active = "home";
+  if (!isStaticPage && !MODULES.some(m => m.id === active)) active = "home";
 
   // Navigation handler updates URL
   const go = (id) => {
@@ -45,7 +50,6 @@ function AppShell() {
   return (
     <div style={{ display: "flex", height: "100%", minHeight: "100vh", background: T.bg, color: T.text, fontFamily: "'Segoe UI',system-ui,sans-serif", overflow: "hidden", position: "relative" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@600;700;800&display=swap');
         html,body,#root{height:100%;margin:0;padding:0}
         *{box-sizing:border-box;margin:0;padding:0}
         ::-webkit-scrollbar{width:5px;height:5px}
@@ -73,15 +77,26 @@ function AppShell() {
         <div ref={scrollRef} style={{ flex: 1, overflowY: "auto", padding: isMobile ? "16px 12px" : "22px 24px" }}>
           <div style={{ maxWidth: 820, margin: "0 auto" }}>
             <div style={{ animation: "fadeIn .2s ease" }}>
-              <PageSessionProvider pageId={active}>
-                <ModuleContent key={`${active}:${pageResetVersion[active] || 0}`} id={active} isMobile={isMobile} />
-              </PageSessionProvider>
+              {location.pathname === "/privacy" ? (
+                <Suspense fallback={<div style={{ color: T.subtleText, padding: 24 }}>Loading…</div>}>
+                  <PrivacyPolicy />
+                </Suspense>
+              ) : location.pathname === "/terms" ? (
+                <Suspense fallback={<div style={{ color: T.subtleText, padding: 24 }}>Loading…</div>}>
+                  <TermsOfService />
+                </Suspense>
+              ) : (
+                <PageSessionProvider pageId={active}>
+                  <ModuleContent key={`${active}:${pageResetVersion[active] || 0}`} id={active} isMobile={isMobile} />
+                </PageSessionProvider>
+              )}
             </div>
           </div>
         </div>
 
         <Footer />
       </div>
+      <CookieConsent />
     </div>
   );
 }
