@@ -175,6 +175,19 @@ const TERM_RESPONSES = {
     "",
     "💡 Tags mark release points. Create one with: git tag -a v1.2.0 -m 'Release 1.2.0'",
   ],
+  "git worktree list": [
+    "/home/user/my-project         a3f2b1c [main]",
+    "/home/user/hotfix             d7e8f9a [hotfix/critical]",
+    "/home/user/pr-review          c5d6e7f [feature/login]",
+    "",
+    "💡 Each worktree is a separate directory with its own checked-out branch.",
+    "   They all share the same .git history.",
+  ],
+  "git worktree prune": [
+    "✓ Pruned stale worktree references.",
+    "",
+    "💡 This cleans up records of worktrees whose directories were manually deleted.",
+  ],
   "git help": [
     "📚 Simulated commands in this terminal:",
     "",
@@ -185,6 +198,7 @@ const TERM_RESPONSES = {
     "  Undo:      git reset · git revert · git stash · git reflog",
     "  Inspect:   git log · git blame · git tag · git show",
     "  Advanced:  git rebase · git cherry-pick · git bisect",
+    "  Worktree:  git worktree add · git worktree list · git worktree remove",
     "",
     "💡 Most commands also accept arguments — try: git commit -m 'my message'",
     "   For full docs, explore the modules in the sidebar!",
@@ -589,6 +603,84 @@ const TERM_PATTERNS = [
         "",
         `✓ Downloaded latest data from '${remote}' without merging.`,
         "💡 Your local branches are untouched. Merge manually when ready.",
+      ];
+    },
+  },
+  {
+    match: (k) => k.startsWith("git worktree add "),
+    respond: (cmd) => {
+      const args = cmd.replace(/^git worktree add\s+/i, "").trim();
+      const parts = args.split(/\s+/);
+      const hasBranch = parts[0] === "-b";
+      let path, branch;
+      if (hasBranch) {
+        branch = parts[1] || "new-branch";
+        path = parts[2] || "../" + branch;
+      } else if (args === "--detach " + parts[parts.length - 1] || parts[0] === "--detach") {
+        path = parts[1] || "../experiment";
+        return [
+          `Preparing worktree (detached HEAD a3f2b1c)`,
+          `HEAD is now at a3f2b1c feat: add auth`,
+          "",
+          `✓ Created worktree at '${path}' in detached HEAD state.`,
+          "💡 This is useful for quick experiments. No branch is checked out.",
+        ];
+      } else {
+        path = parts[0] || "../worktree";
+        branch = parts[1] || path.split("/").pop();
+      }
+      return [
+        `Preparing worktree (new branch '${branch}')`,
+        `HEAD is now at a3f2b1c feat: add auth`,
+        "",
+        `✓ Created worktree at '${path}' on branch '${branch}'.`,
+        "💡 You now have two working directories sharing the same repo.",
+        `   cd ${path}  to start working there.`,
+      ];
+    },
+  },
+  {
+    match: (k) => k.startsWith("git worktree remove "),
+    respond: (cmd) => {
+      const path = cmd.replace(/^git worktree remove\s+(--force\s+)?/i, "").trim();
+      return [
+        `✓ Worktree '${path}' removed.`,
+        "",
+        "💡 The branch still exists — only the working directory was deleted.",
+        "   Use 'git worktree list' to see remaining worktrees.",
+      ];
+    },
+  },
+  {
+    match: (k) => k.startsWith("git worktree move "),
+    respond: (cmd) => {
+      const parts = cmd.replace(/^git worktree move\s+/i, "").trim().split(/\s+/);
+      return [
+        `✓ Worktree moved: ${parts[0] || "old-path"} → ${parts[1] || "new-path"}`,
+        "",
+        "💡 Git updated its internal records. The worktree link is intact.",
+      ];
+    },
+  },
+  {
+    match: (k) => k.startsWith("git worktree lock "),
+    respond: (cmd) => {
+      const path = cmd.replace(/^git worktree lock\s+/i, "").trim();
+      return [
+        `✓ Worktree '${path}' locked.`,
+        "",
+        "💡 This worktree won't be removed by 'git worktree prune'.",
+      ];
+    },
+  },
+  {
+    match: (k) => k.startsWith("git worktree unlock "),
+    respond: (cmd) => {
+      const path = cmd.replace(/^git worktree unlock\s+/i, "").trim();
+      return [
+        `✓ Worktree '${path}' unlocked.`,
+        "",
+        "💡 This worktree can now be pruned normally.",
       ];
     },
   },

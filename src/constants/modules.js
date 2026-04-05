@@ -72,6 +72,14 @@ const MODULES = [
     keywords: "advanced git commands, git stash, git cherry-pick, git bisect, git reflog, git reset, interactive rebase, git revert, git stash tutorial, how to use git stash, git cherry-pick example, git reset hard, git undo changes, advanced git tutorial",
   },
   {
+    id: "worktree",
+    icon: "🌲",
+    label: "Git Worktree",
+    title: "Git Worktree Tutorial — Work on Multiple Branches Simultaneously | GitSimulator",
+    description: "Learn git worktree to check out multiple branches at once in separate directories. Manage parallel workstreams, hotfixes, and code reviews without stashing or switching branches.",
+    keywords: "git worktree, git worktree tutorial, git worktree add, git multiple branches, git worktree example, work on two branches at once, git worktree vs git stash, git worktree remove, git worktree list, git parallel development, git worktree command, how to use git worktree",
+  },
+  {
     id: "collaborate",
     icon: "🌐",
     label: "Open Source",

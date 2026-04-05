@@ -11,6 +11,7 @@ const MAP = {
   pullrequest: lazy(() => import("./PullRequestModule")),
   gitflow: lazy(() => import("./GitFlowModule")),
   advanced: lazy(() => import("./AdvancedModule")),
+  worktree: lazy(() => import("./WorktreeModule")),
   collaborate: lazy(() => import("./CollaborateModule")),
   visualizer: lazy(() => import("./VisualizerModule")),
   actions: lazy(() => import("./ActionsModule")),
