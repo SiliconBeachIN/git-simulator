@@ -613,11 +613,30 @@ const TERM_PATTERNS = [
       const parts = args.split(/\s+/);
       const hasBranch = parts[0] === "-b";
       let path, branch;
+
       if (hasBranch) {
-        branch = parts[1] || "new-branch";
-        path = parts[2] || "../" + branch;
-      } else if (args === "--detach " + parts[parts.length - 1] || parts[0] === "--detach") {
-        path = parts[1] || "../experiment";
+        branch = parts[1];
+        path = parts[2];
+        if (!branch || !path) {
+          return [
+            "usage: git worktree add -b <branch> <path> [<start-point>]",
+          ];
+        }
+        return [
+          `Preparing worktree (new branch '${branch}')`,
+          `HEAD is now at a3f2b1c feat: add auth`,
+          "",
+          `✓ Created worktree at '${path}' on new branch '${branch}'.`,
+          "💡 You now have two working directories sharing the same repo.",
+          `   cd ${path}  to start working there.`,
+        ];
+      }
+
+      if (parts[0] === "--detach") {
+        path = parts[1];
+        if (!path) {
+          return ["usage: git worktree add --detach <path>"];
+        }
         return [
           `Preparing worktree (detached HEAD a3f2b1c)`,
           `HEAD is now at a3f2b1c feat: add auth`,
@@ -625,15 +644,15 @@ const TERM_PATTERNS = [
           `✓ Created worktree at '${path}' in detached HEAD state.`,
           "💡 This is useful for quick experiments. No branch is checked out.",
         ];
-      } else {
-        path = parts[0] || "../worktree";
-        branch = parts[1] || path.split("/").pop();
       }
+
+      path = parts[0] || "../worktree";
+      branch = parts[1] || path.split("/").pop();
       return [
-        `Preparing worktree (new branch '${branch}')`,
+        `Preparing worktree (checking out '${branch}')`,
         `HEAD is now at a3f2b1c feat: add auth`,
         "",
-        `✓ Created worktree at '${path}' on branch '${branch}'.`,
+        `✓ Created worktree at '${path}' with '${branch}' checked out.`,
         "💡 You now have two working directories sharing the same repo.",
         `   cd ${path}  to start working there.`,
       ];
@@ -642,9 +661,15 @@ const TERM_PATTERNS = [
   {
     match: (k) => k.startsWith("git worktree remove "),
     respond: (cmd) => {
-      const path = cmd.replace(/^git worktree remove\s+(--force\s+)?/i, "").trim();
+      const args = cmd.replace(/^git worktree remove\s+/i, "").trim();
+      const parts = args.split(/\s+/).filter(Boolean);
+      const force = parts[0] === "--force";
+      const path = force ? parts[1] : parts[0];
+      if (!path) {
+        return ["usage: git worktree remove [--force] <path>"];
+      }
       return [
-        `✓ Worktree '${path}' removed.`,
+        `✓ Worktree '${path}' removed${force ? " (forced)" : ""}.`,
         "",
         "💡 The branch still exists — only the working directory was deleted.",
         "   Use 'git worktree list' to see remaining worktrees.",
