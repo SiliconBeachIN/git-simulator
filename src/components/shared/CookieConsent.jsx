@@ -51,7 +51,10 @@ export default function CookieConsent() {
       }}
     >
       <p style={{ color: T.subtleText, fontSize: 13, lineHeight: 1.6, maxWidth: 600, margin: 0 }}>
-        We use cookies for analytics and to serve ads via Google AdSense.{" "}
+        We and third-party vendors, including Google, use cookies to serve ads and analyze traffic.
+        Accepting enables personalized ads.{" "}
+        <a href="https://www.google.com/policies/privacy/partners/" target="_blank" rel="noopener noreferrer" style={{ color: T.linkColor, textDecoration: "underline" }}>How Google uses data</a>
+        {" · "}
         <a href="/privacy" style={{ color: T.linkColor, textDecoration: "underline" }}>Privacy Policy</a>
       </p>
       <div style={{ display: "flex", gap: 8 }}>

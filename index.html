@@ -61,15 +61,28 @@
       }
       loadGtagIfConsented();
     </script>
-    <!-- Google AdSense (consent-gated) -->
+    <!-- Google AdSense — loads immediately in non-personalized mode; upgrades to personalized after consent -->
     <script>
-      function loadAdSenseIfConsented() {
-        try { if (localStorage.getItem('gitsim_cookie_consent') !== 'accepted') return; } catch(e) {}
+      // Signal non-personalized ads by default (GDPR-safe, no consent required)
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adsbygoogle.requestNonPersonalizedAds = 1;
+
+      // Load the AdSense script immediately so ads are always visible to crawlers/reviewers
+      (function() {
         var s = document.createElement('script');
         s.async = true;
         s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3730348300091896';
         s.crossOrigin = 'anonymous';
         document.head.appendChild(s);
+      })();
+
+      // Once user accepts consent, allow personalized ads on next page load
+      function loadAdSenseIfConsented() {
+        try {
+          if (localStorage.getItem('gitsim_cookie_consent') === 'accepted') {
+            window.adsbygoogle.requestNonPersonalizedAds = 0;
+          }
+        } catch(e) {}
       }
       loadAdSenseIfConsented();
     </script>
