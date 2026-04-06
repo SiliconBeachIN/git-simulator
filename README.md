@@ -77,7 +77,7 @@ Each module includes:
 | @vitejs/plugin-react | 4.x | JSX transform |
 | Google Fonts | — | JetBrains Mono + Syne |
 
-No external UI libraries. All styling is pure inline CSS with a design token object. Everything lives in a single `src/App.jsx` file.
+No external UI libraries. All styling is pure inline CSS with a design token object.
 
 ---
 
@@ -118,12 +118,21 @@ npm run preview      # Preview the production build locally
 ```
 git-simulator/
 ├── src/
-│   ├── App.jsx          # Entire application — all components, data, state
-│   └── main.jsx         # React entry point
-├── docs/
-│   └── GITHUB_MASTERY_GUIDE.md
-├── index.html           # Vite HTML shell
-├── vite.config.js       # Vite config (vendor split, esbuild minify)
+│   ├── App.jsx                # App shell — routing, layout, state
+│   ├── main.jsx               # React entry point
+│   ├── components/
+│   │   ├── layout/            # Sidebar, Topbar, Footer
+│   │   ├── modules/           # One file per learning module
+│   │   ├── pages/             # Privacy Policy, Terms of Service
+│   │   ├── shared/            # Reusable UI — Terminal, CommandCard, Badge, etc.
+│   │   └── Meta/              # Canonical tag component
+│   ├── constants/             # Module definitions, design tokens
+│   ├── hooks/                 # useMediaQuery, usePageState
+│   └── utils/                 # Scroll helpers
+├── public/                    # Static assets, sitemap, ads.txt, CNAME
+├── scripts/                   # Sitemap & prerender generators
+├── index.html                 # Vite HTML shell + SEO meta + structured data
+├── vite.config.js             # Vite config (vendor split, esbuild minify)
 ├── package.json
 └── .gitignore
 ```
