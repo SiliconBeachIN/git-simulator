@@ -151,11 +151,12 @@ function WorktreeSimulator() {
         return;
       }
 
-      // git worktree add -b <branch> <path>
-      const addBMatch = cmd.match(/^git\s+worktree\s+add\s+-b\s+(\S+)\s+(\S+)$/i);
+      // git worktree add -b <branch> <path> [<start-point>]
+      const addBMatch = cmd.match(/^git\s+worktree\s+add\s+-b\s+(\S+)\s+(\S+)(?:\s+(\S+))?$/i);
       if (addBMatch) {
         const branch = addBMatch[1];
         const path = addBMatch[2];
+        const startPoint = addBMatch[3];
         if (wts.some((w) => w.path === path)) {
           addLog("error", `fatal: '${path}' already exists as a worktree.`);
           return;
@@ -169,6 +170,19 @@ function WorktreeSimulator() {
         setWorktrees(updated);
         wtRef.current = updated;
         addLog("success", `✓ Created new branch '${branch}' and worktree at '${path}'.`);
+        if (startPoint) {
+          addLog("info", `Base: '${branch}' starts from '${startPoint}'.`);
+        }
+        return;
+      }
+
+      if (/^git\s+worktree\s+add\s+--detach\s*$/i.test(cmd)) {
+        addLog("error", "usage: git worktree add --detach <path>");
+        return;
+      }
+
+      if (/^git\s+worktree\s+add\s+-b\s+\S+\s*$/i.test(cmd)) {
+        addLog("error", "usage: git worktree add -b <branch> <path> [<start-point>]");
         return;
       }
 
@@ -176,6 +190,10 @@ function WorktreeSimulator() {
       const addMatch = cmd.match(/^git\s+worktree\s+add\s+(\S+)(?:\s+(\S+))?$/i);
       if (addMatch) {
         const path = addMatch[1];
+        if (path.startsWith("-")) {
+          addLog("error", "usage: git worktree add <path> <branch>");
+          return;
+        }
         const branch = addMatch[2] || path.split("/").pop();
         if (wts.some((w) => w.path === path)) {
           addLog("error", `fatal: '${path}' already exists as a worktree.`);
@@ -271,6 +289,10 @@ function WorktreeSimulator() {
         }
         if (wts[idx].isMain) {
           addLog("error", "fatal: cannot move the main worktree.");
+          return;
+        }
+        if (wts.some((w, i) => i !== idx && w.path === newPath)) {
+          addLog("error", `fatal: '${newPath}' already exists as a worktree.`);
           return;
         }
         const updated = wts.map((w, i) => (i === idx ? { ...w, path: newPath } : w));
@@ -467,6 +489,7 @@ function WorktreeSimulator() {
             ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            aria-label="Git worktree command input"
             placeholder="git worktree add ../feature feat/login"
             spellCheck={false}
             style={{
@@ -650,25 +673,32 @@ export default function WorktreeModule() {
       <SectionTitle>💡 Real-World Workflows</SectionTitle>
       {[
         {
-          cmd: "# Review a PR without leaving your branch\ngit worktree add ../pr-review origin/feat/login",
+          cmd: "git worktree add ../pr-review origin/feat/login",
           desc: "Code review in a separate directory",
           detail:
             "Check out the PR branch in a new folder, run tests, inspect code — all while your feature branch stays untouched in the main directory.",
           example: "👀 Review code without disrupting your flow",
         },
         {
-          cmd: "# Urgent hotfix while mid-feature\ngit worktree add -b hotfix/CVE-fix ../hotfix main",
+          cmd: "git worktree add -b hotfix/CVE-fix ../hotfix main",
           desc: "Ship a hotfix without stashing work-in-progress",
           detail:
             "Create a hotfix branch based on main in a new directory. Fix, commit, push, then delete the worktree. Your feature branch never notices.",
           example: "🚑 Emergency fix without touching your current work",
         },
         {
-          cmd: "# Compare builds side by side\ngit worktree add ../v1 v1.0.0\ngit worktree add ../v2 v2.0.0",
-          desc: "Run two versions simultaneously for comparison",
+          cmd: "git worktree add ../v1 v1.0.0",
+          desc: "Add a worktree for version 1.0.0",
           detail:
-            "Tag-based worktrees let you build and run older versions alongside the current one — great for debugging regressions.",
-          example: "⚖️ Side-by-side version comparison",
+            "Create the first tag-based worktree so you can build and inspect an older release alongside your current checkout.",
+          example: "⚖️ Compare builds side by side — step 1",
+        },
+        {
+          cmd: "git worktree add ../v2 v2.0.0",
+          desc: "Add a worktree for version 2.0.0",
+          detail:
+            "Create the second tag-based worktree to run two versions simultaneously for regression checks and side-by-side comparison.",
+          example: "⚖️ Compare builds side by side — step 2",
         },
       ].map((c, i) => (
         <CommandCard key={i} index={i} {...c} />

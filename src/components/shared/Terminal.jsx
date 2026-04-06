@@ -198,7 +198,7 @@ const TERM_RESPONSES = {
     "  Undo:      git reset · git revert · git stash · git reflog",
     "  Inspect:   git log · git blame · git tag · git show",
     "  Advanced:  git rebase · git cherry-pick · git bisect",
-    "  Worktree:  git worktree add · git worktree list · git worktree remove",
+    "  Worktree:  git worktree add · git worktree list · git worktree move · git worktree lock · git worktree unlock · git worktree prune · git worktree remove",
     "",
     "💡 Most commands also accept arguments — try: git commit -m 'my message'",
     "   For full docs, explore the modules in the sidebar!",
