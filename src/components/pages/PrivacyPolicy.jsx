@@ -39,7 +39,15 @@ export default function PrivacyPolicy() {
       <p style={p}>
         Google uses cookies to serve ads based on your prior visits to this website or other websites.
         Google's use of advertising cookies enables it and its partners to serve ads based on your visit
-        to this site and/or other sites on the Internet.
+        to this site and/or other sites on the Internet. Third-party vendors, including Google, may place
+        and read cookies on your browser, or use web beacons to collect information, as a result of ad
+        serving on this website.
+      </p>
+      <p style={p}>
+        For more information on how Google uses data when you use our site, see{" "}
+        <a href="https://www.google.com/policies/privacy/partners/" target="_blank" rel="noopener noreferrer" style={{ color: T.linkColor }}>
+          How Google uses data when you use our partners' sites or apps
+        </a>.
       </p>
       <p style={p}>
         You may opt out of personalized advertising by visiting{" "}
@@ -62,9 +70,11 @@ export default function PrivacyPolicy() {
 
       <h2 style={h2}>5. Children's Privacy</h2>
       <p style={p}>
-        GitSimulator is an educational tool suitable for all ages. We do not knowingly collect personal
-        information from children under 13. If you believe a child has provided us personal data,
-        please contact us to have it removed.
+        GitSimulator is a developer-focused educational tool designed for students, professionals, and
+        anyone learning Git and GitHub. This site is <strong style={{ color: T.text }}>not directed at children under the age
+        of 13</strong>. We do not knowingly collect personal information from children under 13. If you
+        believe a child under 13 has provided personal data through our site, please contact us
+        immediately so we can delete it.
       </p>
 
       <h2 style={h2}>6. Your Rights (GDPR / CCPA)</h2>

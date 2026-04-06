@@ -61,17 +61,30 @@
       }
       loadGtagIfConsented();
     </script>
-    <!-- Google AdSense (consent-gated) -->
+    <!-- Google AdSense — reads consent first, then injects script with correct mode -->
     <script>
-      function loadAdSenseIfConsented() {
-        try { if (localStorage.getItem('gitsim_cookie_consent') !== 'accepted') return; } catch(e) {}
+      (function() {
+        window.adsbygoogle = window.adsbygoogle || [];
+
+        // Determine personalization mode from stored consent BEFORE injecting the script
+        var consented = false;
+        try { consented = localStorage.getItem('gitsim_cookie_consent') === 'accepted'; } catch(e) {}
+        window.adsbygoogle.requestNonPersonalizedAds = consented ? 0 : 1;
+
+        // Inject AdSense script after the mode flag is set
         var s = document.createElement('script');
         s.async = true;
         s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3730348300091896';
         s.crossOrigin = 'anonymous';
         document.head.appendChild(s);
+      })();
+
+      // Called by CookieConsent on accept — stores consent and reloads so
+      // AdSense reinitializes with the personalized flag deterministically.
+      function upgradeAdsConsent() {
+        try { localStorage.setItem('gitsim_cookie_consent', 'accepted'); } catch(e) {}
+        window.location.reload();
       }
-      loadAdSenseIfConsented();
     </script>
     <script type="application/ld+json">{
       "@context": "https://schema.org",
