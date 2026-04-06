@@ -61,14 +61,17 @@
       }
       loadGtagIfConsented();
     </script>
-    <!-- Google AdSense — loads immediately in non-personalized mode; upgrades to personalized after consent -->
+    <!-- Google AdSense — reads consent first, then injects script with correct mode -->
     <script>
-      // Signal non-personalized ads by default (GDPR-safe, no consent required)
-      window.adsbygoogle = window.adsbygoogle || [];
-      window.adsbygoogle.requestNonPersonalizedAds = 1;
-
-      // Load the AdSense script immediately so ads are always visible to crawlers/reviewers
       (function() {
+        window.adsbygoogle = window.adsbygoogle || [];
+
+        // Determine personalization mode from stored consent BEFORE injecting the script
+        var consented = false;
+        try { consented = localStorage.getItem('gitsim_cookie_consent') === 'accepted'; } catch(e) {}
+        window.adsbygoogle.requestNonPersonalizedAds = consented ? 0 : 1;
+
+        // Inject AdSense script after the mode flag is set
         var s = document.createElement('script');
         s.async = true;
         s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3730348300091896';
@@ -76,15 +79,12 @@
         document.head.appendChild(s);
       })();
 
-      // Once user accepts consent, allow personalized ads on next page load
-      function loadAdSenseIfConsented() {
-        try {
-          if (localStorage.getItem('gitsim_cookie_consent') === 'accepted') {
-            window.adsbygoogle.requestNonPersonalizedAds = 0;
-          }
-        } catch(e) {}
+      // Called by CookieConsent on accept — stores consent and reloads so
+      // AdSense reinitializes with the personalized flag deterministically.
+      function upgradeAdsConsent() {
+        try { localStorage.setItem('gitsim_cookie_consent', 'accepted'); } catch(e) {}
+        window.location.reload();
       }
-      loadAdSenseIfConsented();
     </script>
     <script type="application/ld+json">{
       "@context": "https://schema.org",
