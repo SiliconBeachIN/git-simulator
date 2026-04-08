@@ -200,7 +200,7 @@ export default function Sidebar({ active, onNavigate, sideOpen, setSideOpen, isM
                 outline: "none",
               }}
             >
-              <span style={{ fontSize: 15, flexShrink: 0, opacity: 0.8 }}>
+              <span style={{ fontSize: 15, flexShrink: 0, opacity: 0.8, width: 20, textAlign: "center", display: "inline-block" }}>
                 {m.icon}
               </span>
               {(sideOpen || isMobile) && (
