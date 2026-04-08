@@ -158,7 +158,13 @@ function buildStaticBodyContent(mod, allModules) {
 
 function injectStaticContent(html, mod, allModules) {
   const content = buildStaticBodyContent(mod, allModules);
-  return html.replace('<div id="root"></div>', `<div id="root">${content}</div>`);
+  const rootElementPattern = /<div\b([^>]*\bid=(['"])root\2[^>]*)>([\s\S]*?)<\/div>/i;
+
+  if (!rootElementPattern.test(html)) {
+    throw new Error('Failed to inject static content: could not find <div id="root"> in dist/index.html');
+  }
+
+  return html.replace(rootElementPattern, `<div$1>${content}</div>`);
 }
 
 function injectAllMeta(html, mod, canonicalUrl, allModules) {
