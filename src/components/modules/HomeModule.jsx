@@ -91,10 +91,10 @@ export default function HomeModule({ isMobile }) {
       </InfoBox>
 
       {/* Modules overview */}
-      <SectionTitle>🗺️ What You Will Learn — 23 Interactive Modules</SectionTitle>
+      <SectionTitle>🗺️ What You Will Learn — 24 Interactive Modules</SectionTitle>
       <InfoBox icon="📚" title="A Complete Git & GitHub Curriculum" color={T.purple}>
         <p style={prose}>
-          GitSimulator offers <strong style={{ color: T.text }}>23 structured learning modules</strong> covering everything from running your first <code style={{ color: T.green }}>git init</code> to advanced topics like GitHub Actions CI/CD, Dependabot security automation, and Git internals. Every module includes:
+          GitSimulator offers <strong style={{ color: T.text }}>24 structured learning modules</strong> covering everything from running your first <code style={{ color: T.green }}>git init</code> to advanced topics like GitHub Actions CI/CD, Dependabot security automation, and Git internals. Every module includes:
         </p>
         <ul style={{ ...prose, paddingLeft: 18 }}>
           <li>📖 <strong style={{ color: T.text }}>Story-based introduction</strong> — real-world analogies that make abstract concepts click.</li>
