@@ -108,9 +108,11 @@ function buildStaticBodyContent(mod, allModules) {
 
   const topicsList = keywords.length
     ? `<h2>What You&#39;ll Learn</h2>
-          <p>In this interactive module you will practise:</p>
+          <p>In this interactive module you will practice:</p>
           <ul>${keywords.map(k => `<li>${escapeAttr(k)}</li>`).join('')}</ul>`
     : '';
+
+  const moduleCount = allModules.filter(m => m.id !== 'home').length;
 
   if (mod.id === 'home') {
     return `<div id="ssr-fallback" style="max-width:820px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif;color:#e6edf3;background:#060b18">
@@ -121,8 +123,8 @@ function buildStaticBodyContent(mod, allModules) {
           <p>Git is a free, open-source distributed version control system created by Linus Torvalds in 2005. It tracks changes in any set of files and coordinates work among multiple developers. Every change is recorded as a commit — a permanent snapshot of your project.</p>
           <h2>What is GitHub?</h2>
           <p>GitHub is a web-based platform built on top of Git. It provides a central place to host Git repositories online with powerful collaboration features: pull requests, issues, code review, GitHub Actions CI/CD pipelines, project boards, and more. Owned by Microsoft since 2018, GitHub hosts over 420 million repositories.</p>
-          <h2>23 Interactive Learning Modules</h2>
-          <p>GitSimulator offers 23 structured modules covering everything from git init to GitHub Actions CI/CD, Dependabot security automation, and Git internals. Every module includes story-based introductions, concept diagrams, an interactive terminal, and copy-ready command cards.</p>
+          <h2>${moduleCount} Interactive Learning Modules</h2>
+          <p>GitSimulator offers ${moduleCount} structured modules covering everything from git init to GitHub Actions CI/CD, Dependabot security automation, and Git internals. Every module includes story-based introductions, concept diagrams, an interactive terminal, and copy-ready command cards.</p>
           <nav><ul>
             ${navLinks}
           </ul></nav>
