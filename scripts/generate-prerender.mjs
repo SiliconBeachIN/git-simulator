@@ -94,7 +94,80 @@ function buildArticleSchema(mod, canonicalUrl) {
   return JSON.stringify(article);
 }
 
-function injectAllMeta(html, mod, canonicalUrl) {
+function buildStaticBodyContent(mod, allModules) {
+  const keywords = (mod.keywords || '')
+    .split(',')
+    .map(k => k.trim())
+    .filter(Boolean)
+    .slice(0, 12);
+
+  const navLinks = allModules
+    .filter(m => m.id !== 'home')
+    .map(m => `<li><a href="/${m.id}">${escapeAttr(m.icon)} ${escapeAttr(m.label)} — ${escapeAttr(m.title.split('|')[0].split('—')[0].trim())}</a></li>`)
+    .join('\n            ');
+
+  const topicsList = keywords.length
+    ? `<h2>What You&#39;ll Learn</h2>
+          <p>In this interactive module you will practice:</p>
+          <ul>${keywords.map(k => `<li>${escapeAttr(k)}</li>`).join('')}</ul>`
+    : '';
+
+  const moduleCount = allModules.filter(m => m.id !== 'home').length;
+
+  if (mod.id === 'home') {
+    return `<div id="ssr-fallback" style="max-width:820px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif;color:#e6edf3;background:#060b18">
+        <header><h1>GitSimulator — Free Interactive Git &amp; GitHub Course</h1></header>
+        <main>
+          <p>${escapeAttr(mod.description)}</p>
+          <h2>What is Git?</h2>
+          <p>Git is a free, open-source distributed version control system created by Linus Torvalds in 2005. It tracks changes in any set of files and coordinates work among multiple developers. Every change is recorded as a commit — a permanent snapshot of your project.</p>
+          <h2>What is GitHub?</h2>
+          <p>GitHub is a web-based platform built on top of Git. It provides a central place to host Git repositories online with powerful collaboration features: pull requests, issues, code review, GitHub Actions CI/CD pipelines, project boards, and more. Owned by Microsoft since 2018, GitHub hosts over 420 million repositories.</p>
+          <h2>${moduleCount} Interactive Learning Modules</h2>
+          <p>GitSimulator offers ${moduleCount} structured modules covering everything from git init to GitHub Actions CI/CD, Dependabot security automation, and Git internals. Every module includes story-based introductions, concept diagrams, an interactive terminal, and copy-ready command cards.</p>
+          <nav><ul>
+            ${navLinks}
+          </ul></nav>
+          <h2>Who Is This For?</h2>
+          <p>Students, bootcamp learners, self-taught developers, and professionals. No sign-up, no installation — everything runs in your browser for free.</p>
+        </main>
+        <footer style="margin-top:32px;border-top:1px solid #21262d;padding-top:16px">
+          <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a> |
+          <a href="https://github.com/SiliconBeachIN/git-simulator">GitHub</a> | &copy; 2026 GitSimulator
+        </footer>
+      </div>`;
+  }
+
+  return `<div id="ssr-fallback" style="max-width:820px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif;color:#e6edf3;background:#060b18">
+        <header><h1>${escapeAttr(mod.title.split('|')[0].trim())}</h1></header>
+        <main>
+          <p>${escapeAttr(mod.description)}</p>
+          ${topicsList}
+          <p>GitSimulator provides a hands-on terminal simulator where you can type real commands and see instant output — no installation required.</p>
+          <h2>All Learning Modules</h2>
+          <nav><ul>
+            ${navLinks}
+          </ul></nav>
+        </main>
+        <footer style="margin-top:32px;border-top:1px solid #21262d;padding-top:16px">
+          <a href="/">Home</a> | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a> |
+          <a href="https://github.com/SiliconBeachIN/git-simulator">GitHub</a> | &copy; 2026 GitSimulator
+        </footer>
+      </div>`;
+}
+
+function injectStaticContent(html, mod, allModules) {
+  const content = buildStaticBodyContent(mod, allModules);
+  const rootElementPattern = /<div\b([^>]*\bid=(['"])root\2[^>]*)>([\s\S]*?)<\/div>/i;
+
+  if (!rootElementPattern.test(html)) {
+    throw new Error('Failed to inject static content: could not find <div id="root"> in dist/index.html');
+  }
+
+  return html.replace(rootElementPattern, `<div$1>${content}</div>`);
+}
+
+function injectAllMeta(html, mod, canonicalUrl, allModules) {
   const image = `${SITE_BASE}/social/${mod.id}.png`;
   html = replaceTitle(html, mod.title);
   html = replaceMetaName(html, 'description', mod.description);
@@ -114,6 +187,9 @@ function injectAllMeta(html, mod, canonicalUrl) {
   const articleTag = articleSchema ? `\n    <script type="application/ld+json">${articleSchema}</script>` : '';
   html = html.replace('</head>', `    ${breadcrumbTag}${articleTag}\n  </head>`);
 
+  // Inject static body content for crawlers
+  html = injectStaticContent(html, mod, allModules);
+
   return html;
 }
 
@@ -132,7 +208,7 @@ async function main() {
     const routeDir = path.join(distDir, mod.id);
     if (!fs.existsSync(routeDir)) fs.mkdirSync(routeDir, { recursive: true });
     const canonicalUrl = `${SITE_BASE}/${mod.id}`;
-    const html = injectAllMeta(indexHtml, mod, canonicalUrl);
+    const html = injectAllMeta(indexHtml, mod, canonicalUrl, MODULES);
     fs.writeFileSync(path.join(routeDir, 'index.html'), html, 'utf8');
     count++;
   }
@@ -140,7 +216,7 @@ async function main() {
   // Patch root index.html with home meta
   const homeMod = MODULES.find((m) => m.id === 'home');
   if (homeMod) {
-    const homeHtml = injectAllMeta(indexHtml, homeMod, `${SITE_BASE}/`);
+    const homeHtml = injectAllMeta(indexHtml, homeMod, `${SITE_BASE}/`, MODULES);
     fs.writeFileSync(path.join(distDir, 'index.html'), homeHtml, 'utf8');
   }
 
